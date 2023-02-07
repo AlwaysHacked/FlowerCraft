@@ -43,6 +43,10 @@ public class Cell {
     public Point getCoord(int x, int y) {
     	return new Point(this.coord.x + x, this.coord.y + y);
     }
+    
+    public void affiche() {
+    	System.out.print(entities.size() == 0 ? ' ' : 'J');
+    }
 }
 
 // getters, setters, second constructor with point, delete and add entity

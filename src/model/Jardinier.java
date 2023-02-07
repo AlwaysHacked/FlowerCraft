@@ -20,6 +20,27 @@ public class Jardinier implements Entity{
 		return this.move(this.position.getCoord(0, -1));
 	}
 	
+	public boolean down() {
+		if (this.position.getY() + 1 > this.map.sizeGrid)
+			return false;
+		
+		return this.move(this.position.getCoord(0, 1));
+	}
+	
+	public boolean left() {
+		if (this.position.getX() - 1 < 0)
+			return false;
+		
+		return this.move(this.position.getCoord(-1, 0));
+	}
+	
+	public boolean right() {
+		if (this.position.getX() + 1 > this.map.sizeGrid)
+			return false;
+		
+		return this.move(this.position.getCoord(1, 0));
+	}
+	
 	private boolean move(Point p) {
 		this.position.delete(this);
 		this.position = this.map.getCell(p.x, p.y);
