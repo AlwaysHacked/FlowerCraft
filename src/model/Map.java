@@ -20,4 +20,11 @@ public class Map {
     private Cell createCell() {
     	return new Cell(m);
     }
+    
+    
+    
+    // Getters
+    public Cell getCell(int x, int y) {
+    	return this.grid[x][y];
+    }
 }
