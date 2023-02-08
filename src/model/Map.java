@@ -1,5 +1,7 @@
 package model;
 
+import model.terrain.Cell;
+
 public class Map {
 //	Taille de la grille
 	public static final int sizeGrid = 10;

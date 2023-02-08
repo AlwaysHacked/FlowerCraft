@@ -1,9 +1,12 @@
-package model;
+package model.terrain;
 
 import java.awt.Point;
 import java.util.ArrayList;
 
-public class Cell {
+import model.Entity;
+import model.MainModel;
+
+public class Cell implements ICell{
 	private Point coord; 
     private final MainModel model;
     private final ArrayList<Entity> entities = new ArrayList<>();
@@ -24,8 +27,8 @@ public class Cell {
     	return this.entities.remove(e);
     }
     
-    public boolean addEntity(Entity e) {
-    	return this.entities.add(e);
+    public void addEntity(Entity e) {
+    	this.entities.add(e);
     }
     
     // Getters
@@ -41,15 +44,22 @@ public class Cell {
     	return this.coord;
     }
     
-    public Point getCoord(int x, int y) {
+    public Point createCoord(int x, int y) {
     	return new Point(this.coord.x + x, this.coord.y + y);
     }
-    
+
+	@Override
     public ArrayList<Entity> getEntities(){
     	return this.entities;
     }
     
+	@Override
     public void affiche() {
     	System.out.print(entities.size() == 0 ? ' ' : 'J');
     }
+
+	@Override
+	public boolean isAccessible(Entity e) {
+		return false;
+	}
 }
