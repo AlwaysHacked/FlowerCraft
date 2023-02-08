@@ -1,8 +1,109 @@
-# FlowerCraft
+# Avatar
+As human consumption continues, a group of people seperates itself from the civilisation, reclaims a land
+and develops its own "tribe".\
+The new formed tribe lived in peace with itself and the Terra Mater.\
+Nature has revealed them it has a soul and can punish or compensate their actions.\
+beaucoup de prosperite .. la civilisation en continuant son irresponsabilite envers la planete se trouve dans la merde.\
+The other group looks more and more at them with envy / jealousy.\
+Reconnaissance groups and stuff.
 
-## orga 
-M
-### Model
+The ennemies attack by waves.
+
+# Organisation 
+
+## Ressources
+* Food
+* Population
+
+## Terrain 
+* water
+* forest
+* berries
+* field
+* random generation?
+### Berries
+* regeneration of ressources
+* destruction to field
+* harvest
+
+## Allies
+### Na'vi
+* Move
+* Build village
+* Harvest
+* Fight au contact
+* Stop
+* Wounded
+* Dead
+
+### Village
+* En construction
+* Create Na'vi
+* Under Attack
+* Destroy
+
+### Holy tree 
+* Under Attack
+* Destroy and defeat
+
+## Ennemies
+### Wave of ennemies
+* How many waves? (infinite?)
+* How much in each wave?
+* Where
+* When
+
+### Soldier
+* How to choose target?
+* Move
+* Fight au contact
+* Wounded
+* Dead
+
+
+
+
+## Brainstorming
+
+
+### Ressources: 
+* food 
+* population
+
+### Humans attack with 
+* Soldiers
+* Tanks
+* Fighter planes ?
+* Motos
+* ExoSuits
+
+### Tribes forces are organized into :
+* people being able to gather ressources and fight\
+**move ** : 
+	* algo a etoile
+	* algo pheromone
+**when gathering** : 
+ 	* fait des aller retours
+ 	* move sur une case
+ 	* move retour au village
+ 	* recolter prends un temps, reduit les ressources de la case 
+* cavalry
+* village
+
+
+### Terra Mater's events:
+* tsunami
+* stampede
+
+### Tribes Units are:
+Name 						| Speed | Ability 	| Force 
+---							|---	|---		|---|
+Thanator Palulukan 			| fast 	|aggresive 	| strong
+Équidius Pa’li 				| fast 	| gentle 	| doesn't attack
+Titanosaure Marteau Angtsìk | slow 	|  huge 	| strong++
+Loup-vipèrins Nantang	 	| fast 	| aggresive | in pack, 
+
+#  Old Model
 
 ## Liste des Classes :
 
@@ -25,10 +126,10 @@ Grille de JPanel
 
 ## Liste des Classes :
 
-MainView : ViewMap, ViewPanel
+MainView : ViewMap, ViewPanel\
 ViewPanel : Panel
 
-ViewMap : [[ViewCell]], Grille
+ViewMap : [[ViewCell]], Grille\
 ViewCell : Cell
 ### Control
 
@@ -44,4 +145,3 @@ ControlCell implements MouseListener: Cell, MainModel\
 
 ControlPanel : MainModel, ViewPanel, Panel\
     Je sais pas comment géré le Panel\
-

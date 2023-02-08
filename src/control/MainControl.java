@@ -34,5 +34,11 @@ public class MainControl {
 		
 		this.jar.left();
 		this.map.affiche();
+		
+		this.jar.up();
+		this.map.affiche();
+		
+		this.jar.left();
+		this.map.affiche();
 	}
 }

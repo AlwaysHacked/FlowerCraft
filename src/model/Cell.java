@@ -20,11 +20,6 @@ public class Cell {
         this.coord = new Point(x, y);
     }
 
-    private void Cell(MainModel model2, Point point) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	public boolean deleteEntity(Entity e) {
     	return this.entities.remove(e);
     }
