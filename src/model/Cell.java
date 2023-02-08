@@ -15,15 +15,21 @@ public class Cell {
     }
     
     public Cell(MainModel model, int x, int y) {
-        this.model = model;
+//        this.Cell(model, new Point(x, y));
+    	this.model = model;
         this.coord = new Point(x, y);
     }
 
-    public boolean delete(Entity e) {
+    private void Cell(MainModel model2, Point point) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public boolean deleteEntity(Entity e) {
     	return this.entities.remove(e);
     }
     
-    public boolean add(Entity e) {
+    public boolean addEntity(Entity e) {
     	return this.entities.add(e);
     }
     
@@ -44,9 +50,11 @@ public class Cell {
     	return new Point(this.coord.x + x, this.coord.y + y);
     }
     
+    public ArrayList<Entity> getEntities(){
+    	return this.entities;
+    }
+    
     public void affiche() {
     	System.out.print(entities.size() == 0 ? ' ' : 'J');
     }
 }
-
-// getters, setters, second constructor with point, delete and add entity

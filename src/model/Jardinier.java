@@ -26,7 +26,7 @@ public class Jardinier implements Entity{
 		
 		return this.move(this.position.getCoord(0, 1));
 	}
-	
+	 
 	public boolean left() {
 		if (this.position.getX() - 1 < 0)
 			return false;
@@ -42,9 +42,9 @@ public class Jardinier implements Entity{
 	}
 	
 	private boolean move(Point p) {
-		this.position.delete(this);
+		this.position.deleteEntity(this);
 		this.position = this.map.getCell(p.x, p.y);
-		this.position.add(this);
+		this.position.addEntity(this);
 		
 		return true;
 	}

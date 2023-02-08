@@ -2,13 +2,13 @@ package model;
 
 public class Map {
 //	Taille de la grille
-	public static final int sizeGrid = 20;
+	public static final int sizeGrid = 10;
     private final MainModel m;
     private Cell[][] grid;
 
     public Map(MainModel model) {
         this.m = model;
-        this.initGrid();// = new Cell[sizeGrid][sizeGrid];
+        this.initGrid();
     }
     
     private void initGrid(){
@@ -26,14 +26,26 @@ public class Map {
     public Cell getCell(int x, int y) {
     	return this.grid[x][y];
     }
+  
+    public void affiche_barre() {
+    	System.out.print('@');
+    	for (int j = 0; j < this.sizeGrid*2; j++) 
+			System.out.print('_');
+    	System.out.print('@');
+    	System.out.println();
+    }
     
     public void affiche() {
+    	this.affiche_barre();
     	for (int i = 0; i < this.sizeGrid; i++) {
+    		System.out.print('|');
     		for (int j = 0; j < this.sizeGrid; j++) {
-    			this.grid[i][j].affiche();
-    			System.out.print(' ');
+//    			System.out.print(this.grid[j][i].getX() + " " + this.grid[j][i].getY());
+    			this.grid[j][i].affiche();
+    			System.out.print('|');
     		}
     		System.out.println();
     	}
+    	this.affiche_barre();
     }
 }
