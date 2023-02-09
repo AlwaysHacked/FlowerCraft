@@ -2,7 +2,7 @@ package model;
 
 import model.terrain.Cell;
 
-public class Navi extends MobileEntity implements IEntity{
+public class Navi extends MobileEntity implements IEntity {
 	private int harvest_capacity;
 	private Cell harvestCell;
 	
@@ -14,6 +14,6 @@ public class Navi extends MobileEntity implements IEntity{
 	}
 	
 	public boolean canHarvest(Cell c){
-		
+		return false;
 	}
 }

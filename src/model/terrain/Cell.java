@@ -29,6 +29,7 @@ public class Cell implements ICell{
     
     public void addEntity(IEntity e) {
     	this.entities.add(e);
+    	System.out.println("\tcell: " + this.coord.x + " " + this.coord.y + "\t" + entities.size());
     }
     
     // Getters
@@ -55,7 +56,7 @@ public class Cell implements ICell{
     
 	@Override
     public void affiche() {
-    	System.out.print(entities.size() == 0 ? ' ' : 'J');
+    	System.out.print(entities.size());
     }
 
 	@Override

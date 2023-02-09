@@ -2,7 +2,7 @@ package model;
 
 import model.terrain.Cell;
 
-public class MobileEntity {
+public class MobileEntity implements IEntity {
 	private MainModel model;
 	private Cell position;
 	private Map map;
@@ -50,3 +50,4 @@ public class MobileEntity {
 	public void setSpeed(int speed) {this.speed = speed;}
 
 	public void setPosition(Cell position) {this.position = position;}
+}

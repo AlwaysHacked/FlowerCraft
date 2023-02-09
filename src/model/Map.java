@@ -29,35 +29,44 @@ public class Map {
     	for(int i = 0; i < sizeGrid; i++)
     		for(int j = 0; j < sizeGrid; j++)
     			this.grid[i][j] = createCell(i, j);
+//    	what if we did it in createCell?
     }
     
-    private void randomGeneration() {
-//    	we supppose there are 3 zones
-//    	* the allies zone :
-//    		navis with their animals are created
-//    		50 % of map
-//    	* the buffer zone :
-//    		not friendly animals are located here
-//    		15 % of map  
-//    	* the ennemy zone : 
-//    		ennemies appear on this 
-//    		35 % of map
-//		at first, there's only one Entity on a Cell
-    	
+
+////    	we supppose there are 3 zones
+////    	* the allies zone :
+////    		navis with their animals are created
+////    		50 % of map
+////    	* the buffer zone :
+////    		not friendly animals are located here
+////    		15 % of map  
+////    	* the ennemy zone : 
+////    		ennemies appear on this 
+////    		35 % of map
+////		at first, there's only one Entity on a Cell    	
+    
+    private Cell createCell(int x, int y) {
     	int az = (int) (this.sizeGrid * .5);
     	int bz = (int) (this.sizeGrid * .15);
     	int ez = (int) (this.sizeGrid * .35);
     	
-    	for(int i = 0; i < az; i++)
-    		for(int j = 0; j < this.sizeGrid; j++) {
-    			int r = rand.nextInt(100);
-    			if (r <= this.probNavi)
-    				this.grid[i][j].addEntity(new Navi(m, grid[i][j], this, 100, 5, 10, 20));
-    		}
-    }
-    
-    private Cell createCell(int x, int y) {
-    	return new Cell(m, x, y);
+    	Cell c = new Cell(m, x, y);
+    	int r = rand.nextInt(100);
+    	
+    	if (x < az) {
+			if (r <= this.probNavi) {
+				System.out.print(x + " " + y);
+				c.addEntity(new Navi(m, c, this, 100, 5, 10, 20));
+			}
+		}
+    	else if (x < bz) {
+    		
+    	}
+    	else {
+    		
+    	}
+    	
+    	return c;
     }
     
     // Getters
@@ -65,8 +74,15 @@ public class Map {
     	return this.grid[x][y];
     }
   
+    public void showLineNums() {
+    	System.out.print(" ");
+    	for (int i = 0; i < this.sizeGrid; i++)
+    		System.out.print(" " + i);
+    	System.out.println();
+    }
+    
     public void affiche_barre() {
-    	System.out.print('@');
+    	System.out.print(" @");
     	for (int j = 0; j < this.sizeGrid*2; j++) 
 			System.out.print('_');
     	System.out.print('@');
@@ -74,8 +90,10 @@ public class Map {
     }
     
     public void affiche() {
+    	this.showLineNums();
     	this.affiche_barre();
     	for (int i = 0; i < this.sizeGrid; i++) {
+    		System.out.print(i);
     		System.out.print('|');
     		for (int j = 0; j < this.sizeGrid; j++) {
 //    			System.out.print(this.grid[j][i].getX() + " " + this.grid[j][i].getY());
