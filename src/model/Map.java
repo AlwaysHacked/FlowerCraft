@@ -26,24 +26,26 @@ public class Map {
     
     private void initGrid(){
     	this.grid = new Cell[sizeGrid][sizeGrid];
-    	for(int i = 0; i < sizeGrid; i++)
-    		for(int j = 0; j < sizeGrid; j++)
-    			this.grid[i][j] = createCell(i, j);
-//    	what if we did it in createCell?
+    	for(int i = 0; i < sizeGrid; i++) {
+    		for(int j = 0; j < sizeGrid; j++) {
+//    			System.out.print(i + "," + j + " ");
+    			this.grid[i][j] = this.createCell(i, j);
+    		}
+//    		System.out.println();
+    	}
     }
     
-
-////    	we supppose there are 3 zones
-////    	* the allies zone :
-////    		navis with their animals are created
-////    		50 % of map
-////    	* the buffer zone :
-////    		not friendly animals are located here
-////    		15 % of map  
-////    	* the ennemy zone : 
-////    		ennemies appear on this 
-////    		35 % of map
-////		at first, there's only one Entity on a Cell    	
+//	we supppose there are 3 zones
+//	* the allies zone :
+//		navis with their animals are created
+//		50 % of map
+//	* the buffer zone :
+//		not friendly animals are located here
+//		15 % of map  
+//	* the ennemy zone : 
+//		ennemies appear on this 
+//		35 % of map
+//	at first, there's only one Entity on a Cell    	
     
     private Cell createCell(int x, int y) {
     	int az = (int) (this.sizeGrid * .5);
@@ -55,7 +57,7 @@ public class Map {
     	
     	if (x < az) {
 			if (r <= this.probNavi) {
-				System.out.print(x + " " + y);
+				System.out.println(x + " " + y);
 				c.addEntity(new Navi(m, c, this, 100, 5, 10, 20));
 			}
 		}

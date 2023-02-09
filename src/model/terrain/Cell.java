@@ -1,10 +1,12 @@
 package model.terrain;
-
+import model.Navi;
 import java.awt.Point;
 import java.util.ArrayList;
 
 import model.IEntity;
+import model.Jardinier;
 import model.MainModel;
+import model.Navi;
 
 public class Cell implements ICell{
 	private Point coord; 
@@ -29,7 +31,7 @@ public class Cell implements ICell{
     
     public void addEntity(IEntity e) {
     	this.entities.add(e);
-    	System.out.println("\tcell: " + this.coord.x + " " + this.coord.y + "\t" + entities.size());
+//    	System.out.println("\tcell: " + this.coord.x + " " + this.coord.y + "\t" + entities.size());
     }
     
     // Getters
@@ -56,7 +58,15 @@ public class Cell implements ICell{
     
 	@Override
     public void affiche() {
-    	System.out.print(entities.size());
+    	char c = ' ';
+    	if (entities.size() == 1) {
+    		if(entities.get(0) instanceof Navi) {
+    			c = 'N';
+    		}
+    		else if(entities.get(0) instanceof Jardinier)
+    			c = 'J';
+    	}
+    	System.out.print(c);
     }
 
 	@Override

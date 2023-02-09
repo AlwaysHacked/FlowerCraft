@@ -6,6 +6,6 @@ public class MainModel {
 
     public MainModel() {
         panel = new Panel(this);
-        map = new Map(this);
+        map = null;//new Map(this);
     }
 }

@@ -1,6 +1,7 @@
 package model;
 
 import control.CFlower;
+import model.terrain.Cell;
 
 public class Flower implements IEntity{
     private final MainModel model;
@@ -35,28 +36,3 @@ public class Flower implements IEntity{
     	age++;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
