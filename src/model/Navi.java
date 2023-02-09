@@ -1,6 +1,8 @@
 package model;
 
-public class Navi extends MobileEntity{
+import model.terrain.Cell;
+
+public class Navi extends MobileEntity implements IEntity{
 	private int harvest_capacity;
 	private Cell harvestCell;
 	

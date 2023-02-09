@@ -3,13 +3,13 @@ package model.terrain;
 import java.awt.Point;
 import java.util.ArrayList;
 
-import model.Entity;
+import model.IEntity;
 import model.MainModel;
 
 public class Cell implements ICell{
 	private Point coord; 
     private final MainModel model;
-    private final ArrayList<Entity> entities = new ArrayList<>();
+    private final ArrayList<IEntity> entities = new ArrayList<>();
 
 
     public Cell(MainModel model, Point p) {
@@ -23,11 +23,11 @@ public class Cell implements ICell{
         this.coord = new Point(x, y);
     }
 
-	public boolean deleteEntity(Entity e) {
+	public boolean deleteEntity(IEntity e) {
     	return this.entities.remove(e);
     }
     
-    public void addEntity(Entity e) {
+    public void addEntity(IEntity e) {
     	this.entities.add(e);
     }
     
@@ -49,7 +49,7 @@ public class Cell implements ICell{
     }
 
 	@Override
-    public ArrayList<Entity> getEntities(){
+    public ArrayList<IEntity> getEntities(){
     	return this.entities;
     }
     
@@ -59,7 +59,7 @@ public class Cell implements ICell{
     }
 
 	@Override
-	public boolean isAccessible(Entity e) {
+	public boolean isAccessible(IEntity e) {
 		return false;
 	}
 }

@@ -3,17 +3,17 @@ package model.terrain;
 import java.awt.Point;
 import java.util.ArrayList;
 
-import model.Entity;
+import model.IEntity;
 
 public interface ICell {
 	/** Supprime l'entité e de la case et renvoie true si e etait sur la case */
-	public boolean deleteEntity(Entity e);
+	public boolean deleteEntity(IEntity e);
     
 	/** Ajoute l'entité e */
-    public void addEntity(Entity e);
+    public void addEntity(IEntity e);
     
     /** Renvoie true si la case est accessible à e*/
-    public boolean isAccessible(Entity e);
+    public boolean isAccessible(IEntity e);
     
     /** Getters */
     
@@ -27,7 +27,7 @@ public interface ICell {
     public Point getCoord();
     
 //    Donne la liste des entités sur la case
-    public ArrayList<Entity> getEntities();
+    public ArrayList<IEntity> getEntities();
 
     
 //    Créer un point au coordonnée x y

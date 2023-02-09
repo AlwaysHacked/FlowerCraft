@@ -1,5 +1,7 @@
 package model;
 
+import model.terrain.Cell;
+
 public class MobileEntity {
 	private MainModel model;
 	private Cell position;

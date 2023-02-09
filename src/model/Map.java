@@ -1,13 +1,24 @@
 package model;
 
+import java.util.Random;
+
 import model.terrain.Cell;
 
 public class Map {
-//	Taille de la grille
+//	Grid's size
 	public static final int sizeGrid = 10;
     private final MainModel m;
     private Cell[][] grid;
+    
+//  Probabilities  
+//		Allies' probabilities
+    	private final int probNavi = 5; 	
+//		Ennemies' probabilities
 
+//    	Neutral animals probabilities
+    
+    private Random rand = new Random();
+    
     public Map(MainModel model) {
         this.m = model;
         this.initGrid();
@@ -18,6 +29,31 @@ public class Map {
     	for(int i = 0; i < sizeGrid; i++)
     		for(int j = 0; j < sizeGrid; j++)
     			this.grid[i][j] = createCell(i, j);
+    }
+    
+    private void randomGeneration() {
+//    	we supppose there are 3 zones
+//    	* the allies zone :
+//    		navis with their animals are created
+//    		50 % of map
+//    	* the buffer zone :
+//    		not friendly animals are located here
+//    		15 % of map  
+//    	* the ennemy zone : 
+//    		ennemies appear on this 
+//    		35 % of map
+//		at first, there's only one Entity on a Cell
+    	
+    	int az = (int) (this.sizeGrid * .5);
+    	int bz = (int) (this.sizeGrid * .15);
+    	int ez = (int) (this.sizeGrid * .35);
+    	
+    	for(int i = 0; i < az; i++)
+    		for(int j = 0; j < this.sizeGrid; j++) {
+    			int r = rand.nextInt(100);
+    			if (r <= this.probNavi)
+    				this.grid[i][j].addEntity(new Navi(m, grid[i][j], this, 100, 5, 10, 20));
+    		}
     }
     
     private Cell createCell(int x, int y) {

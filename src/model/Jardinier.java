@@ -4,7 +4,7 @@ import java.awt.Point;
 
 import model.terrain.Cell;
 
-public class Jardinier implements Entity{
+public class Jardinier implements IEntity{
 	private MainModel model;
 	private Cell position;
 	private Map map;

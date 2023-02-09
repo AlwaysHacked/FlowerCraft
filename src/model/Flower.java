@@ -2,7 +2,7 @@ package model;
 
 import control.CFlower;
 
-public class Flower implements Entity{
+public class Flower implements IEntity{
     private final MainModel model;
     private final Cell cell;
     private final CFlower control;
