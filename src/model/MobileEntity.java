@@ -25,12 +25,35 @@ public class MobileEntity implements IEntity {
 		this.speed = s;
 	}
 	
-	public void suffer_attack(int impact) {
+	public void sufferAttack(int impact) {
 		this.health -= impact;
 	}
 	
 	public Action[] possibleActions() {
 		return Action.values();
+	}
+	
+	public boolean nextTo(Cell c) {
+		int x = c.getX();
+		int y = c.getY();
+		
+		return 	this.map.getCell(x+1, y).equals(c) ||
+				this.map.getCell(x-1, y).equals(c) ||
+				this.map.getCell(x, y+1).equals(c) ||
+				this.map.getCell(x, y-1).equals(c) ;
+	}
+	
+	public boolean atSamePlace(Cell c) {
+		return c.equals(this.position);
+	}
+	
+//	Can attack if the Entity is next to him
+	public boolean canAttack(MobileEntity ent, Cell c) {
+		return this.nextTo(c) && c.getEntities().contains(ent);			
+	}
+	
+	public void attack(MobileEntity ent) {
+		ent.sufferAttack(this.attack);
 	}
 
 	//	getters

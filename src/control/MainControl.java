@@ -14,31 +14,7 @@ public class MainControl {
 		this.map = new Map(this.model);
 		this.jar = new Jardinier(this.model, this.map, this.map.getCell(0, 0));
 		this.map.getCell(5, 4).addEntity(jar);
-		
-//		System.out.println(this.map.getCell(0, 0));
-//		System.out.println((this.map.getCell(0, 0)).getEntities());
-		
+
 		this.map.affiche();
-//		jardinier a besoin d'un point de depart
-//		mauvaise idee de declarer le point ici
-//		faudra faire de l'aleatoire, je teste pour l'instant
-		
-//		this.jar.right();
-//		this.map.affiche();
-//		
-//		this.jar.down();
-//		this.map.affiche();
-//		
-//		this.jar.up();
-//		this.map.affiche();
-//		
-//		this.jar.left();
-//		this.map.affiche();
-//		
-//		this.jar.up();
-//		this.map.affiche();
-//		
-//		this.jar.left();
-//		this.map.affiche();
 	}
 }

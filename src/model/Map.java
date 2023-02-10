@@ -11,8 +11,8 @@ public class Map {
     private Cell[][] grid;
     
 //  Probabilities  
-//		Allies' probabilities
-    	private final int probNavi = 5; 	
+//		Allies' probabilities (friend animals included)
+    	private final int probNavi = 5;
 //		Ennemies' probabilities
 
 //    	Neutral animals probabilities
@@ -75,6 +75,9 @@ public class Map {
     public Cell getCell(int x, int y) {
     	return this.grid[x][y];
     }
+    
+    
+    // printing in terminal
   
     public void showLineNums() {
     	System.out.print(" ");
@@ -98,7 +101,6 @@ public class Map {
     		System.out.print(i);
     		System.out.print('|');
     		for (int j = 0; j < this.sizeGrid; j++) {
-//    			System.out.print(this.grid[j][i].getX() + " " + this.grid[j][i].getY());
     			this.grid[j][i].affiche();
     			System.out.print('|');
     		}
