@@ -10,11 +10,12 @@ public class Map {
     private final MainModel m;
     private Cell[][] grid;
     
-//  Probabilities  
+//  Probabilities, have to be divided by 2  
 //		Allies' probabilities (friend animals included)
     	private final int probNavi = 5;
 //		Ennemies' probabilities
-
+    	private final int probSoldier = this.probNavi + 4
+    			;
 //    	Neutral animals probabilities
     
     private Random rand = new Random();
@@ -37,10 +38,10 @@ public class Map {
     
 //	we supppose there are 3 zones
 //	* the allies zone :
-//		navis with their animals are created
+//		navis with their friendly animals are created
 //		50 % of map
 //	* the buffer zone :
-//		not friendly animals are located here
+//		only neutral animals are located here
 //		15 % of map  
 //	* the ennemy zone : 
 //		ennemies appear on this 
@@ -53,7 +54,7 @@ public class Map {
     	int ez = (int) (this.sizeGrid * .35);
     	
     	Cell c = new Cell(m, x, y);
-    	int r = rand.nextInt(100);
+    	int r = rand.nextInt(200);
     	
     	if (x < az) {
 			if (r <= this.probNavi) {
@@ -65,7 +66,10 @@ public class Map {
     		
     	}
     	else {
-    		
+    		if (r <= this.probNavi) {
+				System.out.println(x + " " + y);
+				c.addEntity(new Soldier(m, c, this, 100, 5, 10));
+			}
     	}
     	
     	return c;

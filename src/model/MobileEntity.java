@@ -25,14 +25,35 @@ public class MobileEntity implements IEntity {
 		this.speed = s;
 	}
 	
+//	war methods
+	@Override
+//	does it work?
+	public boolean isEnemy(MobileEntity ent) {
+		if (this instanceof Navi)
+			return ent instanceof Soldier;
+		else if (this instanceof Soldier)
+			return ent instanceof Navi;
+		else 
+			return false;
+	}
+	
+//	Can attack if the Entity is next to him and is his enemy
+	@Override
+	public boolean canAttack(MobileEntity ent, Cell c) {
+		return this.nextTo(c) && c.getEntities().contains(ent);	/*&& this.isEnemy(ent)*/
+	}
+	
+	@Override
+	public void attack(MobileEntity ent) {
+		ent.sufferAttack(this.attack);
+	}
+	@Override
 	public void sufferAttack(int impact) {
 		this.health -= impact;
 	}
 	
-	public Action[] possibleActions() {
-		return Action.values();
-	}
 	
+//	position methods
 	public boolean nextTo(Cell c) {
 		int x = c.getX();
 		int y = c.getY();
@@ -47,14 +68,6 @@ public class MobileEntity implements IEntity {
 		return c.equals(this.position);
 	}
 	
-//	Can attack if the Entity is next to him
-	public boolean canAttack(MobileEntity ent, Cell c) {
-		return this.nextTo(c) && c.getEntities().contains(ent);			
-	}
-	
-	public void attack(MobileEntity ent) {
-		ent.sufferAttack(this.attack);
-	}
 
 	//	getters
 	public Action getCurrentAction() {return this.currentAction;}
@@ -73,4 +86,10 @@ public class MobileEntity implements IEntity {
 	public void setSpeed(int speed) {this.speed = speed;}
 
 	public void setPosition(Cell position) {this.position = position;}
+
+//	other
+	public Action[] possibleActions() {
+		return Action.values();
+	}
+	
 }

@@ -1,5 +1,7 @@
 package model.terrain;
 import model.Navi;
+import model.Soldier;
+
 import java.awt.Point;
 import java.util.ArrayList;
 
@@ -60,11 +62,13 @@ public class Cell implements ICell{
     public void affiche() {
     	char c = ' ';
     	if (entities.size() == 1) {
-    		if(entities.get(0) instanceof Navi) {
-    			c = 'N';
-    		}
+    		if(entities.get(0) instanceof Soldier)
+    			c = 's';
     		else if(entities.get(0) instanceof Jardinier)
     			c = 'J';
+    		else if(entities.get(0) instanceof Navi)
+    			c = 'N';
+    		
     	}
     	System.out.print(c);
     }

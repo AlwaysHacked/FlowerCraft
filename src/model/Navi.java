@@ -13,6 +13,11 @@ public class Navi extends MobileEntity implements IEntity {
 		super.currentAction = null;
 	}
 	
+	@Override
+	public boolean isEnemy(MobileEntity ent) {
+		return ent instanceof Soldier /*or their technology*/;
+	}
+	
 	public boolean canHarvest(Cell c){
 		return false;
 	}
