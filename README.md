@@ -21,6 +21,7 @@ The ennemies attack by waves.
 * berries
 * field
 * random generation?
+
 ### Berries
 * regeneration of ressources
 * destruction to field
@@ -145,3 +146,15 @@ ControlCell implements MouseListener: Cell, MainModel\
 
 ControlPanel : MainModel, ViewPanel, Panel\
     Je sais pas comment géré le Panel\
+
+
+
+public void setCurrentAction(Action currentAction) {this.currentAction = currentAction;}
+
+public void setHealth(int health) {this.health = health;}
+
+public void setAttack(int attack) {this.attack = attack;}
+
+public void setSpeed(int speed) {this.speed = speed;}
+
+public void setPosition(Cell position) {this.position = position;}
