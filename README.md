@@ -19,118 +19,118 @@ Get new na'vi
 Defend the holy tree against the soldier
 
 ## Rules
-* If Holy tree is destroyed the game is over
-* The soldiers move toward the tree
-* Actions take certain time
-* You cannot produce more navis than 4 * (number of camps)
-* navi can take 20 from berries in  4s
-* food has to drop food back to a camp or the tree to be used
-* if berries has no more food it become a field
-* building a village cost 100 food and takes 15s for a navi
-* camp and tree are entity that can't move
-* navi and soldier move 1 time each second
-* village produces a navi cost 40 food in 10s
-* if a soldier is next to a navi he attack each second
-* the navi ripost each time he is attacked
-* an entity die in 4 hit
-* soldier die in 4 hit
-* na'vi does 2 hit if in forest
-* each 30s a wave arrive
-* a wave is 3 soldier always on the same side of the map
-* One entity per cell
+- [ ] If Holy tree is destroyed the game is over
+- [ ] The soldiers move toward the tree
+- [ ] Actions take certain time
+- [ ] You cannot produce more navis than 4 * (number of camps)
+- [ ] navi can take 20 from berries in  4s
+- [ ] food has to drop food back to a camp or the tree to be used
+- [ ] if berries has no more food it become a field
+- [ ] building a village cost 100 food and takes 15s for a navi
+- [ ] camp and tree are entity that can't move
+- [ ] navi and soldier move 1 time each second
+- [ ] village produces a navi cost 40 food in 10s
+- [ ] if a soldier is next to a navi he attack each second
+- [ ] the navi ripost each time he is attacked
+- [ ] an entity die in 4 hit
+- [ ] soldier die in 4 hit
+- [ ] na'vi does 2 hit if in forest
+- [ ] each 30s a wave arrive
+- [ ] a wave is 3 soldier always on the same side of the map
+- [ ] One entity per cell
 
 ## Map
-* Each time the same
-* Create default map
-* One entity per cell
-* View Map
+- [ ] Each time the same
+- [ ] Create default map
+- [ ] One entity per cell
+- [ ] View Map
 *
 
 ## Control Panel
 When clicked on a cell, a Panel appears with following information:
-* Image of the selection
-* Name of the selection
-* Description of the selection ?
-* Possible action of the selected entity
+- [ ] Image of the selection
+- [ ] Name of the selection
+- [ ] Description of the selection ?
+- [ ] Possible action of the selected entity
 
 ## Ressources
 We consider there are two types of ressources:
-* Food
-* Population\
+- [ ] Food
+- [ ] Population\
   Food has to be collected from berry fields\
-  Population is created in Camps, there are 4 Navis per Camp, so the number of Living navis can not go over 4 * numOfCamps\
+  - [ ]opulation is created in Camps, there are 4 Navis per Camp, so the number of Living navis can not go over 4 * numOfCamps\
   If a camp is destroyed by Soldiers, navi's number will not reduce s, perhaps the total number
 
 ## Terrain
-* water
-* forest
-* berries
-* field
+- [ ] water
+- [ ] forest
+- [ ] berries
+- [ ] field
 
 ### Berries
-* regeneration of ressources
-* destruction to field
-* harvest
+- [ ] regeneration of ressources
+- [ ] destruction to field
+- [ ] harvest
 
 ## Allies
 ### Na'vi
-* Move
-* Build camp
-* Harvest
-* Fight au contact
-* Stop
-* Wounded
-* Dead
+- [ ] Move
+- [ ] Build camp
+- [ ] Harvest
+- [ ] Fight au contact
+- [ ] Stop
+- [ ] Wounded
+- [ ] Dead
 
 ### Camp
-* En construction
-* Create Na'vi
-* Under Attack
-* Destroy
+- [ ] En construction
+- [ ] Create Na'vi
+- [ ] Under Attack
+- [ ] Destroy
 
 ### Holy tree
-* Under Attack
-* Destroy and defeat
+- [ ] Under Attack
+- [ ] Destroy and defeat
 
 ## Ennemies
 ### Wave of ennemies
-* How many waves? (infinite?)
-* How much in each wave?
-* Where
-* When
+- [ ] How many waves? (infinite?)
+- [ ] How much in each wave?
+- [ ] Where
+- [ ] When
 
 ### Soldier
-* How to choose target?
-* Move
-* Fight au contact
-* Wounded
-* Dead
+- [ ] How to choose target?
+- [ ] Move
+- [ ] Fight au contact
+- [ ] Wounded
+- [ ] Dead
 
 ## Functionalities
-* View window
-* View map
-* View Cell(mouse listener of Control cell, image, entity)
-* Panel(selected cell or entity, selected action)
-* Control Cell (send clicked cell to model)
-* Terrain(field, forest, water)
-* berries extends field
-* Control Berries extends Control Cell(grow food, harvest food, become field)
-* PheromoneTree
-* PheromoneCamps
-* Control entity
-* Action stop
-* Action move to next cell
-* Action move (a*, pheromone)
-* Fight(soldier)
-* Ripost(na'vi)
-* Take damage(Tree, Camp, Soldier, Na'vi)
-* Harvest (na'vi et berries)
-* Dead/destroy (Tree, Camp, Soldier, Na'vi)
-* Control Wave
-* Generate wave
-* Food(drop food, produce navi, build camp, view)
-* Population(number of navi < number of village * 4, view)
-* Score(food gathered, time survived, soldiers killed, number of village, number of na'vi)
+- [ ] View window
+- [ ] View map
+- [ ] View Cell(mouse listener of Control cell, image, entity)
+- [ ] Panel(selected cell or entity, selected action)
+- [ ] Control Cell (send clicked cell to model)
+- [ ] Terrain(field, forest, water)
+- [ ] berries extends field
+- [ ] Control Berries extends Control Cell(grow food, harvest food, become field)
+- [ ] PheromoneTree
+- [ ] PheromoneCamps
+- [ ] Control entity
+- [ ] Action stop
+- [ ] Action move to next cell
+- [ ] Action move (a*, pheromone)
+- [ ] Fight(soldier)
+- [ ] Ripost(na'vi)
+- [ ] Take damage(Tree, Camp, Soldier, Na'vi)
+- [ ] Harvest (na'vi et berries)
+- [ ] Dead/destroy (Tree, Camp, Soldier, Na'vi)
+- [ ] Control Wave
+- [ ] Generate wave
+- [ ] Food(drop food, produce navi, build camp, view)
+- [ ] Population(number of navi < number of village * 4, view)
+- [ ] Score(food gathered, time survived, soldiers killed, number of village, number of na'vi)
 
 
 
@@ -139,33 +139,33 @@ We consider there are two types of ressources:
 
 
 ### Ressources:
-* food
-* population
+- [ ] food
+- [ ] population
 
 ### Humans attack with
-* Soldiers
-* Tanks
-* Fighter planes ?
-* Motos
-* ExoSuits
+- [ ] Soldiers
+- [ ] Tanks
+- [ ] Fighter planes ?
+- [ ] Motos
+- [ ] ExoSuits
 
 ### Tribes forces are organized into :
-* people being able to gather ressources and fight\
-  **move ** :
-    * algo a etoile
-    * algo pheromone
-      **when gathering** :
-    * fait des aller retours
-    * move sur une case
-    * move retour au village
-    * recolter prends un temps, reduit les ressources de la case
-* cavalry
-* village
+- [ ] people being able to gather ressources and fight\
+  - [ ]*move ** :
+    - [ ] algo a etoile
+    - [ ] algo pheromone
+      - [ ]*when gathering** :
+    - [ ] fait des aller retours
+    - [ ] move sur une case
+    - [ ] move retour au village
+    - [ ] recolter prends un temps, reduit les ressources de la case
+- [ ] cavalry
+- [ ] village
 
 
 ### Terra Mater's events:
-* tsunami
-* stampede
+- [ ] tsunami
+- [ ] stampede
 
 ### Tribes Units are:
 Name 						| Speed | Ability 	| Force
@@ -209,7 +209,7 @@ ViewCell : Cell
 
 MainControl : MainModel, MainView, Display, ControlMap, ControlPanel\
 Display extends thread: MainView\
-*   Classe qui appelle repaint \
+- [ ]   Classe qui appelle repaint \
     ControlMap : Map, MainModel, ViewMap, [[ControlCell]]\
     Créé les ControlCell. Mais les ViewCell correspondantes en mouseListener des ControlCell. Je ne croit pas que cette classe ait d'autre utilité\
     ControlCell implements MouseListener: Cell, MainModel\
