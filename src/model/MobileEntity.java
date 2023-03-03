@@ -75,10 +75,10 @@ public class MobileEntity implements IEntity {
 		return a > 0 ? a : -a;
 	}
 	
-	private int calcG(Cell a, Cell b) {
-		int res = this.abs(a.getX() - b.getX());
-		return res + abs(a.getY() - b.getY());
-	}
+//	private int calcG(Cell a, Cell b) {
+//		int res = this.abs(a.getX() - b.getX());
+//		return res + abs(a.getY() - b.getY());
+//	}
 	
 	private int dist(int ax, int ay, int bx, int by) {
 		int res = this.abs(ax - bx);
