@@ -8,12 +8,11 @@ import java.util.ArrayList;
 import model.IEntity;
 import model.Jardinier;
 import model.MainModel;
-import model.Navi;
 
 public class Cell implements ICell{
 	private Point coord; 
     private final MainModel model;
-    private final ArrayList<IEntity> entities = new ArrayList<>();
+    protected IEntity entity = null;
 
 
     public Cell(MainModel model, Point p) {
@@ -27,54 +26,70 @@ public class Cell implements ICell{
         this.coord = new Point(x, y);
     }
 
-	public boolean deleteEntity(IEntity e) {
-    	return this.entities.remove(e);
+	// --------------------- ICell Methods ---------------------
+	@Override
+	public boolean deleteEntity() {
+		if (entity == null) return false;
+		entity = null;
+		return true;
     }
-    
-    public void addEntity(IEntity e) {
-    	this.entities.add(e);
+
+	@Override
+    public boolean addEntity(IEntity e) {
+		if (entity != null) return false;
+		entity = e;
+		return true;
 //    	System.out.println("\tcell: " + this.coord.x + " " + this.coord.y + "\t" + entities.size());
     }
-    
-    // Getters
+
+	@Override
+	public boolean isAccessible() { return false; }
+
+    /** Getters */
+	@Override
     public int getX() {
     	return this.coord.x;
     }
-    
+
+	@Override
     public int getY() {
     	return this.coord.y;
     }
-    
+
+	@Override
     public Point getCoord() {
     	return this.coord;
     }
-    
+
+	@Override
     public Point createCoord(int x, int y) {
     	return new Point(this.coord.x + x, this.coord.y + y);
     }
 
 	@Override
-    public ArrayList<IEntity> getEntities(){
-    	return this.entities;
+    public IEntity getEntity(){
+    	return this.entity;
     }
-    
+
+	@Override
+	public Terrain getType() {
+		return null;
+	}
+
 	@Override
     public void affiche() {
     	char c = ' ';
-    	if (entities.size() == 1) {
-    		if(entities.get(0) instanceof Soldier)
+    	if (entity != null) {
+    		if(entity instanceof Soldier)
     			c = 's';
-    		else if(entities.get(0) instanceof Jardinier)
+    		else if(entity instanceof Jardinier)
     			c = 'J';
-    		else if(entities.get(0) instanceof Navi)
+    		else if(entity instanceof Navi)
     			c = 'N';
     		
     	}
     	System.out.print(c);
     }
 
-	@Override
-	public boolean isAccessible(IEntity e) {
-		return false;
-	}
+	// --------------------- Other Methods ---------------------
 }
