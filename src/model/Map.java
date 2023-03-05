@@ -3,10 +3,11 @@ package model;
 import java.util.Random;
 
 import model.terrain.Cell;
+import model.terrain.CellFactory;
 
 public class Map {
 //	Grid's size
-	public static final int sizeGrid = 10;
+	public final int sizeGrid;
     private final MainModel m;
     private Cell[][] grid;
     
@@ -22,8 +23,21 @@ public class Map {
     
     public Map(MainModel model) {
         this.m = model;
+		this.sizeGrid = 10;
+
         this.initGrid();
     }
+
+	public Map(MainModel model, String[][] setup) {
+		this.m = model;
+		this.sizeGrid = setup.length;
+		this.grid = new Cell[sizeGrid][sizeGrid];
+		CellFactory make = CellFactory.getInstance(model);
+
+		for (int i = 0; i < sizeGrid; i++)
+			for (int j = 0; j < sizeGrid; j++)
+				make.createCell(i,j,setup[i][j]);
+	}
     
     private void initGrid(){
     	this.grid = new Cell[sizeGrid][sizeGrid];
