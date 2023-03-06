@@ -12,15 +12,12 @@ public class Berries extends Cell implements Runnable{
 
     public Berries(MainModel model, Point p) {
         super(model, p);
+        terrain = Terrain.BERRIES;
     }
 
     public Berries(MainModel model, int x, int y) {
         super(model, x, y);
-    }
-
-    @Override
-    public Terrain getType() {
-        return Terrain.BERRIES;
+        terrain = Terrain.BERRIES;
     }
 
     @Override

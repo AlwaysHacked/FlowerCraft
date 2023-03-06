@@ -13,6 +13,7 @@ public class Cell implements ICell{
 	private Point coord; 
     private final MainModel model;
     protected IEntity entity = null;
+	protected Terrain terrain;
 
 
     public Cell(MainModel model, Point p) {
@@ -73,7 +74,12 @@ public class Cell implements ICell{
 
 	@Override
 	public Terrain getType() {
-		return null;
+		return terrain;
+	}
+
+	@Override
+	public int getA() {
+		return entity == null ? 1 : 10000;
 	}
 
 	@Override

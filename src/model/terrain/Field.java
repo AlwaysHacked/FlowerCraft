@@ -7,15 +7,12 @@ import java.awt.*;
 public class Field extends Cell{
     public Field(MainModel model, Point p) {
         super(model, p);
+        terrain = Terrain.FIELD;
     }
 
     public Field(MainModel model, int x, int y) {
         super(model, x, y);
-    }
-
-    @Override
-    public Terrain getType() {
-        return Terrain.FIELD;
+        terrain = Terrain.FIELD;
     }
 
     @Override

@@ -11,10 +11,7 @@ public class Forest extends Cell{
 
     public Forest(MainModel model, int x, int y) {
         super(model, x, y);
-    }
-    @Override
-    public Terrain getType() {
-        return Terrain.FOREST;
+        terrain = Terrain.FOREST;
     }
 
     @Override
