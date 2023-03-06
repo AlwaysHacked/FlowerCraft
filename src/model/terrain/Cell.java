@@ -88,7 +88,7 @@ public class Cell implements ICell{
     			c = 'N';
     		
     	}
-    	System.out.print(c);
+//    	System.out.print(c);
     }
 
 	// --------------------- Other Methods ---------------------

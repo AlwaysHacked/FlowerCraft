@@ -85,22 +85,60 @@ public class MobileEntity implements IEntity {
 		return res + abs(ay - by);
 	}
 	
-	private void calcG(int G[][], int H[][], int F[][], int ax, int ay, int bx, int by) {
-        G[ax+1][ay] = dist(ax+1, ay, ax, ay);
-        H[ax+1][ay] = dist(ax+1, ay, bx, by);
-        F[ax+1][ay] = G[ax+1][ay] + H[ax+1][ay];
+	private void calcS(int G[][], int H[][], int F[][], int ax, int ay, int bx, int by) {
+//		System.out.println(Integer.toString(ax) + ' ' + Integer.toString(ay));
+		if(ax < this.map.sizeGrid - 1) {
+			G[ax+1][ay] = dist(ax+1, ay, ax, ay);
+	        H[ax+1][ay] = dist(ax+1, ay, bx, by);
+	        F[ax+1][ay] = G[ax+1][ay] + H[ax+1][ay];
+		}
+        if(ay < this.map.sizeGrid - 1) {
+			G[ax][ay+1] = dist(ax, ay+1, ax, ay);
+			H[ax][ay+1] = dist(ax, ay+1, bx, by);
+			F[ax][ay+1] = G[ax][ay+1] + H[ax][ay+1];
+        }
+		if(ax > 0) {
+			G[ax-1][ay] = dist(ax-1, ay, ax, ay);
+			H[ax-1][ay] = dist(ax-1, ay, bx, by);
+			F[ax-1][ay] = G[ax-1][ay] + H[ax-1][ay];
+		}
+		if(ay > 0) {
+			G[ax][ay-1] = dist(ax, ay-1, ax, ay);
+			H[ax][ay-1] = dist(ax, ay-1, bx, by);
+			F[ax][ay-1] = G[ax][ay-1] + H[ax][ay-1];
+		}
+	}
+	
+	private void init(int A[][]) {
+		for (int i = 0; i < this.map.sizeGrid; i++) 
+			for (int j = 0; j < this.map.sizeGrid; j++) 
+				A[i][j] = -1;
+	}
+	
+	private void show(int A[][]) {
+    	this.map.showLineNums();
+    	this.map.affiche_barre();
+		for (int i = 0; i < this.map.sizeGrid; i++) {
+    		System.out.print(i);
+    		System.out.print('|');
+    		for (int j = 0; j < this.map.sizeGrid; j++) {
+    			System.out.print(Integer.toString(A[i][j]) + '|');
+    		}
+    		System.out.println();
+		}
+		this.map.affiche_barre();
+	}
+	
+	private void smallest(int A[][], int[] coord) {
+		int min = Integer.MAX_VALUE;
 		
-		G[ax-1][ay] = dist(ax-1, ay, ax, ay);
-		H[ax-1][ay] = dist(ax-1, ay, bx, by);
-		F[ax-1][ay] = G[ax-1][ay] + H[ax-1][ay];
-		
-		G[ax][ay+1] = dist(ax, ay+1, ax, ay);
-		H[ax][ay+1] = dist(ax, ay+1, bx, by);
-		F[ax][ay+1] = G[ax][ay+1] + H[ax][ay+1];
-		
-		G[ax][ay-1] = dist(ax, ay-1, ax, ay);
-		H[ax][ay-1] = dist(ax, ay-1, bx, by);
-		F[ax][ay-1] = G[ax][ay-1] + H[ax][ay-1];
+		for (int i = 0; i < this.map.sizeGrid; i++) 
+			for (int j = 0; j < this.map.sizeGrid; j++) 
+				if(min > A[i][j] && A[i][j] > -1) {
+					min = A[i][j];
+					coord[0] = i;
+					coord[1] = j;
+				}
 	}
 	
 //	as i see it, we'd like the method to return an array of `Cell`s
@@ -120,16 +158,36 @@ public class MobileEntity implements IEntity {
 //		* the distance of each cell from the arriving point (H cost)
 //		* the sum G + H of each cell (F cost)
 //		ArrayList<ArrayList<int[]>> values = new ArrayList<>(this.map.sizeGrid);  
-		int G[][] = new int[this.map.sizeGrid][this.map.sizeGrid];
-		int H[][] = new int[this.map.sizeGrid][this.map.sizeGrid];
-		int F[][] = new int[this.map.sizeGrid][this.map.sizeGrid];
+		int G[][] = new int[this.map.sizeGrid][this.map.sizeGrid]; init(G);
+		int H[][] = new int[this.map.sizeGrid][this.map.sizeGrid]; init(H);
+		int F[][] = new int[this.map.sizeGrid][this.map.sizeGrid]; init(F);
 		
+//		calcS(G, H, F, depX, depY, arrX, arrY);
 		
-		
-//		next we will choose the cell containing the samllest F cost and will choose as the new starting point
-		boolean notFound = true;
-		while(notFound) {
+//		next we will choose the cell containing the smallest F cost and will choose as the new starting point
+//		boolean notFound = true;
+		while(depX != arrX || depY != arrY) {
+//		for(int i = 0; i < 2; i++) {
+			int[] coord = {0,0};
+			smallest(F, coord); 
+			depX = coord[0];
+			depY = coord[1];
+			calcS(G, H, F, depX, depY, arrX, arrY);
+			System.out.println("G:");
+			show(G);
+			System.out.println("H:");
+			show(H);
+			System.out.println("F:");
+			show(F);
 			
+//			System.out.println(Integer.toString(coord[0]) + ' ' + Integer.toString(coord[1]));
+			System.out.println(Integer.toString(depX) + ' ' + Integer.toString(depY));
+			System.out.println(depX == arrX && depY == arrY);
+			System.out.println(Integer.toString(arrX) + ' ' + Integer.toString(arrY));
+//			what is needed to be done
+//			* in case if there's not a unique minimal value in F, 
+//			  a comparison is also needed with the H cases
+//			
 			
 		}
 		return false;
