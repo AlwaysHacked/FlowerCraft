@@ -1,9 +1,9 @@
-package model;
+package model.entity;
 
+import model.Action;
+import model.MainModel;
+import model.Map;
 import model.terrain.Cell;
-
-import java.awt.Point;
-import java.util.ArrayList;
 
 public class MobileEntity implements IEntity {
 	private MainModel model;
@@ -43,7 +43,9 @@ public class MobileEntity implements IEntity {
 //	Can attack if the Entity is next to him and is his enemy
 	@Override
 	public boolean canAttack(MobileEntity ent, Cell c) {
-		return this.nextTo(c) && c.getEntities().contains(ent);	/*&& this.isEnemy(ent)*/
+//		TODO
+//		return this.nextTo(c) && c.getEntities().contains(ent);	/*&& this.isEnemy(ent)*/
+		return false;
 	}
 	
 	@Override
@@ -181,9 +183,9 @@ public class MobileEntity implements IEntity {
 			show(F);
 			
 //			System.out.println(Integer.toString(coord[0]) + ' ' + Integer.toString(coord[1]));
-			System.out.println(Integer.toString(depX) + ' ' + Integer.toString(depY));
+			System.out.println(Integer.toString(depX) + ' ' + depY);
 			System.out.println(depX == arrX && depY == arrY);
-			System.out.println(Integer.toString(arrX) + ' ' + Integer.toString(arrY));
+			System.out.println(Integer.toString(arrX) + ' ' + arrY);
 //			what is needed to be done
 //			* in case if there's not a unique minimal value in F, 
 //			  a comparison is also needed with the H cases

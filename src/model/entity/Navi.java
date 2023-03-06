@@ -1,5 +1,7 @@
-package model;
+package model.entity;
 
+import model.MainModel;
+import model.Map;
 import model.terrain.Cell;
 
 public class Navi extends MobileEntity implements IEntity {

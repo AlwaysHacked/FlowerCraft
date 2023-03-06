@@ -1,9 +1,8 @@
 package model.terrain;
 
 import java.awt.Point;
-import java.util.ArrayList;
 
-import model.IEntity;
+import model.entity.IEntity;
 
 public interface ICell {
 	/** Supprime l'entité de la case et renvoie true si il y en avait une */

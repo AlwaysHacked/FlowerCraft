@@ -1,10 +1,15 @@
-package model;
+package model.entity;
 
 import java.awt.Point;
 
+import model.Action;
+import model.MainModel;
+import model.Map;
+import model.entity.IEntity;
+import model.entity.MobileEntity;
 import model.terrain.Cell;
 
-public class Jardinier implements IEntity{
+public class Jardinier implements IEntity {
 	private MainModel model;
 	private Cell position;
 	private Map map;

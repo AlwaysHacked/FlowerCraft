@@ -1,6 +1,6 @@
 package model.terrain;
 
-import model.IEntity;
+import model.entity.IEntity;
 import model.MainModel;
 
 import java.awt.*;

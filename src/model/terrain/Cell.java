@@ -1,12 +1,11 @@
 package model.terrain;
-import model.Navi;
-import model.Soldier;
+import model.entity.Navi;
+import model.entity.Soldier;
 
 import java.awt.Point;
-import java.util.ArrayList;
 
-import model.IEntity;
-import model.Jardinier;
+import model.entity.IEntity;
+import model.entity.Jardinier;
 import model.MainModel;
 
 public class Cell implements ICell{

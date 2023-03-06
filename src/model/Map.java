@@ -2,6 +2,8 @@ package model;
 
 import java.util.Random;
 
+import model.entity.Navi;
+import model.entity.Soldier;
 import model.terrain.Cell;
 import model.terrain.CellFactory;
 

@@ -1,6 +1,7 @@
 package control;
 
 import model.*;
+import model.entity.Jardinier;
 
 public class MainControl {
 	private MainModel model;

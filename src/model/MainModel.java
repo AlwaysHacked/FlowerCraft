@@ -1,14 +1,13 @@
 package model;
 
+import model.entity.Navi;
 import model.terrain.Cell;
 
 public class MainModel {
-    private final Panel panel;
     private final Map map;
     private boolean running = true;
 
     public MainModel() {
-        panel = new Panel(this);
         map = new Map(this);
         
         Cell c = map.getCell(0,0);

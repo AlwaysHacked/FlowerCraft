@@ -1,9 +1,11 @@
-package model;
+package model.entity;
 
 import control.CFlower;
+import model.MainModel;
+import model.entity.IEntity;
 import model.terrain.Cell;
 
-public class Flower implements IEntity{
+public abstract class Flower implements IEntity {
     private final MainModel model;
     private final Cell cell;
     private final CFlower control;
