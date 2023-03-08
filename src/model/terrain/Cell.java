@@ -72,7 +72,7 @@ public class Cell implements ICell{
     }
 
 	@Override
-	public Terrain getType() {
+	public Terrain getTerrain() {
 		return terrain;
 	}
 

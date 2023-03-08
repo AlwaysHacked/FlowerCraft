@@ -1,3 +1,8 @@
+A l'addesse https://lucid.app/join avec un code accès à :
+- Diagramme de Gantt : VP7 LZW
+- Diagramme de classe : 9QY X4D
+
+
 # Avatar
 As human consumption continues, a group of people seperates itself from the civilisation, reclaims a land
 and develops its own "tribe".\
@@ -40,9 +45,9 @@ Defend the holy tree against the soldier
 - [ ] One entity per cell
 
 ## Map
-- [ ] Each time the same
-- [ ] Create default map
-- [ ] One entity per cell
+- [x] Each time the same
+- [x] Create default map
+- [x] One entity per cell
 - [ ] View Map
 *
 
@@ -58,18 +63,18 @@ We consider there are two types of ressources:
 - [ ] Food
 - [ ] Population\
   Food has to be collected from berry fields\
-  - [ ]opulation is created in Camps, there are 4 Navis per Camp, so the number of Living navis can not go over 4 * numOfCamps\
+- [ ] Population is created in Camps, there are 4 Navis per Camp, so the number of Living navis can not go over 4 * numOfCamps\
   If a camp is destroyed by Soldiers, navi's number will not reduce s, perhaps the total number
 
 ## Terrain
-- [ ] water
-- [ ] forest
+- [x] water
+- [x] forest
 - [ ] berries
-- [ ] field
+- [x] field
 
 ### Berries
-- [ ] regeneration of ressources
-- [ ] destruction to field
+- [x] regeneration of ressources
+- [x] destruction to field
 - [ ] harvest
 
 ## Allies
@@ -112,9 +117,9 @@ We consider there are two types of ressources:
 - [ ] View Cell(mouse listener of Control cell, image, entity)
 - [ ] Panel(selected cell or entity, selected action)
 - [ ] Control Cell (send clicked cell to model)
-- [ ] Terrain(field, forest, water)
-- [ ] berries extends field
-- [ ] Control Berries extends Control Cell(grow food, harvest food, become field)
+- [x] Terrain(field, forest, water, berries)
+- [ ] berries harvest
+- [x] Control Berries
 - [ ] PheromoneTree
 - [ ] PheromoneCamps
 - [ ] Control entity
@@ -132,7 +137,11 @@ We consider there are two types of ressources:
 - [ ] Population(number of navi < number of village * 4, view)
 - [ ] Score(food gathered, time survived, soldiers killed, number of village, number of na'vi)
 
-
+## Conception détaillé
+### Conception Case
+Une case à 4 attribut :
+- Le 
+### Conception CaseFactory
 
 
 ## Brainstorming

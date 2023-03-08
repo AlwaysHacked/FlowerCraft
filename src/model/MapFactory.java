@@ -39,10 +39,8 @@ public class MapFactory {
     }
 
     /** Partie factory :
-     * créé des Cell aux coordonnées x y
-     * et du type donné dans channel
-     * mais avec le type apparent channel */
-    public Map createMap(int x, int y, String channel) {
+     * créé la Map avec le nom donnée */
+    public Map createMap(String channel) {
         if (channel == null || channel.isEmpty())
             return null;
         return switch (channel) {

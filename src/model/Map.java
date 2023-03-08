@@ -6,12 +6,13 @@ import model.entity.Navi;
 import model.entity.Soldier;
 import model.terrain.Cell;
 import model.terrain.CellFactory;
+import model.terrain.ICell;
 
 public class Map {
 //	Grid's size
 	public final int sizeGrid;
     private final MainModel m;
-    private Cell[][] grid;
+    private ICell[][] grid;
     
 //  Probabilities, have to be divided by 2  
 //		Allies' probabilities (friend animals included)
@@ -33,7 +34,7 @@ public class Map {
 	public Map(MainModel model, String[][] setup) {
 		this.m = model;
 		this.sizeGrid = setup.length;
-		this.grid = new Cell[sizeGrid][sizeGrid];
+		this.grid = new ICell[sizeGrid][sizeGrid];
 		CellFactory make = CellFactory.getInstance(model);
 
 		for (int i = 0; i < sizeGrid; i++)
@@ -92,7 +93,7 @@ public class Map {
     }
     
     // Getters
-    public Cell getCell(int x, int y) {
+    public ICell getCell(int x, int y) {
     	return this.grid[x][y];
     }
     

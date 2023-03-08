@@ -4,10 +4,11 @@ import model.Action;
 import model.MainModel;
 import model.Map;
 import model.terrain.Cell;
+import model.terrain.ICell;
 
 public class MobileEntity implements IEntity {
 	private MainModel model;
-	private Cell position;
+	private ICell position;
 	private Map map;
 	
 	private int health;
@@ -18,7 +19,7 @@ public class MobileEntity implements IEntity {
 
 //	IDEA : special bool cases : invicibility / rage / ...
 	
-	public MobileEntity(MainModel m, Cell c, Map map, int h, int a, int s) {
+	public MobileEntity(MainModel m, ICell c, Map map, int h, int a, int s) {
 		this.model = m;
 		this.position = c;
 		this.map = map;
@@ -29,8 +30,8 @@ public class MobileEntity implements IEntity {
 	}
 	
 //	war methods
-	@Override
 //	does it work?
+	@Override
 	public boolean isEnemy(MobileEntity ent) {
 		if (this instanceof Navi)
 			return ent instanceof Soldier;
@@ -42,7 +43,7 @@ public class MobileEntity implements IEntity {
 	
 //	Can attack if the Entity is next to him and is his enemy
 	@Override
-	public boolean canAttack(MobileEntity ent, Cell c) {
+	public boolean canAttack(MobileEntity ent, ICell c) {
 //		TODO
 //		return this.nextTo(c) && c.getEntities().contains(ent);	/*&& this.isEnemy(ent)*/
 		return false;
@@ -59,7 +60,8 @@ public class MobileEntity implements IEntity {
 	
 	
 //	position methods
-	public boolean nextTo(Cell c) {
+	@Override
+	public boolean nextTo(ICell c) {
 		int x = c.getX();
 		int y = c.getY();
 		
@@ -68,8 +70,9 @@ public class MobileEntity implements IEntity {
 				this.map.getCell(x, y+1).equals(c) ||
 				this.map.getCell(x, y-1).equals(c) ;
 	}
-	
-	public boolean atSamePlace(Cell c) {
+
+	@Override
+	public boolean atSamePlace(ICell c) {
 		return c.equals(this.position);
 	}
 	
@@ -149,7 +152,7 @@ public class MobileEntity implements IEntity {
 //	in the meantime, i'll start here
 //	Best Regards.
 //	Serge
-	public boolean aStar(Cell dest) {
+	public boolean aStar(ICell dest) {
 		int depX = this.position.getX();
 		int depY = this.position.getY();
 		
@@ -196,22 +199,28 @@ public class MobileEntity implements IEntity {
 	}
 
 	//	getters
+	@Override
 	public Action getCurrentAction() {return this.currentAction;}
+	@Override
 	public int getHealth() {return this.health;}
+	@Override
 	public int getAttack() {return this.attack;}
+	@Override
 	public int getSpeed() {return this.speed;}
-	public Cell getPosition() {return this.position;}
+	@Override
+	public ICell getPosition() {return this.position;}
 	
 	// setters
+	@Override
 	public void setCurrentAction(Action currentAction) {this.currentAction = currentAction;}
-
+	@Override
 	public void setHealth(int health) {this.health = health;}
-
+	@Override
 	public void setAttack(int attack) {this.attack = attack;}
-
+	@Override
 	public void setSpeed(int speed) {this.speed = speed;}
-
-	public void setPosition(Cell position) {this.position = position;}
+	@Override
+	public void setPosition(ICell position) {this.position = position;}
 
 //	other
 	public Action[] possibleActions() {

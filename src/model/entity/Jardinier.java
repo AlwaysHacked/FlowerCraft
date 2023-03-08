@@ -8,13 +8,14 @@ import model.Map;
 import model.entity.IEntity;
 import model.entity.MobileEntity;
 import model.terrain.Cell;
+import model.terrain.ICell;
 
 public class Jardinier implements IEntity {
 	private MainModel model;
-	private Cell position;
+	private ICell position;
 	private Map map;
 	
-	public Jardinier(MainModel model, Map map, Cell pos) {
+	public Jardinier(MainModel model, Map map, ICell pos) {
 		this.model = model;
 		this.position = pos;
 		this.map = map;
@@ -58,7 +59,7 @@ public class Jardinier implements IEntity {
 	// tore
 	
 	//	Getters
-	public Cell getPosistion() {
+	public ICell getPosistion() {
 		return this.position;
 	}
 
@@ -69,7 +70,7 @@ public class Jardinier implements IEntity {
 	}
 
 	@Override
-	public boolean canAttack(MobileEntity ent, Cell c) {
+	public boolean canAttack(MobileEntity ent, ICell c) {
 		return false;
 	}
 
@@ -84,12 +85,12 @@ public class Jardinier implements IEntity {
 	}
 
 	@Override
-	public boolean nextTo(Cell c) {
+	public boolean nextTo(ICell c) {
 		return false;
 	}
 
 	@Override
-	public boolean atSamePlace(Cell c) {
+	public boolean atSamePlace(ICell c) {
 		return false;
 	}
 
@@ -114,7 +115,7 @@ public class Jardinier implements IEntity {
 	}
 
 	@Override
-	public Cell getPosition() {
+	public ICell getPosition() {
 		return null;
 	}
 
@@ -139,7 +140,7 @@ public class Jardinier implements IEntity {
 	}
 
 	//	Setters
-	public void setPosition(Cell pos) {
+	public void setPosition(ICell pos) {
 		this.position = pos;
 	}
 }

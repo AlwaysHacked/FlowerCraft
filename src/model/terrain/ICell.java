@@ -29,8 +29,8 @@ public interface ICell {
 //    Donne l'entité sur la case ou null si il n'y en a pas
     IEntity getEntity();
 
-//    Donne le type de la case
-    Terrain getType();
+//    Donne le terrain de la case
+    Terrain getTerrain();
 
 //    Donne la valeur d'accessibilité pour a*
     int getA();

@@ -2,6 +2,7 @@ package model;
 
 import model.entity.Navi;
 import model.terrain.Cell;
+import model.terrain.ICell;
 
 public class MainModel {
     private final Map map;
@@ -10,7 +11,7 @@ public class MainModel {
     public MainModel() {
         map = new Map(this);
         
-        Cell c = map.getCell(0,0);
+        ICell c = map.getCell(0,0);
         Navi n = new Navi(this, c, map, 100, 5, 10, 20);
         if (c.getEntity() == null)
         	c.addEntity(n);
