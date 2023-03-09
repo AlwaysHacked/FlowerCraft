@@ -90,27 +90,30 @@ public class MobileEntity implements IEntity {
 		return res + abs(ay - by);
 	}
 	
-	private void calcS(int G[][], int H[][], int F[][], int ax, int ay, int bx, int by) {
+	private void calcS(int G[][], int H[][], int F[][], ICell a, ICell b) {
 //		System.out.println(Integer.toString(ax) + ' ' + Integer.toString(ay));
+		int ax = a.getX(), ay = a.getY();
+		int bx = b.getX(), by = b.getY();
+		
 		if(ax < this.map.sizeGrid - 1) {
-			G[ax+1][ay] = dist(ax+1, ay, ax, ay);
+//			G[ax+1][ay] = this.map.getCell(ax+1, ay).getTerrain().value;
 	        H[ax+1][ay] = dist(ax+1, ay, bx, by);
 	        F[ax+1][ay] = G[ax+1][ay] + H[ax+1][ay];
 		}
-        if(ay < this.map.sizeGrid - 1) {
-			G[ax][ay+1] = dist(ax, ay+1, ax, ay);
-			H[ax][ay+1] = dist(ax, ay+1, bx, by);
-			F[ax][ay+1] = G[ax][ay+1] + H[ax][ay+1];
-        }
+		if(ay < this.map.sizeGrid - 1) {
+//		    G[ax][ay+1] = this.map.getCell(ax, ay+1).getTerrain().value;
+		    H[ax][ay+1] = dist(ax, ay+1, bx, by);
+		    F[ax][ay+1] = G[ax][ay+1] + H[ax][ay+1];
+		}
 		if(ax > 0) {
-			G[ax-1][ay] = dist(ax-1, ay, ax, ay);
-			H[ax-1][ay] = dist(ax-1, ay, bx, by);
-			F[ax-1][ay] = G[ax-1][ay] + H[ax-1][ay];
+//		    G[ax-1][ay] = this.map.getCell(ax-1, ay).getTerrain().value;
+		    H[ax-1][ay] = dist(ax-1, ay, bx, by);
+		    F[ax-1][ay] = G[ax-1][ay] + H[ax-1][ay];
 		}
 		if(ay > 0) {
-			G[ax][ay-1] = dist(ax, ay-1, ax, ay);
-			H[ax][ay-1] = dist(ax, ay-1, bx, by);
-			F[ax][ay-1] = G[ax][ay-1] + H[ax][ay-1];
+//		    G[ax][ay-1] = this.map.getCell(ax, ay-1).getTerrain().value;
+		    H[ax][ay-1] = dist(ax, ay-1, bx, by);
+		    F[ax][ay-1] = G[ax][ay-1] + H[ax][ay-1];
 		}
 	}
 	
@@ -177,7 +180,7 @@ public class MobileEntity implements IEntity {
 			smallest(F, coord); 
 			depX = coord[0];
 			depY = coord[1];
-			calcS(G, H, F, depX, depY, arrX, arrY);
+			calcS(G, H, F, this.position, dest);
 			System.out.println("G:");
 			show(G);
 			System.out.println("H:");
