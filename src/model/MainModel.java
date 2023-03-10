@@ -32,6 +32,10 @@ public class MainModel {
 //        System.out.println("Choosen ent is : " + e);
 //        e.
     }
+    
+    public Map getMap() {
+    	return this.map;
+    }
 
     public boolean isRunning() {
         return running;
