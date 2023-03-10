@@ -10,6 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import model.MainModel;
+import model.terrain.Field;
+import model.terrain.ICell;
 
 public class ViewMap extends JPanel {
 	private MainModel m;
@@ -48,19 +50,27 @@ public class ViewMap extends JPanel {
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        /* Pour chaque cellule... */
-        int count = 0;
+        // Pour chaque cellule... 
         for (int i = 0; i < STEP; i++) {
             for (int j = 0; j < STEP; j++) {
                 if (m.getMap().getCell(i, j) != null) {
-                    paint(g, m.getMap().getCell(i, j), j*STEP, i*STEP, count);// to be written
-                    count++;
+                    frame(g, type(m.getMap().getCell(i, j)), j*STEP, i*STEP);// to be written
                 }
             }
         }
         //add other components later on
     }
     
+    public String type(ICell c) {
+    	if (c instanceof Field) return "Ressources/Field.jpg";
+    	else return "Ressources/Water.jpg";
+    }
+    
+    public void frame(Graphics g, String s, int x, int y) {
+    	
+    	ImageIcon temp2 = new ImageIcon(this.getClass().getResource(s));
+        g.drawImage(temp2.getImage(), x, y, STEP, STEP, this);
+    }
     
 
 }
