@@ -9,16 +9,21 @@ public class MainModel {
     private boolean running = true;
 
     public MainModel() {
-        map = new Map(this);
-        
-        ICell c = map.getCell(0,0);
-        Navi n = new Navi(this, c, map, 100, 5, 10, 20);
-        if (c.getEntity() == null)
-        	c.addEntity(n);
-        else { 
-        	c.deleteEntity();
-        	c.addEntity(n);
-        }
+        this.map = MapFactory.getInstance(this).createMap("DEFOREST");
+    }
+
+    //      Ancien constructeur
+//    public MainModel() {
+//        map = new Map(this);
+//
+//        ICell c = map.getCell(0,0);
+//        Navi n = new Navi(this, c, map, 100, 5, 10, 20);
+//        if (c.getEntity() == null)
+//        	c.addEntity(n);
+//        else {
+//        	c.deleteEntity();
+//        	c.addEntity(n);
+//        }
         
         //n.aStar(map.getCell(this.map.sizeGrid - 1, this.map.sizeGrid - 1));
         
@@ -31,7 +36,7 @@ public class MainModel {
 //        	}
 //        System.out.println("Choosen ent is : " + e);
 //        e.
-    }
+//    }
     
     public Map getMap() {
     	return this.map;

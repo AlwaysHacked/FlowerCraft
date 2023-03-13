@@ -96,5 +96,13 @@ public class Cell implements ICell{
 //    	System.out.print(c);
     }
 
+	@Override
+	public String toString() {
+		if (entity == null) return " ";
+		if(entity instanceof Soldier) return "s";
+		if(entity instanceof Jardinier) return "j";
+		if(entity instanceof Navi) return "n";
+		return "?";
+	}
 	// --------------------- Other Methods ---------------------
 }

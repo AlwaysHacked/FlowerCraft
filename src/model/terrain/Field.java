@@ -17,4 +17,9 @@ public class Field extends Cell{
 
     @Override
     public boolean isAccessible() { return entity == null; }
+
+    @Override
+    public String toString() {
+        return "f" + super.toString();
+    }
 }

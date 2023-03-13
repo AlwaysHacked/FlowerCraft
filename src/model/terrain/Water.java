@@ -30,4 +30,9 @@ public class Water extends Cell {
     public int getA(){
         return Integer.MAX_VALUE;
     }
+
+    @Override
+    public String toString() {
+        return "W" + super.toString();
+    }
 }

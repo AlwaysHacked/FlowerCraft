@@ -23,6 +23,11 @@ public class Berries extends Cell{
     @Override
     public boolean isAccessible() { return entity == null; }
 
+    @Override
+    public String toString() {
+        return "B" + super.toString();
+    }
+
     public boolean update() {
         if (food > 0) {
             food = Integer.max(MAX_FOOD, food + 5);
