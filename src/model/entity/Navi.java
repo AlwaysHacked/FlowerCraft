@@ -24,4 +24,9 @@ public class Navi extends MobileEntity implements IEntity {
 	public boolean canHarvest(Cell c){
 		return false;
 	}
+
+	@Override
+	public String toString() {
+		return "n";
+	}
 }

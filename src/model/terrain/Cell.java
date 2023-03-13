@@ -99,10 +99,7 @@ public class Cell implements ICell{
 	@Override
 	public String toString() {
 		if (entity == null) return " ";
-		if(entity instanceof Soldier) return "s";
-		if(entity instanceof Jardinier) return "j";
-		if(entity instanceof Navi) return "n";
-		return "?";
+		return entity.toString();
 	}
 	// --------------------- Other Methods ---------------------
 }
