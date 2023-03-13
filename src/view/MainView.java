@@ -9,6 +9,7 @@ import model.MainModel;
 public class MainView {
 	private JFrame frame;
 	private ViewMap map;
+	private ViewControlPanel control;
 
 	public MainView(MainModel model) {
 
@@ -28,6 +29,16 @@ public class MainView {
 		gcon.gridheight = 2;
 		
 		frame.add(map, gcon);
+		
+		control = new ViewControlPanel(model);
+
+		gcon.gridy = 0;
+		gcon.gridx = 2;
+		gcon.gridwidth = 1;
+		gcon.gridheight = 2;
+
+		frame.add(control, gcon);
+
 		
 		frame.pack();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

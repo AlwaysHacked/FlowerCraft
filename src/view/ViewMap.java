@@ -16,17 +16,18 @@ import model.terrain.ICell;
 public class ViewMap extends JPanel {
 	private MainModel m;
 	private ArrayList<JLabel> cases;
-	public final int SIZE = 100;
-	public final int STEP = 10;
+	public final static int SIZE = 10;
+	public final static int STEP = 100;
 	
 	public ViewMap(MainModel model) {
 		this.m = model;
-		Dimension dim = new Dimension(SIZE, SIZE); /////change later on
+		this.cases = new ArrayList<>();
+		Dimension dim = new Dimension(SIZE*100, SIZE*100); /////change later on
         this.setPreferredSize(dim);
         setOpaque(true);
         
-        for (int i = 0; i < STEP; i++) {
-            for (int j = 0; j < STEP; j++) {
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
 
                     ImageIcon temp = new ImageIcon();
                     JLabel object = new JLabel();
@@ -51,8 +52,8 @@ public class ViewMap extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         // Pour chaque cellule... 
-        for (int i = 0; i < STEP; i++) {
-            for (int j = 0; j < STEP; j++) {
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
                 if (m.getMap().getCell(i, j) != null) {
                     frame(g, type(m.getMap().getCell(i, j)), j*STEP, i*STEP);// to be written
                 }

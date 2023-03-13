@@ -20,7 +20,7 @@ public class MainModel {
         	c.addEntity(n);
         }
         
-        n.aStar(map.getCell(this.map.sizeGrid - 1, this.map.sizeGrid - 1));
+        //n.aStar(map.getCell(this.map.sizeGrid - 1, this.map.sizeGrid - 1));
         
 //        Cell c;
 //        for (int i = 0; i < map.sizeGrid; i++)
