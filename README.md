@@ -1,6 +1,6 @@
 A l'addesse https://lucid.app/join avec un code accès à :
 - Diagramme de Gantt : VP7 LZW
-- Diagramme de classe : 9QY X4D
+- Diagramme de classe : 2VZ C7V
 
 
 # Avatar
