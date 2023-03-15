@@ -16,4 +16,9 @@ public class Forest extends Cell{
 
     @Override
     public boolean isAccessible() { return entity == null; }
+
+    @Override
+    public String toString() {
+        return "F" + super.toString();
+    }
 }

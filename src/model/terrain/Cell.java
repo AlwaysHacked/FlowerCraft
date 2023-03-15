@@ -96,5 +96,10 @@ public class Cell implements ICell{
 //    	System.out.print(c);
     }
 
+	@Override
+	public String toString() {
+		if (entity == null) return " ";
+		return entity.toString();
+	}
 	// --------------------- Other Methods ---------------------
 }

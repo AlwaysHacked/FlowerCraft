@@ -39,7 +39,7 @@ public class Map {
 
 		for (int i = 0; i < sizeGrid; i++)
 			for (int j = 0; j < sizeGrid; j++)
-				make.createCell(i,j,setup[i][j]);
+				grid[i][j] = make.createCell(i,j,setup[i][j]);
 	}
     
     private void initGrid(){
@@ -122,7 +122,7 @@ public class Map {
     		System.out.print(i);
     		System.out.print('|');
     		for (int j = 0; j < this.sizeGrid; j++) {
-    			this.grid[j][i].affiche();
+				System.out.print(this.grid[j][i].toString());
     			System.out.print('|');
     		}
     		System.out.println();

@@ -120,6 +120,11 @@ public class Jardinier implements IEntity {
 	}
 
 	@Override
+	public String toString() {
+		return "j";
+	}
+
+	@Override
 	public void setCurrentAction(Action currentAction) {
 
 	}

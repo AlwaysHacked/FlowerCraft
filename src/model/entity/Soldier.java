@@ -22,4 +22,9 @@ public class Soldier extends MobileEntity implements IEntity {
 //	public boolean isEnemy(MobileEntity ent) {
 //		return ent instanceof Navi/*or their animals*/;
 //	}
+
+	@Override
+	public String toString() {
+		return "s";
+	}
 }
