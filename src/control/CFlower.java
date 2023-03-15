@@ -1,7 +1,7 @@
 package control;
 
-import model.entity.Flower;
 import model.MainModel;
+import model.entity.Flower;
 
 public class CFlower extends Thread{
     private final MainModel model;
