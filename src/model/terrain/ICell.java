@@ -15,6 +15,8 @@ public interface ICell {
     /** Renvoie true si la case est accessible à e*/
     boolean isAccessible();
     
+	public boolean samePlace(ICell c);
+    
     /** Getters */
     
 //    Donne l'abcisse de la case

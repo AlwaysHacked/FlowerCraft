@@ -13,7 +13,6 @@ public interface IEntity {
 	
 //	position methods
 	boolean nextTo(ICell c);
-	boolean atSamePlace(ICell c);
 	
 //	getters
 	Action getCurrentAction() ;

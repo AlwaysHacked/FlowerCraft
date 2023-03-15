@@ -45,6 +45,11 @@ public class Cell implements ICell{
 	@Override
 	public boolean isAccessible() { return false; }
 
+	public boolean samePlace(ICell c) {
+		return c.getX() == this.getX() && 
+				c.getY() == this.getY();
+	}
+
     /** Getters */
 	@Override
     public int getX() {
