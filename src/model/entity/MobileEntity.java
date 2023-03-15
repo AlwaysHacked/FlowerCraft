@@ -6,6 +6,9 @@ import model.Map;
 import model.terrain.Cell;
 import model.terrain.ICell;
 
+import java.awt.Point;
+import java.lang.Thread;
+
 public class MobileEntity implements IEntity {
 	private MainModel model;
 	private ICell position;
@@ -96,22 +99,22 @@ public class MobileEntity implements IEntity {
 		int bx = b.getX(), by = b.getY();
 		
 		if(ax < this.map.sizeGrid - 1) {
-//			G[ax+1][ay] = this.map.getCell(ax+1, ay).getTerrain().value;
+			G[ax+1][ay] = this.map.getCell(ax+1, ay).getA();
 	        H[ax+1][ay] = dist(ax+1, ay, bx, by);
 	        F[ax+1][ay] = G[ax+1][ay] + H[ax+1][ay];
 		}
 		if(ay < this.map.sizeGrid - 1) {
-//		    G[ax][ay+1] = this.map.getCell(ax, ay+1).getTerrain().value;
+		    G[ax][ay+1] = this.map.getCell(ax, ay+1).getA();
 		    H[ax][ay+1] = dist(ax, ay+1, bx, by);
 		    F[ax][ay+1] = G[ax][ay+1] + H[ax][ay+1];
 		}
 		if(ax > 0) {
-//		    G[ax-1][ay] = this.map.getCell(ax-1, ay).getTerrain().value;
+		    G[ax-1][ay] = this.map.getCell(ax-1, ay).getA();
 		    H[ax-1][ay] = dist(ax-1, ay, bx, by);
 		    F[ax-1][ay] = G[ax-1][ay] + H[ax-1][ay];
 		}
 		if(ay > 0) {
-//		    G[ax][ay-1] = this.map.getCell(ax, ay-1).getTerrain().value;
+		    G[ax][ay-1] = this.map.getCell(ax, ay-1).getA();
 		    H[ax][ay-1] = dist(ax, ay-1, bx, by);
 		    F[ax][ay-1] = G[ax][ay-1] + H[ax][ay-1];
 		}
@@ -137,16 +140,18 @@ public class MobileEntity implements IEntity {
 		this.map.affiche_barre();
 	}
 	
-	private void smallest(int A[][], int[] coord) {
+	private ICell smallest(int A[][], ICell coord) {
+		int x = coord.getX(), y = coord.getY(); 
 		int min = Integer.MAX_VALUE;
 		
 		for (int i = 0; i < this.map.sizeGrid; i++) 
 			for (int j = 0; j < this.map.sizeGrid; j++) 
 				if(min > A[i][j] && A[i][j] > -1) {
 					min = A[i][j];
-					coord[0] = i;
-					coord[1] = j;
+					x = i;
+					y = j;
 				}
+		return new Cell(this.model, x, y);
 	}
 	
 //	as i see it, we'd like the method to return an array of `Cell`s
@@ -155,12 +160,11 @@ public class MobileEntity implements IEntity {
 //	in the meantime, i'll start here
 //	Best Regards.
 //	Serge
-	public boolean aStar(ICell dest) {
-		int depX = this.position.getX();
-		int depY = this.position.getY();
+	public boolean aStar(ICell dest)  {
+		ICell inter = new Cell (this.model, this.position.getX(), this.position.getY());
 		
-		int arrX = dest.getX();
-		int arrY = dest.getY();
+//		int arrX = dest.getX();
+//		int arrY = dest.getY();
 //		we need another map with three numbers in it, starting with the cells surrounding the starting point::
 //		* the distance of each cell from the starting point (G cost)
 //		* the distance of each cell from the arriving point (H cost)
@@ -170,17 +174,11 @@ public class MobileEntity implements IEntity {
 		int H[][] = new int[this.map.sizeGrid][this.map.sizeGrid]; init(H);
 		int F[][] = new int[this.map.sizeGrid][this.map.sizeGrid]; init(F);
 		
-//		calcS(G, H, F, depX, depY, arrX, arrY);
-		
 //		next we will choose the cell containing the smallest F cost and will choose as the new starting point
 //		boolean notFound = true;
-		while(depX != arrX || depY != arrY) {
-//		for(int i = 0; i < 2; i++) {
-			int[] coord = {0,0};
-			smallest(F, coord); 
-			depX = coord[0];
-			depY = coord[1];
-			calcS(G, H, F, this.position, dest);
+		while(inter.getX() != dest.getX() || inter.getY() != inter.getX()) {
+			inter = smallest(F, inter);
+			calcS(G, H, F, inter, dest);
 			System.out.println("G:");
 			show(G);
 			System.out.println("H:");
@@ -188,10 +186,10 @@ public class MobileEntity implements IEntity {
 			System.out.println("F:");
 			show(F);
 			
-//			System.out.println(Integer.toString(coord[0]) + ' ' + Integer.toString(coord[1]));
-			System.out.println(Integer.toString(depX) + ' ' + depY);
-			System.out.println(depX == arrX && depY == arrY);
-			System.out.println(Integer.toString(arrX) + ' ' + arrY);
+//			try {
+//				Thread.sleep(5000);
+//			} catch (InterruptedException e) {
+//			}
 //			what is needed to be done
 //			* in case if there's not a unique minimal value in F, 
 //			  a comparison is also needed with the H cases

@@ -49,6 +49,4 @@ public class MainView {
 	public void update() {
 		map.update();
 	}
-
 }
-	

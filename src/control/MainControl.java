@@ -1,6 +1,7 @@
 package control;
+import java.util.Map;
 
-import model.*;
+import model.MainModel;
 import model.entity.Jardinier;
 
 public class MainControl {
