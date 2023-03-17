@@ -54,8 +54,8 @@ public class ViewMap extends JPanel {
         // Pour chaque cellule... 
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
-                if (m.getMap().getCell(i, j) != null) {
-                    frame(g, type(m.getMap().getCell(i, j)), j*STEP, i*STEP);// to be written
+                if (m.getMap().getCell(j, i) != null) {
+                    frame(g, type(m.getMap().getCell(j, i)), j*STEP, i*STEP);// to be written
                 }
             }
         }
