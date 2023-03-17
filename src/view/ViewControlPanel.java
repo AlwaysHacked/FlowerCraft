@@ -45,13 +45,12 @@ public class ViewControlPanel extends JPanel {
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        paint(g);
-
-    }
-
-    public void paint(Graphics g) {
-
         
+        //ImageIcon temp = new ImageIcon(this.getClass().getResource("Ressources/End_turn.png"));
+       // g.drawImage(temp.getImage(), -5, 0, width + 8, height + 3, this);
+        //object.setBounds(0, 0, width, height);
+        //object.setIcon(new ImageIcon());
+ 
 
     }
 

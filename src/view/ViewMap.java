@@ -17,12 +17,12 @@ public class ViewMap extends JPanel {
 	private MainModel m;
 	private ArrayList<JLabel> cases;
 	public final static int SIZE = 10;
-	public final static int STEP = 20;
+	public final static int STEP = 70;
 	
 	public ViewMap(MainModel model) {
 		this.m = model;
 		this.cases = new ArrayList<>();
-		Dimension dim = new Dimension(SIZE*50, SIZE*50); /////change later on
+		Dimension dim = new Dimension(SIZE*70, SIZE*70); /////change later on
         this.setPreferredSize(dim);
         setOpaque(true);
         
