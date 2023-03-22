@@ -83,6 +83,7 @@ public class MobileEntity implements IEntity {
 	public int getSpeed() {return this.speed;}
 	@Override
 	public ICell getPosition() {return this.position;}
+	public Map getMap() { return this.map; }
 	
 	// setters
 	@Override

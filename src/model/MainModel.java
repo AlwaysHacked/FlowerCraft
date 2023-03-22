@@ -27,23 +27,7 @@ public class MainModel {
         }
         
 //        AStar star = new AStar(this, this.map, map.getCell(0, 0), map.getCell(this.map.sizeGrid - 1, this.map.sizeGrid - 1));
-		for (int i = 0; i < this.map.sizeGrid; i++) {
-    		System.out.print(i);
-    		System.out.print('|');
-    		for (int j = 0; j < this.map.sizeGrid; j++) {
-    			System.out.print(this.map.getCell(i, j) );
-    		}
-    		System.out.println();
-		}
-//        Cell c;
-//        for (int i = 0; i < map.sizeGrid; i++)
-//        	for(int j = 0; j < map.sizeGrid; j++) {
-//        		e = .getEntity();
-//        		if(e != null) 
-//        			break;
-//        	}
-//        System.out.println("Choosen ent is : " + e);
-//        e.
+
     }
     
     public Map getMap() {
