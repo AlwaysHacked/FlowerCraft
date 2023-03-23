@@ -28,7 +28,7 @@ public class Water extends Cell {
 
     @Override
     public int getA(){
-        return Integer.MAX_VALUE;
+        return 20000;
     }
 
     @Override
