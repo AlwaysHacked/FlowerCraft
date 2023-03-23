@@ -24,9 +24,9 @@ public class Navi extends MobileEntity implements IEntity {
 		return ent instanceof Soldier /*or their technology*/;
 	}
 	
-	public boolean canHarvest(Cell c){
-		return (c.getTerrain() == Terrain.BERRIES 
-				&& this.nextTo(c));
+	public boolean canHarvest(ICell c){
+		return c.getTerrain() == Terrain.BERRIES 
+				&& this.nextTo(c);
 	}
 	Action getAction() {
 		return action;

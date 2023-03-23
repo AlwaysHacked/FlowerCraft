@@ -13,6 +13,7 @@ public interface IEntity {
 	
 //	position methods
 	boolean nextTo(ICell c);
+	boolean canMove(ICell c);
 	
 //	getters
 	Action getCurrentAction() ;

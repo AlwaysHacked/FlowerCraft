@@ -183,7 +183,7 @@ public class AStar {
     		System.out.print(i);
     		System.out.print('|');
     		for (int j = 0; j < this.map.sizeGrid; j++) {
-    			System.out.print(Integer.toString(A[i][j][1]) + '|');
+    			System.out.print(Integer.toString(A[i][j][1]) + "\t|");
     		}
     		System.out.println();
 		}

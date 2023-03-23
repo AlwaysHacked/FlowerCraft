@@ -5,6 +5,7 @@ import model.MainModel;
 import model.Map;
 import model.terrain.Cell;
 import model.terrain.ICell;
+import model.terrain.Terrain;
 
 import java.awt.Point;
 import java.lang.Thread;
@@ -56,11 +57,35 @@ public class MobileEntity implements IEntity {
 	public void attack(MobileEntity ent) {
 		ent.sufferAttack(this.attack);
 	}
+	
+//	Baisse les points de vie 
 	@Override
 	public void sufferAttack(int impact) {
 		this.health -= impact;
 	}
 	
+	// Selon la valeur, indique la possibilite de bouger a l'endroit demande
+	@Override
+	public boolean canMove(ICell c) {
+		if(c.getTerrain() == Terrain.FOREST)
+			return false;
+		
+//		get aStar from this.position to c
+//		AStar star = new AStar(this.model, this.map, this.position, c);
+//		star.getPath();
+		
+		return true;
+	}
+	
+//	After checking if the move is possible will
+//	put the path gotten from AStar into path variable.
+//	If the move isn't possible will throw exception
+	public void move(ICell c) {
+		throw new IllegalArgumentException("Cannot move to " + c.getX() + " " + c.getY() + "\nTerrain type is " + c.getTerrain());
+	}
+	
+//	Indique si l'entite mobile se trouve a proximite de ICell passe 
+//	en argument.
 	@Override
 	public boolean nextTo(ICell c) {
 		int x = c.getX();
