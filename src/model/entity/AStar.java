@@ -1,6 +1,8 @@
 package model.entity;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
+
 
 import model.MainModel;
 import model.Map;
@@ -22,7 +24,7 @@ public class AStar {
 	int H[][][];
 	int F[][][];
 	
-	ArrayList<ICell> path;
+	Queue<ICell> path;
 	
 	public AStar(MainModel model, Map map, ICell start, ICell end) {
 		this.model = model;
@@ -36,7 +38,7 @@ public class AStar {
 		H = new int[this.map.sizeGrid][this.map.sizeGrid][2]; init(H);
 		F = new int[this.map.sizeGrid][this.map.sizeGrid][2]; init(F);
 		
-		path = new ArrayList<>(0);
+		path = new LinkedList<ICell>();
 		
 //		this.aStar();
 	}
@@ -83,18 +85,18 @@ public class AStar {
 		}
 	}
 	
-//	private ArrayList<ICell> smallest() {
+//	private Queue<ICell> smallest() {
 //		int x = inter.getX(), y = inter.getY();
 //		int min_val = Integer.MAX_VALUE;
 //		
-//		ArrayList<ICell> min = new ArrayList<>();
+//		Queue<ICell> min = new Queue<>();
 //		
 //		for (int i = 0; i < this.map.sizeGrid; i++) 
 //			for (int j = 0; j < this.map.sizeGrid; j++)
 //				if (F[i][j][0] == 0 ) {
 //					if(min_val > F[i][j][1] ) {
 //						min_val = F[i][j][1];
-//						min = new ArrayList<>();
+//						min = new Queue<>();
 //						min.add(new Cell(this.model, i, j));
 //					}
 //					else if(min_val == G[i][j][1]) {
@@ -119,7 +121,7 @@ public class AStar {
 		return this.map.getCell(x, y);
 	}
 
-	public ArrayList<ICell> getPath() {
+	public Queue<ICell> getPath() {
 		aStar();
 		show(F);
 		return path;

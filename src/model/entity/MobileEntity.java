@@ -3,22 +3,24 @@ package model.entity;
 import model.Action;
 import model.MainModel;
 import model.Map;
-import model.terrain.Cell;
+//import model.terrain.Cell;
 import model.terrain.ICell;
 import model.terrain.Terrain;
 
-import java.awt.Point;
-import java.lang.Thread;
+//import java.awt.Point;
+//import java.lang.Thread;
+import java.util.Queue;
 
 public class MobileEntity implements IEntity {
-	private MainModel model;
-	private ICell position;
-	private Map map;
+	protected MainModel model;
+	protected ICell position;
+	protected Map map;
 	
-	private int health;
-	private int attack;
-	private int speed;
-	
+	protected int health;
+	protected int attack;
+	protected int speed;
+
+	protected Queue<ICell> path;
 	protected Action currentAction;
 
 //	IDEA : special bool cases : invicibility / rage / ...
@@ -31,6 +33,8 @@ public class MobileEntity implements IEntity {
 		this.health = h;
 		this.attack = a;
 		this.speed = s;
+
+		this.path = null;
 	}
 	
 //	war methods
@@ -47,15 +51,16 @@ public class MobileEntity implements IEntity {
 	
 //	Can attack if the Entity is next to him and is his enemy
 	@Override
-	public boolean canAttack(MobileEntity ent, ICell c) {
+	public boolean canAttack(MobileEntity ent) {
 //		TODO
-//		return this.nextTo(c) && c.getEntities().contains(ent);	/*&& this.isEnemy(ent)*/
-		return false;
+		return this.nextTo(ent.getPosition()) && this.isEnemy(ent);
+//		return false;
 	}
 	
 	@Override
 	public void attack(MobileEntity ent) {
-		ent.sufferAttack(this.attack);
+		if (this.canAttack(ent))
+			ent.sufferAttack(this.attack);
 	}
 	
 //	Baisse les points de vie 
@@ -69,19 +74,28 @@ public class MobileEntity implements IEntity {
 	public boolean canMove(ICell c) {
 		if(c.getTerrain() == Terrain.FOREST)
 			return false;
-		
-//		get aStar from this.position to c
-//		AStar star = new AStar(this.model, this.map, this.position, c);
-//		star.getPath();
-		
+
 		return true;
+	}
+
+	public boolean moveToNext(){
+		if(this.nextTo(this.path.peek())) {
+			this.position = this.path.poll();
+			return true;
+		}
+		return false;
 	}
 	
 //	After checking if the move is possible will
 //	put the path gotten from AStar into path variable.
 //	If the move isn't possible will throw exception
 	public void move(ICell c) {
-		throw new IllegalArgumentException("Cannot move to " + c.getX() + " " + c.getY() + "\nTerrain type is " + c.getTerrain());
+		if (!canMove(c))
+			throw new IllegalArgumentException("Cannot move to " + c.getX() + " " + c.getY() + "\nTerrain type is " + c.getTerrain());
+
+//		get aStar from this.position to c
+		AStar star = new AStar(this.model, this.map, this.position, c);
+		this.path = star.getPath();
 	}
 	
 //	Indique si l'entite mobile se trouve a proximite de ICell passe 

@@ -7,7 +7,7 @@ import model.terrain.ICell;
 public interface IEntity {
 //	war methods
 	boolean isEnemy(MobileEntity ent);
-	boolean canAttack(MobileEntity ent, ICell c) ;
+	boolean canAttack(MobileEntity ent) ;
 	void attack(MobileEntity ent);
 	void sufferAttack(int impact) ;
 	
