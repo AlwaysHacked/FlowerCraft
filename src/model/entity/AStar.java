@@ -38,7 +38,7 @@ public class AStar {
 		
 		path = new ArrayList<>(0);
 		
-		this.aStar();
+//		this.aStar();
 	}
 	
 	private void init(int A[][][]) {
@@ -84,8 +84,8 @@ public class AStar {
 	}
 	
 //	private ArrayList<ICell> smallest() {
-////		int x = inter.getX(), y = inter.getY(); 
-//		int min_val = Integer.MAX_VALUE; 
+//		int x = inter.getX(), y = inter.getY();
+//		int min_val = Integer.MAX_VALUE;
 //		
 //		ArrayList<ICell> min = new ArrayList<>();
 //		
@@ -116,36 +116,55 @@ public class AStar {
 					y = j;
 				}
 		F[x][y][0] = 1;
-		return new Cell(this.model, x, y);
+		return this.map.getCell(x, y);
+	}
+
+	public ArrayList<ICell> getPath() {
+		aStar();
+		show(F);
+		return path;
 	}
 
 	public boolean aStar()  {
-		
-//		Pair p = new Pair();
-		while(!this.inter.samePlace(this.end)) {
-			System.out.println(Integer.toString(inter.getX()) + " " + Integer.toString(inter.getY()));
-			
-			calcS();
-			inter = smallest();
-			
-			System.out.println("G:");
-			show(G);
-//			System.out.println("H:");
-//			show(H);
-//			System.out.println("F:");
-//			show(F);
-//			
-//			try {
-//				Thread.sleep(5000);
-//			} catch (InterruptedException e) {
-//			}
-//			what is needed to be done
-//			* in case if there's not a unique minimal value in F, 
-//			  a comparison is also needed with the H cases
+		System.out.println(this.inter.getTerrain());
+		if (this.inter.samePlace(this.end)) {
+//			this.path.add(this.inter);
+			return true;
 		}
-		return false;
+//		map is not included ?
+		// code here
+		calcS();
+		ICell coord = smallest();
+		this.inter = coord;
+//		System.out.println("G:");
+//		show(G);
+//		System.out.println("H:");
+//		show(H);
+//		System.out.println("F:");
+//		show(F);
+		if(aStar()){
+			this.path.add(coord);
+			return true;
+		}
+		else return false;
+//		Pair p = new Pair();
+//		while(!this.inter.samePlace(this.end)) {
+//			System.out.println(Integer.toString(inter.getX()) + " " + Integer.toString(inter.getY()));
+//
+//			inter = smallest();
+//
+//
+////			try {
+////				Thread.sleep(5000);
+////			} catch (InterruptedException e) {
+////			}
+////			what is needed to be done
+////			* in case if there's not a unique minimal value in F,
+////			  a comparison is also needed with the H cases
+//		}
+//		return false;
 	}
-	
+
 //	private bool
 	
 	private int abs(int a) {

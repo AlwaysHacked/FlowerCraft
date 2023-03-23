@@ -4,6 +4,8 @@ import model.entity.AStar;
 import model.entity.Navi;
 import model.terrain.Cell;
 import model.terrain.ICell;
+import java.util.ArrayList;
+
 
 public class MainModel {
     private final Map map;
@@ -26,8 +28,12 @@ public class MainModel {
         	c.addEntity(n);
         }
         
-//        AStar star = new AStar(this, this.map, map.getCell(0, 0), map.getCell(this.map.sizeGrid - 1, this.map.sizeGrid - 1));
-
+        AStar star = new AStar(this, this.map, map.getCell(0, 0), map.getCell(this.map.sizeGrid - 1, this.map.sizeGrid - 8));
+        ArrayList<ICell> path = star.getPath();
+        for (int i = 0; i < path.size(); i++) {
+        	ICell c1 = path.get(i);
+        	System.out.println(c1.getX() +" " + c1.getY());
+        }
     }
     
     public Map getMap() {
