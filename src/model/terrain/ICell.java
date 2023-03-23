@@ -42,4 +42,5 @@ public interface ICell {
     
 //    Affiche la cellule dans le terminal
     void affiche();
+
 }

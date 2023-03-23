@@ -5,6 +5,7 @@ import model.MainModel;
 import model.Map;
 import model.terrain.Cell;
 import model.terrain.ICell;
+import model.terrain.Terrain;
 
 public class Navi extends MobileEntity implements IEntity {
 	private int harvest_capacity;
@@ -24,7 +25,8 @@ public class Navi extends MobileEntity implements IEntity {
 	}
 	
 	public boolean canHarvest(Cell c){
-		return false;
+		return (c.getTerrain() == Terrain.BERRIES 
+				&& this.nextTo(c));
 	}
 	Action getAction() {
 		return action;
