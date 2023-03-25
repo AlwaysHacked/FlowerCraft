@@ -7,7 +7,7 @@ import model.terrain.Cell;
 import model.terrain.ICell;
 import model.terrain.Terrain;
 
-public class Navi extends MobileEntity implements IEntity {
+public class Navi extends Entity implements IEntity {
 	private int harvest_capacity;
 	private Cell harvestCell;
 	private Action action = Action.STOP;
@@ -20,7 +20,7 @@ public class Navi extends MobileEntity implements IEntity {
 	}
 	
 	@Override
-	public boolean isEnemy(MobileEntity ent) {
+	public boolean isEnemy(Entity ent) {
 		return ent instanceof Soldier /*or their technology*/;
 	}
 	
