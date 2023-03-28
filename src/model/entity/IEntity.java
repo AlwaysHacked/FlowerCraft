@@ -11,7 +11,6 @@ public interface IEntity {
 	void sufferAttack(int impact) ;
 	
 //	position methods
-	boolean nextTo(ICell c);
 	boolean canMove(ICell c);
 	
 //	getters

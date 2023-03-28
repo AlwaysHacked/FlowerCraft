@@ -54,7 +54,7 @@ public class Entity implements IEntity {
 	@Override
 	public boolean canAttack(Entity ent) {
 //		TODO
-		return this.nextTo(ent.getPosition()) && this.isEnemy(ent);
+		return this.position.nextTo(ent.getPosition()) && this.isEnemy(ent);
 //		return false;
 	}
 	
@@ -80,7 +80,7 @@ public class Entity implements IEntity {
 	}
 
 	public boolean moveToNext(){
-		if(this.nextTo(this.path.peek())) {
+		if(this.position.nextTo(this.path.peek())) {
 			this.position = this.path.poll();
 			return true;
 		}
@@ -101,16 +101,6 @@ public class Entity implements IEntity {
 	
 //	Indique si l'entite mobile se trouve a proximite de ICell passe 
 //	en argument.
-	@Override
-	public boolean nextTo(ICell c) {
-		int x = c.getX();
-		int y = c.getY();
-		
-		return 	this.map.getCell(x+1, y).equals(c) ||
-				this.map.getCell(x-1, y).equals(c) ||
-				this.map.getCell(x, y+1).equals(c) ||
-				this.map.getCell(x, y-1).equals(c) ;
-	}
 
 	//	getters
 	@Override

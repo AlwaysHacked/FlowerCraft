@@ -43,4 +43,6 @@ public interface ICell {
 //    Affiche la cellule dans le terminal
     void affiche();
 
+//    Renvoie vrai si la case ICell c est a cote 
+    public boolean nextTo(ICell c);
 }
