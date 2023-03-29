@@ -68,6 +68,9 @@ public class Entity implements IEntity {
 	@Override
 	public void sufferAttack(int impact) {
 		this.health -= impact;
+		if(this.health<=0){
+			this.position.deleteEntity();
+		}
 	}
 	
 	// Selon la valeur, indique la possibilite de bouger a l'endroit demande

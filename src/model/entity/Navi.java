@@ -11,13 +11,21 @@ public class Navi extends Entity implements IEntity {
 	private int harvest_capacity;
 	private Cell harvestCell;
 	private Action action = Action.STOP;
+	public Map map ;
+	public MainModel m;
+	public Cell campCell;
+	private Camp camp;
 	
 	public Navi(MainModel m, ICell c, Map map, int h, int a, int s, int hc) {
 		super(m, c, map, h, a, s);
 		this.harvest_capacity = hc;
 		this.harvestCell = null;	
 		super.currentAction = null;
-	}
+        this.map = map;
+		this.m = m;
+        this.campCell = null;
+		
+	}             
 	
 	@Override
 	public boolean isEnemy(Entity ent) {
@@ -28,6 +36,24 @@ public class Navi extends Entity implements IEntity {
 		return c.getTerrain() == Terrain.BERRIES 
 				&& this.position.nextTo(c);
 	}
+    
+
+    public boolean canBuildCamp(ICell c){
+		return c.getTerrain() != Terrain.WATER 
+		&& c.isAccessible()
+		&& this.position.nextTo(c);
+	}
+
+	public Camp buildCamp(ICell cell){
+		if(this.canBuildCamp (cell)){
+		Camp c = new Camp(super.model,cell,this.map,12,0,0);
+		return c;
+		} else {
+			return null;
+		}
+	}
+
+
 	Action getAction() {
 		return action;
 	}
@@ -40,12 +66,4 @@ public class Navi extends Entity implements IEntity {
 		return "n";
 	}
 
-	public Camp startBuild(){
-		Camp c = new Camp(super.model,this.position,this.map,3,0,0);
-		return c;
-	}
-
-	public void builingCamp(){
-		this.camp.construCamp();
-	}
 }
