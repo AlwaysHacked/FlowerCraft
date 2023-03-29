@@ -26,7 +26,7 @@ public class Navi extends Entity implements IEntity {
 	
 	public boolean canHarvest(ICell c){
 		return c.getTerrain() == Terrain.BERRIES 
-				&& this.nextTo(c);
+				&& this.position.nextTo(c);
 	}
 	Action getAction() {
 		return action;
@@ -41,7 +41,7 @@ public class Navi extends Entity implements IEntity {
 	}
 
 	public Camp startBuild(){
-		Camp c = new Camp(this.m,this.campCell,this.map,3,0,0);
+		Camp c = new Camp(super.model,this.position,this.map,3,0,0);
 		return c;
 	}
 
