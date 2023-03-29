@@ -2,6 +2,9 @@ A l'addesse https://lucid.app/join avec un code accès à :
 - Diagramme de Gantt : VP7 LZW
 - Diagramme de classe : 2VZ C7V
 
+Lien vers le rapport :
+- https://docs.google.com/document/d/1RweWYBTC5uxCHWgynlGDUSDqtY3ZI1vCGwynVyRHQH0/edit?usp=drivesdk
+
 
 # Avatar
 As human consumption continues, a group of people seperates itself from the civilisation, reclaims a land
