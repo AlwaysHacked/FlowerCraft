@@ -11,7 +11,7 @@ import model.terrain.Terrain;
 //import java.lang.Thread;
 import java.util.Queue;
 
-public class MobileEntity implements IEntity {
+public class Entity implements IEntity {
 	protected MainModel model;
 	protected ICell position;
 	protected Map map;
@@ -21,11 +21,12 @@ public class MobileEntity implements IEntity {
 	protected int speed;
 
 	protected Queue<ICell> path;
+	protected ICell destination;
 	protected Action currentAction;
 
 //	IDEA : special bool cases : invicibility / rage / ...
 	
-	public MobileEntity(MainModel m, ICell c, Map map, int h, int a, int s) {
+	public Entity(MainModel m, ICell c, Map map, int h, int a, int s) {
 		this.model = m;
 		this.position = c;
 		this.map = map;
@@ -40,7 +41,7 @@ public class MobileEntity implements IEntity {
 //	war methods
 //	does it work?
 	@Override
-	public boolean isEnemy(MobileEntity ent) {
+	public boolean isEnemy(Entity ent) {
 		if (this instanceof Navi)
 			return ent instanceof Soldier;
 		else if (this instanceof Soldier)
@@ -51,14 +52,14 @@ public class MobileEntity implements IEntity {
 	
 //	Can attack if the Entity is next to him and is his enemy
 	@Override
-	public boolean canAttack(MobileEntity ent) {
+	public boolean canAttack(Entity ent) {
 //		TODO
-		return this.nextTo(ent.getPosition()) && this.isEnemy(ent);
+		return this.position.nextTo(ent.getPosition()) && this.isEnemy(ent);
 //		return false;
 	}
 	
 	@Override
-	public void attack(MobileEntity ent) {
+	public void attack(Entity ent) {
 		if (this.canAttack(ent))
 			ent.sufferAttack(this.attack);
 	}
@@ -79,7 +80,7 @@ public class MobileEntity implements IEntity {
 	}
 
 	public boolean moveToNext(){
-		if(this.nextTo(this.path.peek())) {
+		if(this.position.nextTo(this.path.peek())) {
 			this.position = this.path.poll();
 			return true;
 		}
@@ -100,16 +101,6 @@ public class MobileEntity implements IEntity {
 	
 //	Indique si l'entite mobile se trouve a proximite de ICell passe 
 //	en argument.
-	@Override
-	public boolean nextTo(ICell c) {
-		int x = c.getX();
-		int y = c.getY();
-		
-		return 	this.map.getCell(x+1, y).equals(c) ||
-				this.map.getCell(x-1, y).equals(c) ||
-				this.map.getCell(x, y+1).equals(c) ||
-				this.map.getCell(x, y-1).equals(c) ;
-	}
 
 	//	getters
 	@Override

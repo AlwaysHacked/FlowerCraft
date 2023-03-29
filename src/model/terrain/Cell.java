@@ -42,6 +42,22 @@ public class Cell implements ICell{
 //    	System.out.println("\tcell: " + this.coord.x + " " + this.coord.y + "\t" + entities.size());
     }
 
+	public boolean nextTo(ICell c) {
+//		System.out.println(new  Cell(this.model, c.getX()+1, c.getY()).equals(this) + "  ") ;
+//		System.out.print(c.getX()+1 + ", " + c.getY() + "\t" + this.getX() + ", " + this.getY());
+//		System.out.println(new  Cell(this.model, c.getX()-1, c.getY()).equals(this) + "  ") ;
+//		System.out.print(c.getX()-1 + ", " + c.getY() + "\t" + this.getX() + ", " + this.getY());
+//		System.out.println(new  Cell(this.model, c.getX(), c.getY()+1).equals(this) + "  ") ;
+//		System.out.print(c.getX() + ", " + c.getY()+1 + "\t" + this.getX() + ", " + this.getY());
+//		System.out.println(new  Cell(this.model, c.getX(), c.getY()-1).equals(this) + "  ") ;
+//		System.out.print(c.getX() + ", " + (c.getY()-1) + "\t" + this.getX() + ", " + this.getY());
+//		System.out.println();
+		return  (c.getX()+1 == this.getX() && this.getY() == c.getY()) ||
+				(c.getX()-1 == this.getX() && this.getY() == c.getY()) ||
+				(c.getX() == this.getX() && this.getY() == c.getY()+1) ||
+				(c.getX() == this.getX() && this.getY() == c.getY()-1)  ;
+}
+
 	@Override
 	public boolean isAccessible() { return false; }
 

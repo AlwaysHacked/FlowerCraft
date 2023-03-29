@@ -7,7 +7,7 @@ import model.terrain.Cell;
 import model.terrain.ICell;
 import model.terrain.Terrain;
 
-public class Navi extends MobileEntity implements IEntity {
+public class Navi extends Entity implements IEntity {
 	private int harvest_capacity;
 	private Cell harvestCell;
 	private Action action = Action.STOP;
@@ -20,13 +20,13 @@ public class Navi extends MobileEntity implements IEntity {
 	}
 	
 	@Override
-	public boolean isEnemy(MobileEntity ent) {
+	public boolean isEnemy(Entity ent) {
 		return ent instanceof Soldier /*or their technology*/;
 	}
 	
 	public boolean canHarvest(ICell c){
 		return c.getTerrain() == Terrain.BERRIES 
-				&& this.nextTo(c);
+				&& this.position.nextTo(c);
 	}
 	Action getAction() {
 		return action;
@@ -38,5 +38,14 @@ public class Navi extends MobileEntity implements IEntity {
 	@Override
 	public String toString() {
 		return "n";
+	}
+
+	public Camp startBuild(){
+		Camp c = new Camp(super.model,this.position,this.map,3,0,0);
+		return c;
+	}
+
+	public void builingCamp(){
+		this.camp.construCamp();
 	}
 }

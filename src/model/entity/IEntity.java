@@ -1,18 +1,16 @@
 package model.entity;
 
 import model.Action;
-import model.terrain.Cell;
 import model.terrain.ICell;
 
 public interface IEntity {
 //	war methods
-	boolean isEnemy(MobileEntity ent);
-	boolean canAttack(MobileEntity ent) ;
-	void attack(MobileEntity ent);
+	boolean isEnemy(Entity ent);
+	boolean canAttack(Entity ent) ;
+	void attack(Entity ent);
 	void sufferAttack(int impact) ;
 	
 //	position methods
-	boolean nextTo(ICell c);
 	boolean canMove(ICell c);
 	
 //	getters

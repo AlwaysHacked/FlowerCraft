@@ -5,9 +5,6 @@ import java.awt.Point;
 import model.Action;
 import model.MainModel;
 import model.Map;
-import model.entity.IEntity;
-import model.entity.MobileEntity;
-import model.terrain.Cell;
 import model.terrain.ICell;
 
 public class Jardinier implements IEntity {
@@ -65,17 +62,17 @@ public class Jardinier implements IEntity {
 
 
 	@Override
-	public boolean isEnemy(MobileEntity ent) {
+	public boolean isEnemy(Entity ent) {
 		return false;
 	}
 
 	@Override
-	public boolean canAttack(MobileEntity ent, ICell c) {
+	public boolean canAttack(Entity ent, ICell c) {
 		return false;
 	}
 
 	@Override
-	public void attack(MobileEntity ent) {
+	public void attack(Entity ent) {
 
 	}
 

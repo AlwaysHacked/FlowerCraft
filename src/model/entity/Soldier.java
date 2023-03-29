@@ -4,7 +4,7 @@ import model.MainModel;
 import model.Map;
 import model.terrain.Cell;
 
-public class Soldier extends MobileEntity implements IEntity {
+public class Soldier extends Entity implements IEntity {
 //	default
 	private static final int def_health = 100;
 	private static final int def_attack = 5;

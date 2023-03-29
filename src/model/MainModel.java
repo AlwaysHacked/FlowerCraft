@@ -5,7 +5,7 @@ import model.entity.Navi;
 import model.terrain.Cell;
 import model.terrain.ICell;
 import java.util.Queue;
-
+import java.util.ArrayList;
 
 public class MainModel {
     private final Map map;
@@ -29,9 +29,13 @@ public class MainModel {
         }
         
         AStar star = new AStar(this, this.map, map.getCell(0, 0), map.getCell(this.map.sizeGrid - 1, this.map.sizeGrid - 8));
-        Queue<ICell> path = star.getPath();
-        while(path.peek() != null) {
-        	ICell c1 = path.poll();
+//        Queue<ICell> path = star.getPath();
+//        while(path.peek() != null) {
+//        	ICell c1 = path.poll();
+//    	System.out.println(c1.getX() +" " + c1.getY());
+//        }
+        ArrayList<ICell> path = star.getPath();
+        for (ICell c1 : path) {
         	System.out.println(c1.getX() +" " + c1.getY());
         }
     }
