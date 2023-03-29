@@ -39,4 +39,13 @@ public class Navi extends Entity implements IEntity {
 	public String toString() {
 		return "n";
 	}
+
+	public Camp startBuild(){
+		Camp c = new Camp(this.m,this.campCell,this.map,3,0,0);
+		return c;
+	}
+
+	public void builingCamp(){
+		this.camp.construCamp();
+	}
 }
