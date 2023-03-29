@@ -19,18 +19,23 @@ public class Navi extends Entity implements IEntity {
 		super.currentAction = null;
 	}
 	
-	@Override
 	public boolean isEnemy(Entity ent) {
 		return ent instanceof Soldier /*or their technology*/;
 	}
 	
-	public boolean canHarvest(ICell c){
-		return c.getTerrain() == Terrain.BERRIES 
-				&& this.position.nextTo(c);
+	public boolean canHarvest(){
+		return this.position.getTerrain() == Terrain.BERRIES;
 	}
+	
+	public void harvest() {
+		if(this.canHarvest())
+			this.map.getCell(super.position.getX(), super.position.getX()).isBeingHarvested();
+	}
+	
 	Action getAction() {
 		return action;
 	}
+	
 	void setAction(Action action) {
 		this.action = action;
 	}

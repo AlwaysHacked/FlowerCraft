@@ -4,10 +4,13 @@ import model.Action;
 import model.terrain.ICell;
 
 public interface IEntity {
+	
+	void update();
+	
 //	war methods
-	boolean isEnemy(Entity ent);
-	boolean canAttack(Entity ent) ;
-	void attack(Entity ent);
+	boolean isEnemy(IEntity ent);
+	IEntity canAttack() ;
+	void attack();
 	void sufferAttack(int impact) ;
 	
 //	position methods
