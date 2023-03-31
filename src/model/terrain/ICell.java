@@ -15,6 +15,10 @@ public interface ICell {
     /** Renvoie true si la case est accessible à e*/
     boolean isAccessible();
     
+    /** 
+     * Renvoie true si l'ICell passe en argument est 
+     * aux memes  coordonnees
+     */
 	public boolean samePlace(ICell c);
     
     /** Getters */
@@ -47,5 +51,5 @@ public interface ICell {
     public boolean nextTo(ICell c);
     
 //    Methode pour Berries, baissant la vie de baies
-    public void isBeingHarvested();
+    public int isBeingHarvested();
 }

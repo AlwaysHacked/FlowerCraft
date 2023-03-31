@@ -7,7 +7,5 @@ public class Main {
 		MainModel m = new MainModel();
 		MainView v = new MainView(m);
 		MainControl c = new MainControl(m);
-
-		m.getMap().affiche();
 	}
 }

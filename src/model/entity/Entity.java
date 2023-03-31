@@ -9,9 +9,20 @@ import model.terrain.Terrain;
 
 import java.util.ArrayList;
 import java.util.Queue;
+
+import control.EntityControl;
+
 import java.util.LinkedList;
 
 public class Entity implements IEntity {
+	protected final int NAVI_HEALTH = 100;
+	protected final int  NAVI_SPEED = 5;
+	protected final int  NAVI_ATTACK = 10;
+
+	protected final int  SOLDIER_HEALTH = 100;
+	protected final int  SOLDIER_SPEED = 5;
+	protected final int  SOLDIER_ATTACK = 15;
+
 	protected MainModel model;
 	protected ICell position;
 	protected Map map;
@@ -23,8 +34,9 @@ public class Entity implements IEntity {
 	protected Queue<ICell> path;
 	protected ICell destination;
 	protected Action currentAction;
+	
+	protected EntityControl entC;
 
-//	IDEA : special bool cases : invicibility / rage / ...
 	
 	public Entity(MainModel m, ICell c, Map map, int h, int a, int s) {
 		this.model = m;
@@ -36,6 +48,8 @@ public class Entity implements IEntity {
 		this.speed = s;
 
 		this.path = null;
+		
+		this.entC = new EntityControl(this.model, this);
 	}
 	
 	@Override
@@ -52,8 +66,6 @@ public class Entity implements IEntity {
 	}
 	
 
-	//	war methods
-//	does it work?
 	@Override
 	public boolean isEnemy(IEntity ent) {
 		if (this instanceof Navi)
@@ -64,7 +76,6 @@ public class Entity implements IEntity {
 			return false;
 	}
 	
-//	Can attack if the Entity is next to him and is his enemy
 	@Override
 	public IEntity canAttack() {
 		ArrayList<ICell> c = this.map.neighbours(this.position);
@@ -76,6 +87,7 @@ public class Entity implements IEntity {
 		return null;
 	}	
 	
+
 	@Override
 	public void attack() {
 		IEntity ent = this.canAttack();
@@ -83,23 +95,29 @@ public class Entity implements IEntity {
 			ent.sufferAttack(this.attack);
 	}
 	
-//	Baisse les points de vie 
+
 	@Override
 	public void sufferAttack(int impact) {
 		this.health -= impact;
 	}
 	
-	// Selon la valeur, indique la possibilite de bouger a l'endroit demande
 	@Override
 	public boolean canMove(ICell c) {
-		if(c.getTerrain() == Terrain.FOREST)
+		if(c.getTerrain() == Terrain.FOREST && c.isAccessible())
 			return false;
 
 		return true;
 	}
 
+/**
+ * 
+ */
 	public void moveToNext(){
-		this.position = this.path.poll();
+		if (canMove(this.path.peek())) {
+			this.position.deleteEntity();
+			this.position = this.path.poll();
+			this.position.addEntity(this);
+		}
 	}
 	
 //	After checking if the move is possible will
@@ -132,9 +150,6 @@ public class Entity implements IEntity {
 	    }
 	}
 	
-//	Indique si l'entite mobile se trouve a proximite de ICell passe 
-//	en argument.
-
 	//	getters
 	@Override
 	public Action getCurrentAction() {return this.currentAction;}

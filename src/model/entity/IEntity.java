@@ -5,15 +5,39 @@ import model.terrain.ICell;
 
 public interface IEntity {
 	
+/**	
+ * Cette fonction est utile pour `EntityControl`
+ * `EC` a chaque unite de temps lui demandera d'update (faire son action).
+ * vu le contenu de l'attribut `currentAction` 
+ * la fonction correspondante sera executee 
+*/
 	void update();
 	
 //	war methods
-	boolean isEnemy(IEntity ent);
+/** prend une entite en argument
+ * renvoie vraie si c'est un ennemi
+ * faux sinon
+ */ 
+	public boolean isEnemy(IEntity ent);
+	
+/**
+ * Examine le voisinage de l'entite
+ * renvoie vraie un ennemi se trouve dans l'une des cases
+ * faux sinon
+ */
 	IEntity canAttack() ;
+	
+ /**
+  * Attaque l'ennemi (s'il y en a un) a cote de lui
+  * En cas d'absence d'ennemi ne fait rien
+  */
 	void attack();
+	
+/** Baisse les points de vie */ 
 	void sufferAttack(int impact) ;
 	
 //	position methods
+/** Selon la valeur, indique la possibilite de bouger a l'endroit demande*/
 	boolean canMove(ICell c);
 	
 //	getters

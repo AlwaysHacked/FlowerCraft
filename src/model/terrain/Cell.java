@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.awt.Point;
 
 import model.entity.IEntity;
-import model.entity.Jardinier;
 import model.MainModel;
 
 public class Cell implements ICell{
@@ -52,7 +51,7 @@ public class Cell implements ICell{
 	
 
 	@Override
-	public boolean isAccessible() { return false; }
+	public boolean isAccessible() { return this.entity != null; }
 
 	public boolean samePlace(ICell c) {
 		return c.getX() == this.getX() && 
@@ -101,8 +100,6 @@ public class Cell implements ICell{
     	if (entity != null) {
     		if(entity instanceof Soldier)
     			c = 's';
-    		else if(entity instanceof Jardinier)
-    			c = 'J';
     		else if(entity instanceof Navi)
     			c = 'N';
     		
@@ -116,4 +113,10 @@ public class Cell implements ICell{
 		return entity.toString();
 	}
 	// --------------------- Other Methods ---------------------
+
+	@Override
+	public int isBeingHarvested() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

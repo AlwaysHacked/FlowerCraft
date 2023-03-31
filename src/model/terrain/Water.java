@@ -35,4 +35,7 @@ public class Water extends Cell {
     public String toString() {
         return "W" + super.toString();
     }
+    
+    @Override
+    public boolean isAccessible() { return false; }
 }
