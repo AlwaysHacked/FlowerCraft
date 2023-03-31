@@ -99,6 +99,9 @@ public class Entity implements IEntity {
 	@Override
 	public void sufferAttack(int impact) {
 		this.health -= impact;
+		if(this.health<=0){
+			this.position.deleteEntity();
+		}
 	}
 	
 	@Override
