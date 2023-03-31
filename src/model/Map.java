@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import model.entity.Navi;
@@ -52,6 +53,29 @@ public class Map {
 //    		System.out.println();
     	}
     }
+    
+	public ArrayList<ICell> neighbours(ICell c) {
+		ArrayList<ICell> n = new ArrayList<>();
+
+		int ax = c.getX();
+		int ay = c.getY();
+
+
+		if(ax < this.sizeGrid - 1)     
+		    n.add(this.getCell(ax+1, ay));
+		    
+		if(ay < this.sizeGrid - 1)     
+		    n.add(this.getCell(ax, ay+1));
+		    
+		if(ax > 0)     
+		    n.add(this.getCell(ax-1, ay));
+		    
+		if(ay > 0)     
+		    n.add(this.getCell(ax, ay-1));    	    
+
+		return n;
+	}
+
     
 //	we supppose there are 3 zones
 //	* the allies zone :

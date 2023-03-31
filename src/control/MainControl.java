@@ -2,13 +2,11 @@ package control;
 import java.util.Map;
 
 import model.MainModel;
-import model.entity.Jardinier;
 
 public class MainControl {
 	private MainModel model;
 	private Map map;
 //	private Entity
-	private Jardinier jar;
 	
 	public MainControl(MainModel m) {
 		this.model = m;

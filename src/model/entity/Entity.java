@@ -3,13 +3,13 @@ package model.entity;
 import model.Action;
 import model.MainModel;
 import model.Map;
-//import model.terrain.Cell;
+import model.terrain.Berries;
 import model.terrain.ICell;
 import model.terrain.Terrain;
 
-//import java.awt.Point;
-//import java.lang.Thread;
+import java.util.ArrayList;
 import java.util.Queue;
+import java.util.LinkedList;
 
 public class Entity implements IEntity {
 	protected MainModel model;
@@ -38,10 +38,24 @@ public class Entity implements IEntity {
 		this.path = null;
 	}
 	
-//	war methods
+	@Override
+	public void update() {
+		if (this.path.isEmpty())
+			this.currentAction = Action.STOP;
+		
+		switch(this.currentAction) {
+			case ATTACK -> this.attack();
+			case HARVEST -> this.harvest();
+			case BUILD -> this.build();
+			case MOVE -> this.moveToNext();
+		}
+	}
+	
+
+	//	war methods
 //	does it work?
 	@Override
-	public boolean isEnemy(Entity ent) {
+	public boolean isEnemy(IEntity ent) {
 		if (this instanceof Navi)
 			return ent instanceof Soldier;
 		else if (this instanceof Soldier)
@@ -52,15 +66,20 @@ public class Entity implements IEntity {
 	
 //	Can attack if the Entity is next to him and is his enemy
 	@Override
-	public boolean canAttack(Entity ent) {
-//		TODO
-		return this.position.nextTo(ent.getPosition()) && this.isEnemy(ent);
-//		return false;
-	}
+	public IEntity canAttack() {
+		ArrayList<ICell> c = this.map.neighbours(this.position);
+		for (ICell cc : c) {
+			IEntity ent = cc.getEntity();
+			if (this.isEnemy(ent))
+				return ent;
+		}
+		return null;
+	}	
 	
 	@Override
-	public void attack(Entity ent) {
-		if (this.canAttack(ent))
+	public void attack() {
+		IEntity ent = this.canAttack();
+		if (ent != null)
 			ent.sufferAttack(this.attack);
 	}
 	
@@ -82,24 +101,38 @@ public class Entity implements IEntity {
 		return true;
 	}
 
-	public boolean moveToNext(){
-		if(this.position.nextTo(this.path.peek())) {
-			this.position = this.path.poll();
-			return true;
-		}
-		return false;
+	public void moveToNext(){
+		this.position = this.path.poll();
 	}
 	
 //	After checking if the move is possible will
 //	put the path gotten from AStar into path variable.
 //	If the move isn't possible will throw exception
-	public void move(ICell c) {
-		if (!canMove(c))
-			throw new IllegalArgumentException("Cannot move to " + c.getX() + " " + c.getY() + "\nTerrain type is " + c.getTerrain());
+	private void move() {
+		this.path = new LinkedList<ICell>();
+		this.currentAction = Action.MOVE;
+		
+	    System.out.println("begin :" + this.position.getX() + " " + this.position.getY());
+	    System.out.println("end :" + this.destination.getX() + " " + this.destination.getY());
+	    
+	    int moveX = this.position.getX() > this.destination.getX() ? -1 : this.position.getX() == this.destination.getX() ? 0 : 1;
+	    int moveY = this.position.getY() > this.destination.getY() ? -1 : this.position.getY() == this.destination.getY() ? 0 : 1;
 
-//		get aStar from this.position to c
-		AStar star = new AStar(this.model, this.map, this.position, c);
-		this.path = star.getPath();
+	    int X = this.position.getX();
+	    int Y = this.position.getY();
+	    
+	    while(X != this.destination.getX() || Y != this.destination.getY() ){
+	        if (X != this.destination.getX())// && this.isPossibleMove())
+	            X += X != this.destination.getX() ? moveX : 0;
+	        else
+	            Y += Y != this.destination.getY() ? moveY : 0;
+	        System.out.println(X + " " + Y);
+	        ICell c = this.map.getCell(X, Y);
+	        System.out.println(c.getTerrain());
+	        if (c.getTerrain() == Terrain.WATER || !c.isAccessible())
+	            return ;
+	        path.add(c);
+	    }
 	}
 	
 //	Indique si l'entite mobile se trouve a proximite de ICell passe 
@@ -135,4 +168,6 @@ public class Entity implements IEntity {
 		return Action.values();
 	}
 	
+	private void build() {}
+	private void harvest() {}
 }

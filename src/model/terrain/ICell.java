@@ -45,4 +45,7 @@ public interface ICell {
 
 //    Renvoie vrai si la case ICell c est a cote 
     public boolean nextTo(ICell c);
+    
+//    Methode pour Berries, baissant la vie de baies
+    public void isBeingHarvested();
 }
