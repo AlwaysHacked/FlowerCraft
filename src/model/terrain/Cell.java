@@ -42,6 +42,7 @@ public class Cell implements ICell{
 //    	System.out.println("\tcell: " + this.coord.x + " " + this.coord.y + "\t" + entities.size());
     }
 
+	@Override
 	public boolean nextTo(ICell c) {
 		return  (c.getX()+1 == this.getX() && this.getY() == c.getY()) ||
 				(c.getX()-1 == this.getX() && this.getY() == c.getY()) ||

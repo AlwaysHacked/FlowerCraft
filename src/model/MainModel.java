@@ -24,6 +24,9 @@ public class MainModel {
         	c.deleteEntity();
         	c.addEntity(n);
         }
+        
+        n.move(map.getCell(7,5));
+        
     }
         
     public Map getMap() {

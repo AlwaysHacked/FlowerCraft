@@ -15,13 +15,13 @@ import control.EntityControl;
 import java.util.LinkedList;
 
 public class Entity implements IEntity {
-	protected final int NAVI_HEALTH = 100;
-	protected final int  NAVI_SPEED = 5;
-	protected final int  NAVI_ATTACK = 10;
+	public static final int NAVI_HEALTH = 100;
+	public static final int  NAVI_SPEED = 5;
+	public static final int  NAVI_ATTACK = 10;
 
-	protected final int  SOLDIER_HEALTH = 100;
-	protected final int  SOLDIER_SPEED = 5;
-	protected final int  SOLDIER_ATTACK = 15;
+	public static final int  SOLDIER_HEALTH = 100;
+	public static final int  SOLDIER_SPEED = 5;
+	public static final int  SOLDIER_ATTACK = 15;
 
 	protected MainModel model;
 	protected ICell position;
@@ -62,9 +62,27 @@ public class Entity implements IEntity {
 			case HARVEST -> this.harvest();
 			case BUILD -> this.build();
 			case MOVE -> this.moveToNext();
+			case UP -> this.moveStraight(0, -1);
+			case DOWN -> this.moveStraight(0, 1);
+			case LEFT -> this.moveStraight(-1, 0);
+			case RIGHT -> this.moveStraight(1,0);
 		}
 	}
 	
+	private boolean moveStraight(int x, int y) {
+		if(ax < this.sizeGrid - 1)     
+		    n.add(this.getCell(ax+1, ay));
+		    
+		if(ay < this.sizeGrid - 1)     
+		    n.add(this.getCell(ax, ay+1));
+		    
+		if(ax > 0)     
+		    n.add(this.getCell(ax-1, ay));
+		    
+		if(ay > 0)     
+		    n.add(this.getCell(ax, ay-1));    	    
+
+	}
 
 	@Override
 	public boolean isEnemy(IEntity ent) {
@@ -106,33 +124,46 @@ public class Entity implements IEntity {
 	
 	@Override
 	public boolean canMove(ICell c) {
-		if(c.getTerrain() == Terrain.FOREST && c.isAccessible())
-			return false;
-
-		return true;
+		return c.isAccessible() && this.position.nextTo(c);
 	}
 
 /**
- * 
+ * La fonction bouge le pion sur la cellule suivante 
+ * Le chemin est sauvgarde dans l'attribut `path`
  */
-	public void moveToNext(){
+	public boolean moveToNext(){
 		if (canMove(this.path.peek())) {
 			this.position.deleteEntity();
 			this.position = this.path.poll();
 			this.position.addEntity(this);
+			return true;
+		}
+		return false;
+	}
+//	for test of moves
+	public void move(ICell c) {
+		this.destination = c;
+		this.generatePath();this.map.affiche();
+		
+		while (!this.path.isEmpty()) {
+			System.out.println(this.moveToNext());
+			this.map.affiche();
 		}
 	}
 	
 //	After checking if the move is possible will
 //	put the path gotten from AStar into path variable.
 //	If the move isn't possible will throw exception
-	private void move() {
+	/**
+	 * 
+	 */
+	private void generatePath() {
 		this.path = new LinkedList<ICell>();
 		this.currentAction = Action.MOVE;
 		
 	    System.out.println("begin :" + this.position.getX() + " " + this.position.getY());
 	    System.out.println("end :" + this.destination.getX() + " " + this.destination.getY());
-	    
+
 	    int moveX = this.position.getX() > this.destination.getX() ? -1 : this.position.getX() == this.destination.getX() ? 0 : 1;
 	    int moveY = this.position.getY() > this.destination.getY() ? -1 : this.position.getY() == this.destination.getY() ? 0 : 1;
 

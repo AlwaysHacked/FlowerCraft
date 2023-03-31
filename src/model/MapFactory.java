@@ -23,7 +23,8 @@ public class MapFactory {
     /** Partie singleton :
      * contrôle du constructeur
      * getInstance renvoie l'unique instance et
-     * l'initalise si elle n'existe pas */
+     * l'initalise si elle n'existe pas 
+    */
     private MapFactory(MainModel model) {
         this.model = model;
     }

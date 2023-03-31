@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.Random;
 
+import model.entity.Entity;
 import model.entity.Navi;
 import model.entity.Soldier;
 import model.terrain.Cell;
@@ -35,25 +36,32 @@ public class Map {
 	public Map(MainModel model, String[][] setup) {
 		this.m = model;
 		this.sizeGrid = setup.length;
+
+		/**
+		 * Initialisation predeterminee de la carte
+		 */
 		this.grid = new ICell[sizeGrid][sizeGrid];
 		CellFactory make = CellFactory.getInstance(model);
-
 		for (int i = 0; i < sizeGrid; i++)
 			for (int j = 0; j < sizeGrid; j++)
 				grid[i][j] = make.createCell(i,j,setup[i][j]);
 	}
     
+	/**
+	 * Initialisation de la grille caree de taille `sizeGrid`
+	 */
     private void initGrid(){
     	this.grid = new Cell[sizeGrid][sizeGrid];
-    	for(int i = 0; i < sizeGrid; i++) {
-    		for(int j = 0; j < sizeGrid; j++) {
-//    			System.out.print(i + "," + j + " ");
+    	for(int i = 0; i < sizeGrid; i++) 
+    		for(int j = 0; j < sizeGrid; j++) 
     			this.grid[i][j] = this.createCell(i, j);
-    		}
-//    		System.out.println();
-    	}
     }
     
+    /**
+     * Calcul les voisins de la cellule c 
+     * @param ICell c
+     * @return les voisins dans ArrayList
+     */
 	public ArrayList<ICell> neighbours(ICell c) {
 		ArrayList<ICell> n = new ArrayList<>();
 
@@ -76,31 +84,33 @@ public class Map {
 		return n;
 	}
 
-    
-//	we supppose there are 3 zones
-//	* the allies zone :
-//		navis with their friendly animals are created
-//		50 % of map
-//	* the buffer zone :
-//		only neutral animals are located here
-//		15 % of map  
-//	* the ennemy zone : 
-//		ennemies appear on this 
-//		35 % of map
-//	at first, there's only one Entity on a Cell    	
-    
+    /**
+     * Creation de Cell avec une apparition random des entites
+     * L'algorithme d'apparition :
+	we supppose there are 3 zones
+	* the allies zone :
+		navis with their friendly animals are created
+		50 % of map
+	* the buffer zone :
+		only neutral animals are located here
+		15 % of map  
+	* the ennemy zone : 
+		ennemies appear on this 
+		35 % of map
+    */
     private Cell createCell(int x, int y) {
     	int az = (int) (this.sizeGrid * .5);
     	int bz = (int) (this.sizeGrid * .15);
     	int ez = (int) (this.sizeGrid * .35);
     	
-    	Cell c = new Cell(m, x, y);
+    	Cell c = new Cell(this.m, x, y);
     	int r = rand.nextInt(200);
     	
     	if (x < az) {
 			if (r <= this.probNavi) {
 				System.out.println(x + " " + y);
-				c.addEntity(new Navi(m, c, this, 100, 5, 10, 20));
+				c.addEntity(new Navi(this.m, c, this, 
+						Entity.NAVI_HEALTH, Entity.NAVI_SPEED, Entity.NAVI_ATTACK));
 			}
 		}
     	else if (x < bz) {
@@ -109,7 +119,7 @@ public class Map {
     	else {
     		if (r <= this.probNavi) {
 				System.out.println(x + " " + y);
-				c.addEntity(new Soldier(m, c, this, 100, 5, 10));
+				c.addEntity(new Soldier(this.m, c, this, 100, 5, 10));
 			}
     	}
     	
@@ -122,8 +132,9 @@ public class Map {
     }
     
     
-    // printing in terminal
-  
+/**
+ * Fonctions d'affichage  
+ */
     public void showLineNums() {
     	System.out.print(" ");
     	for (int i = 0; i < this.sizeGrid; i++)

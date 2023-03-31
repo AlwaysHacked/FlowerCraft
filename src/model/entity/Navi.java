@@ -9,19 +9,11 @@ import model.terrain.Terrain;
 
 public class Navi extends Entity implements IEntity {
 	private Action action = Action.STOP;
-	public Map map ;
-	public MainModel m;
-	public Cell campCell;
-	private Camp camp;
 	
 	public Navi(MainModel m, ICell c, Map map, int h, int a, int s) {
 		super(m, c, map, h, a, s);
 		super.currentAction = null;
-        this.map = map;
-		this.m = m;
-        this.campCell = null;
-		
-	}             
+	}
 	
 	@Override
 	public boolean isEnemy(IEntity ent) {
@@ -41,7 +33,7 @@ public class Navi extends Entity implements IEntity {
 	}
 	
 	/**
-	 * S'il est sur le bon terrain,
+	 * S'il est sur le bon type de terrain,
 	 * il recolte les baies
 	 * => 
 	 * les baies presentes diminuent
@@ -49,43 +41,34 @@ public class Navi extends Entity implements IEntity {
 	 */
 	public void harvest() {
 		if(this.canHarvest())
-			RESSOURCES += this.map.getCell(super.position.getX(), super.position.getX()).isBeingHarvested();
-	}
-<<<<<<< HEAD
-    
-
-    public boolean canBuildCamp(ICell c){
-		return c.getTerrain() != Terrain.WATER 
-		&& c.isAccessible()
-		&& this.position.nextTo(c);
+			Camp.RESSOURCES += this.map.getCell(super.position.getX(), super.position.getX()).isBeingHarvested();
 	}
 
-	public Camp buildCamp(ICell cell){
+	/**
+	 * Verifie si la construction de Camp est possible
+	 * @param ICell c, l'endroit de construction 
+	 * @return vraie s'il n'y a personne sur `c` et est a cote de Navi
+	 */
+	public boolean canBuildCamp(ICell c){
+		return c.isAccessible() && this.position.nextTo(c);
+	}
+
+	/**
+	 * Construit un Camp sur le cell demande
+	 * @param ICell cell 
+	 */
+	public void buildCamp(ICell cell){
 		if(this.canBuildCamp (cell)){
-		Camp c = new Camp(super.model,cell,this.map,12,0,0);
-		return c;
-		} else {
-			return null;
+			Camp c = new Camp(super.model,cell,this.map,12,0,0);
+			this.map.getCell(cell.getX(), cell.getY()).addEntity(c);
 		}
 	}
 
-
-=======
-	
-<<<<<<< HEAD
-	public Camp startBuild(){
-		Camp c = new Camp(super.model,this.position,this.map,3,0,0);
-		return c;
-	}
-
-	public void builingCamp(){
-		this.camp.construCamp();
-	}
+//	public void builingCamp(){
+//		this.camp.construCamp();
+//	}
 	
 //	getters
-=======
->>>>>>> 252ee45d4e05bbd8297641eda4109935c18f24e6
->>>>>>> 5bc2ee1920093025eaf722d791b1b6009e4f2c66
 	Action getAction() {
 		return action;
 	}

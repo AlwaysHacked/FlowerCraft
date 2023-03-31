@@ -14,12 +14,12 @@ public class Berries extends Cell{
 
     public Berries(MainModel model, Point p) {
         super(model, p);
-        terrain = Terrain.BERRIES;
+        super.terrain = Terrain.BERRIES;
     }
 
     public Berries(MainModel model, int x, int y) {
         super(model, x, y);
-        terrain = Terrain.BERRIES;
+        super.terrain = Terrain.BERRIES;
     }
 
     @Override
@@ -30,17 +30,27 @@ public class Berries extends Cell{
         return "B" + super.toString();
     }
 
+    /**
+     * Baisse et renvoie le nombre de ressources
+     * cueillables definie dans HARVEST
+     */
     public int isBeingHarvested() {
     	this.food -= HARVEST;
     	return HARVEST;
     }
     
+    /**
+     * Fonction de mise a jour demandee par le controleur
+     * Si berries le nombre de baies arrive a 0, 
+     * le terrain devient un field
+     * Sinon il se regenere
+     */
     public boolean update() {
         if (food > 0) {
             food = Integer.max(MAX_FOOD, food + REGEN);
             return true;
         } else {
-            terrain = Terrain.FIELD;
+            super.terrain = Terrain.FIELD;
             return false;
         }
     }
