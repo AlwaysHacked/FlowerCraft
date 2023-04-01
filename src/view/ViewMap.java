@@ -11,7 +11,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import model.MainModel;
+import model.terrain.Berries;
 import model.terrain.Field;
+import model.terrain.Forest;
 import model.terrain.ICell;
 
 public class ViewMap extends JPanel {
@@ -32,7 +34,7 @@ public class ViewMap extends JPanel {
 
                 ImageIcon temp = new ImageIcon();
                 JLabel object = new JLabel();
-                object.setBounds(j * STEP, i * STEP, STEP, STEP);
+                object.setBounds(j * STEP, i * STEP - 5, STEP, STEP);
                 object.setIcon(temp);
                 // ZoneController ctrl = new ZoneController(this.grille, this.grille.getZone(j,
                 // i));
@@ -57,24 +59,29 @@ public class ViewMap extends JPanel {
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
                 if (m.getMap().getCell(j, i) != null) {
-                    frame(g, type(m.getMap().getCell(j, i)), j * STEP, i * STEP);// to be written
+                    type(m.getMap().getCell(j, i), g, j, i);
                 }
             }
         }
         // add other components later on
     }
 
-    public String type(ICell c) {
+    public void type(ICell c, Graphics g, int x, int y) {
         if (c instanceof Field)
-            return "Ressources/Normal_1.png";
-        else
-            return "Ressources/FOREST.png";
+            frame(g, "Ressources/Normal_1.png", x * STEP, y * STEP, STEP, STEP);
+        else if (c instanceof Forest)
+            frame(g, "Ressources/FOREST.png", x * STEP, y * STEP, STEP, STEP);
+        else if (c instanceof Berries) {
+            frame(g, "Ressources/Normal_1.png", x * STEP, y * STEP, STEP, STEP);
+            frame(g, "Ressources/BERRIES.png", x * STEP + 10, y * STEP - 4, STEP - 20, STEP - 10);
+        } else
+            frame(g, "Ressources/Submerge_1.png", x * STEP, y * STEP, STEP, STEP);
     }
 
-    public void frame(Graphics g, String s, int x, int y) {
+    public void frame(Graphics g, String s, int x, int y, int width, int height) {
 
         ImageIcon temp2 = new ImageIcon(this.getClass().getResource(s));
-        g.drawImage(temp2.getImage(), x, y, STEP, STEP, this);
+        g.drawImage(temp2.getImage(), x, y, width, height, this);
     }
 
 }
