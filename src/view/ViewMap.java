@@ -1,4 +1,5 @@
 package view;
+
 import model.*;
 
 import java.awt.Dimension;
@@ -14,36 +15,37 @@ import model.terrain.Field;
 import model.terrain.ICell;
 
 public class ViewMap extends JPanel {
-	private MainModel m;
-	private ArrayList<JLabel> cases;
-	public final static int SIZE = 10;
-	public final static int STEP = 70;
-	
-	public ViewMap(MainModel model) {
-		this.m = model;
-		this.cases = new ArrayList<>();
-		Dimension dim = new Dimension(SIZE*70, SIZE*70); /////change later on
+    private MainModel m;
+    private ArrayList<JLabel> cases;
+    public final static int SIZE = 10;
+    public final static int STEP = 70;
+
+    public ViewMap(MainModel model) {
+        this.m = model;
+        this.cases = new ArrayList<>();
+        Dimension dim = new Dimension(SIZE * 70, SIZE * 70); ///// change later on
         this.setPreferredSize(dim);
         setOpaque(true);
-        
+
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
 
-                    ImageIcon temp = new ImageIcon();
-                    JLabel object = new JLabel();
-                    object.setBounds(j*STEP, i*STEP, STEP, STEP);
-                    object.setIcon(temp);
-                    //ZoneController ctrl = new ZoneController(this.grille, this.grille.getZone(j, i));
-                    //object.addMouseListener(ctrl);
-                    this.add(object);
-                    cases.add(object);
-                
+                ImageIcon temp = new ImageIcon();
+                JLabel object = new JLabel();
+                object.setBounds(j * STEP, i * STEP, STEP, STEP);
+                object.setIcon(temp);
+                // ZoneController ctrl = new ZoneController(this.grille, this.grille.getZone(j,
+                // i));
+                // object.addMouseListener(ctrl);
+                this.add(object);
+                cases.add(object);
+
             }
         }
 
-	}
-	
-	public void update() {
+    }
+
+    public void update() {
         // maybe replace with a thread later once there is one in Cell ?
         repaint();
 
@@ -51,27 +53,28 @@ public class ViewMap extends JPanel {
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        // Pour chaque cellule... 
+        // Pour chaque cellule...
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
                 if (m.getMap().getCell(j, i) != null) {
-                    frame(g, type(m.getMap().getCell(j, i)), j*STEP, i*STEP);// to be written
+                    frame(g, type(m.getMap().getCell(j, i)), j * STEP, i * STEP);// to be written
                 }
             }
         }
-        //add other components later on
+        // add other components later on
     }
-    
+
     public String type(ICell c) {
-    	if (c instanceof Field) return "Ressources/Field.jpg";
-    	else return "Ressources/Water.jpg";
+        if (c instanceof Field)
+            return "Ressources/Normal_1.png";
+        else
+            return "Ressources/FOREST.png";
     }
-    
+
     public void frame(Graphics g, String s, int x, int y) {
-    	
-    	ImageIcon temp2 = new ImageIcon(this.getClass().getResource(s));
+
+        ImageIcon temp2 = new ImageIcon(this.getClass().getResource(s));
         g.drawImage(temp2.getImage(), x, y, STEP, STEP, this);
     }
-    
 
 }
