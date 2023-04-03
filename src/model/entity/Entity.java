@@ -46,11 +46,15 @@ public class Entity implements IEntity {
 		this.attack = a;
 		this.speed = s;
 
-		this.path = null;
+		this.videPath();
 
 		this.entC = new EntityControl(this.model, this);
 	}
 
+	private void videPath() {
+		this.path = new LinkedList<ICell>;
+	}
+	
 	@Override
 	public void update() {
 		if (this.path.isEmpty())
@@ -67,25 +71,22 @@ public class Entity implements IEntity {
 			 * case LEFT -> this.moveStraight(-1, 0);
 			 * case RIGHT -> this.moveStraight(1,0);
 			 */
+			case STOP -> this.videPath(); // vide le chemin et ne fait rien
 		}
 	}
 
-	/*
-	 * private boolean moveStraight(int x, int y) {
-	 * if(ax < this.sizeGrid - 1)
-	 * n.add(this.getCell(ax+1, ay));
-	 * 
-	 * if(ay < this.sizeGrid - 1)
-	 * n.add(this.getCell(ax, ay+1));
-	 * 
-	 * if(ax > 0)
-	 * n.add(this.getCell(ax-1, ay));
-	 * 
-	 * if(ay > 0)
-	 * n.add(this.getCell(ax, ay-1));
-	 * 
-	 * }
-	 */
+	private void moveStraight(int x, int y) {
+		this.videPath();
+		x += this.position.getX();
+		y += this.position.getY();
+		
+		if(x < this.map.sizeGrid - 1 && y < this.map.sizeGrid - 1 && x > 0 && y > 0) {
+	        this.path.add(this.map.getCell(x+1, y));
+	        this.moveToNext();
+		}
+		else throw new IllegalArgumentException("Impossible d'aller a la case (" + x + ", " + y ")");
+	}
+
 	@Override
 	public boolean isEnemy(IEntity ent) {
 		if (this instanceof Navi)
@@ -139,6 +140,10 @@ public class Entity implements IEntity {
 			return true;
 		}
 		return false;
+//		else throw new IllegalArgumentException("Impossible d a la case (" + x + ", " + y ")");
+//		il va pas s'arreter apres un test s'il faut y aller ou pas, il est possible que la case soit occupee par qq'un d'autre
+//		et peut se liberer
+//		il vaut mieux avoir un retour en bool 
 	}
 
 	// for test of moves
