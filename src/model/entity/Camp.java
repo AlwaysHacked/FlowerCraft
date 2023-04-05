@@ -83,35 +83,4 @@ public class Camp extends Entity implements IEntity{
 	    if(super.getHealth() <= 0)
 	        campcell.deleteEntity();
 	}
-	
-	private void linearisePheroCamp() {
-		boolean stable = false;
-
-		while(!stable){
-			stable = true;
-			for(int i= 0; i < this.map.sizeGrid; i++){
-				for(int j = 0; j < this.map.sizeGrid; j++){
-
-					ICell c = this.map.getCell(i, j);
-
-					if(c.getPheroCamp() < 1.){
-						ArrayList coordVois = this.map.neighbours(c);
-						float maxPhero = 0;
-
-						for(int k = 0; k < coordVois.size(); k++){
-							ICell voisin = coordVois.get(k);
-							maxPhero = max(maxPhero, voisin.get_pheroNid());
-						}
-						maxPhero -=  (1. / this.map.sizeGrid);
-
-						if(maxPhero > c.get_pheroNid()){
-							c.posePheroNid(maxPhero);
-							stable = false;
-						}
-					}
-				}
-			}
-		}
-	}
 }
-        

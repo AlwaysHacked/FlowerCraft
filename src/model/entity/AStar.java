@@ -111,7 +111,6 @@ public class AStar {
 	}
 
 	public Stack<ICell> getPath() {
-		show(F);
 		aStar(this.start);
 		
 //		i'm searching for f value 1
@@ -128,14 +127,11 @@ public class AStar {
 		if (x == -1) return null;
 		
 		while(x != this.start.getX() && x != this.start.getY()) {
-			System.out.println(x + " " + y);
-			path.add(this.map.getCell(x, y));
+			this.path.add(this.map.getCell(x, y));
 			x = F[x][y][2];
 			y = F[x][y][3];
 		}
-					
-
-		return path;
+		return this.path;
 	}
 
 	public void aStar(ICell parent)  {
@@ -143,8 +139,6 @@ public class AStar {
 			return ;
 
 		calcS(parent);
-//		show(F);
-//		showID(F);
 		ICell smallest_f = smallest();
 		System.out.println(smallest_f.getX());
 

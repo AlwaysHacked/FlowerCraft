@@ -84,7 +84,7 @@ public class Entity implements IEntity {
 	        this.path.add(this.map.getCell(x+1, y));
 	        this.moveToNext();
 		}
-		else throw new IllegalArgumentException("Impossible d'aller a la case (" + x + ", " + y ")");
+		else throw new IllegalArgumentException("Impossible d'aller a la case (" + x + ", " + y + ")");
 	}
 
 	@Override
@@ -135,7 +135,7 @@ public class Entity implements IEntity {
 	public boolean moveToNext() {
 		if (canMove(this.path.peek())) {
 			this.position.deleteEntity();
-			this.position = this.path.poll();
+			this.position = this.path.pop();
 			this.position.addEntity(this);
 			return true;
 		}
@@ -148,12 +148,13 @@ public class Entity implements IEntity {
 
 	// for test of moves
 	public void move(ICell c) {
+		System.out.print("herere");
 		this.destination = c;
 		this.generatePath();
 		this.map.affiche();
 
 		while (!this.path.isEmpty()) {
-			System.out.println(this.moveToNext());
+//			System.out.println(this.moveToNext());
 			this.map.affiche();
 		}
 	}
@@ -167,6 +168,7 @@ public class Entity implements IEntity {
 	private void generatePath() {
 		AStar a = new AStar(this.model, this.map, this.position, this.destination);
 		this.path = a.getPath();
+		System.out.println(this.path.size());
 	}
 
 	// getters

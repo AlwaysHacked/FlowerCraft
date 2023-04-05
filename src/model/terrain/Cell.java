@@ -47,7 +47,11 @@ public class Cell implements ICell{
 		return  (c.getX()+1 == this.getX() && this.getY() == c.getY()) ||
 				(c.getX()-1 == this.getX() && this.getY() == c.getY()) ||
 				(c.getX() == this.getX() && this.getY() == c.getY()+1) ||
-				(c.getX() == this.getX() && this.getY() == c.getY()-1)  ;
+				(c.getX() == this.getX() && this.getY() == c.getY()-1) ||
+				(c.getX()+1 == this.getX() && this.getY()+1 == c.getY()) ||
+				(c.getX()+1 == this.getX() && this.getY()-1 == c.getY()) ||
+				(c.getX()-1 == this.getX() && this.getY()-1 == c.getY()) ||
+				(c.getX()-1 == this.getX() && this.getY()+1 == c.getY());
 	}
 	
 
