@@ -118,7 +118,7 @@ public class AStar {
 		
 		int x = -1 , y = -1;
 		
-		for (int i = 0; i < this.map.sizeGrid; i++) 
+		for (int i = 0; i < this.map.sizeGrid; i++)
 			for (int j = 0; j < this.map.sizeGrid; j++) 
 				if(F[i][j][0] == 1 && F[i][j][1] == 1) {
 					x = i; y = j;
@@ -140,7 +140,6 @@ public class AStar {
 
 		calcS(parent);
 		ICell smallest_f = smallest();
-		System.out.println(smallest_f.getX());
 
 		aStar(smallest_f);
 	}

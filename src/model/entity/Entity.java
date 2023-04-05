@@ -3,16 +3,12 @@ package model.entity;
 import model.Action;
 import model.MainModel;
 import model.Map;
-import model.terrain.Berries;
 import model.terrain.ICell;
-import model.terrain.Terrain;
 
 import java.util.ArrayList;
 import java.util.Stack;
 
 import control.EntityControl;
-
-import java.util.LinkedList;
 
 public class Entity implements IEntity {
 	public static final int NAVI_HEALTH = 100;
@@ -57,8 +53,9 @@ public class Entity implements IEntity {
 	
 	@Override
 	public void update() {
-		if (this.path.isEmpty())
-			this.currentAction = Action.STOP;
+//		attaque si possible
+		if (this.attack())
+			return;
 
 		switch (this.currentAction) {
 			case ATTACK -> this.attack();
@@ -109,10 +106,13 @@ public class Entity implements IEntity {
 	}
 
 	@Override
-	public void attack() {
+	public boolean attack() {
 		IEntity ent = this.canAttack();
-		if (ent != null)
+		if (ent != null) {
 			ent.sufferAttack(this.attack);
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -130,7 +130,7 @@ public class Entity implements IEntity {
 
 	/**
 	 * La fonction bouge le pion sur la cellule suivante
-	 * Le chemin est sauvgarde dans l'attribut `path`
+	 * Le chemin est stocke dans l'attribut `path`
 	 */
 	public boolean moveToNext() {
 		if (canMove(this.path.peek())) {
@@ -140,21 +140,22 @@ public class Entity implements IEntity {
 			return true;
 		}
 		return false;
-//		else throw new IllegalArgumentException("Impossible d a la case (" + x + ", " + y ")");
-//		il va pas s'arreter apres un test s'il faut y aller ou pas, il est possible que la case soit occupee par qq'un d'autre
-//		et peut se liberer
-//		il vaut mieux avoir un retour en bool 
+/**		else throw new IllegalArgumentException("Impossible d a la case (" + x + ", " + y ")");
+ *		il va pas s'arreter apres un test s'il faut y aller ou pas, il est possible que la case soit occupee par qq'un d'autre
+ * 		et peut se liberer
+ * 		il vaut mieux avoir un retour en bool
+ */
 	}
 
 	// for test of moves
-	public void move(ICell c) {
+	public void testMove(ICell c) {
 		System.out.print("herere");
 		this.destination = c;
 		this.generatePath();
 		this.map.affiche();
 
 		while (!this.path.isEmpty()) {
-//			System.out.println(this.moveToNext());
+			System.out.println(this.moveToNext());
 			this.map.affiche();
 		}
 	}

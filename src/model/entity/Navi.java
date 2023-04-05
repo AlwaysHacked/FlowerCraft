@@ -45,7 +45,7 @@ public class Navi extends Entity implements IEntity {
 		
 		if(this.canHarvest())
 			Camp.RESSOURCES += this.map.getCell(x, y).isBeingHarvested();
-		else throw new IllegalArgumentException("Impossible de recolter a la case (" + x + ", " + y ")");
+		else throw new IllegalArgumentException("Impossible de recolter a la case (" + x + ", " + y + ")");
 	}
 
 	/**
@@ -69,7 +69,7 @@ public class Navi extends Entity implements IEntity {
 			Camp c = new Camp(super.model,cell,this.map,12,0,0);
 			this.map.getCell(x, y).addEntity(c);
 		}
-		else throw new IllegalArgumentException("Impossible de construire a la case (" + x + ", " + y ")");
+		else throw new IllegalArgumentException("Impossible de construire a la case (" + x + ", " + y + ")");
 	}
 
 //	public void builingCamp(){

@@ -28,7 +28,7 @@ public class MainModel {
         map.affiche();
         
 //        AStar a = new AStar(this, map, c, map.getCell(6, 0));
-        n.move(this.map.getCell(9, 1));
+        n.testMove(this.map.getCell(9, 1));
         
     }
         

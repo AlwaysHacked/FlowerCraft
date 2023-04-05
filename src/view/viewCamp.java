@@ -30,6 +30,6 @@ public class viewCamp extends JPanel  {
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
             // methode dans Camp
-            
 
+        }
 }

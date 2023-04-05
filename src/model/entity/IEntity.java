@@ -30,8 +30,10 @@ public interface IEntity {
  /**
   * Attaque l'ennemi (s'il y en a un) a cote de lui
   * En cas d'absence d'ennemi ne fait rien
+  *
+  * @return
   */
-	void attack();
+	boolean attack();
 	
 /** Baisse les points de vie */ 
 	void sufferAttack(int impact) ;

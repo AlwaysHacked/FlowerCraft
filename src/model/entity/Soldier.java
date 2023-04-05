@@ -18,6 +18,7 @@ public class Soldier extends Entity implements IEntity {
 		super(m, c, map, def_health, def_attack, def_speed);
 	}
 
+//	pas besoin, c'est deja fait dans Entity, je te conseille de supprimer
 	@Override
 	public boolean isEnemy(IEntity ent) {
 		if(ent instanceof Navi){
@@ -29,7 +30,8 @@ public class Soldier extends Entity implements IEntity {
 	
 	// solder follow navi and search for the camp
 	public void setAction(){
-        AStar.getPath();
+//        AStar.getPath();
+//		what do you wanna get? where and whom you want to make move? you need to specify starting and ending points
 	}
 
 	@Override
