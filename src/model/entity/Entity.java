@@ -8,7 +8,7 @@ import model.terrain.ICell;
 import model.terrain.Terrain;
 
 import java.util.ArrayList;
-import java.util.Queue;
+import java.util.Stack;
 
 import control.EntityControl;
 
@@ -31,7 +31,7 @@ public class Entity implements IEntity {
 	protected int attack;
 	protected int speed;
 
-	protected Queue<ICell> path;
+	protected Stack<ICell> path;
 	protected ICell destination;
 	protected Action currentAction;
 
@@ -52,7 +52,7 @@ public class Entity implements IEntity {
 	}
 
 	private void videPath() {
-		this.path = new LinkedList<ICell>();
+		this.path = new Stack<ICell>();
 	}
 	
 	@Override
@@ -165,32 +165,8 @@ public class Entity implements IEntity {
 	 * 
 	 */
 	private void generatePath() {
-		this.path = new LinkedList<ICell>();
-		this.currentAction = Action.MOVE;
-
-		System.out.println("begin :" + this.position.getX() + " " + this.position.getY());
-		System.out.println("end :" + this.destination.getX() + " " + this.destination.getY());
-
-		int moveX = this.position.getX() > this.destination.getX() ? -1
-				: this.position.getX() == this.destination.getX() ? 0 : 1;
-		int moveY = this.position.getY() > this.destination.getY() ? -1
-				: this.position.getY() == this.destination.getY() ? 0 : 1;
-
-		int X = this.position.getX();
-		int Y = this.position.getY();
-
-		while (X != this.destination.getX() || Y != this.destination.getY()) {
-			if (X != this.destination.getX())// && this.isPossibleMove())
-				X += X != this.destination.getX() ? moveX : 0;
-			else
-				Y += Y != this.destination.getY() ? moveY : 0;
-			System.out.println(X + " " + Y);
-			ICell c = this.map.getCell(X, Y);
-			System.out.println(c.getTerrain());
-			if (c.getTerrain() == Terrain.WATER || !c.isAccessible())
-				return;
-			path.add(c);
-		}
+		AStar a = new AStar(this.model, this.map, this.position, this.destination);
+		this.path = a.getPath();
 	}
 
 	// getters

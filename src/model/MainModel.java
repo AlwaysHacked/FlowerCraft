@@ -6,7 +6,7 @@ import model.terrain.Cell;
 import model.terrain.ICell;
 import model.terrain.Terrain;
 
-import java.util.Queue;
+import java.util.Stack;
 import java.util.ArrayList;
 
 public class MainModel {
