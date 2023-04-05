@@ -18,10 +18,19 @@ public class Soldier extends Entity implements IEntity {
 		super(m, c, map, def_health, def_attack, def_speed);
 	}
 
-//	@Override
-//	public boolean isEnemy(MobileEntity ent) {
-//		return ent instanceof Navi/*or their animals*/;
-//	}
+	@Override
+	public boolean isEnemy(IEntity ent) {
+		if(ent instanceof Navi){
+           return ent instanceof Navi;
+		} else{
+			return ent instanceof Camp;
+		}
+		}
+	
+	// solder follow navi and search for the camp
+	public void setAction(){
+        AStar.getPath();
+	}
 
 	@Override
 	public String toString() {
