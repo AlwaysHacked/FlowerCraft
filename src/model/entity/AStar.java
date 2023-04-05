@@ -1,7 +1,7 @@
 package model.entity;
 
 import java.util.LinkedList;
-import java.util.Queue;
+import java.util.Stack;
 
 
 import model.MainModel;
@@ -14,7 +14,6 @@ public class AStar {
 	Map map;
 	
 	ICell start;
-	ICell inter;
 	ICell end;
 	
 	// two dimensional arrays containing two fields
@@ -24,21 +23,20 @@ public class AStar {
 	int H[][][];
 	int F[][][];
 	
-	Queue<ICell> path;
+	Stack<ICell> path;
 	
 	public AStar(MainModel model, Map map, ICell start, ICell end) {
 		this.model = model;
 		this.map = map;
 		
 		this.start = start;
-		this.inter = start;
 		this.end = end;
 		
-		G = new int[this.map.sizeGrid][this.map.sizeGrid][2]; init(G);
-		H = new int[this.map.sizeGrid][this.map.sizeGrid][2]; init(H);
-		F = new int[this.map.sizeGrid][this.map.sizeGrid][2]; init(F);
+		G = new int[this.map.sizeGrid][this.map.sizeGrid][4]; init(G);
+		H = new int[this.map.sizeGrid][this.map.sizeGrid][4]; init(H);
+		F = new int[this.map.sizeGrid][this.map.sizeGrid][4]; init(F);
 		
-		path = new LinkedList<ICell>();
+		path = new Stack<ICell>();
 		
 //		this.aStar();
 	}
@@ -46,8 +44,10 @@ public class AStar {
 	private void init(int A[][][]) {
 		for (int i = 0; i < this.map.sizeGrid; i++) 
 			for (int j = 0; j < this.map.sizeGrid; j++) {
-				A[i][j][0] = 0;
-				A[i][j][1] = 0;
+				A[i][j][0] = 0; // visit
+				A[i][j][1] = 0; // value
+				A[i][j][2] = -1; // for f : x, parents from what node it has been initialised
+				A[i][j][3] = -1; //         y
 			}
 	}
 		
@@ -56,57 +56,46 @@ public class AStar {
 		int bx = end.getX(), by = end.getY();
 		
 		if(ax < this.map.sizeGrid - 1) {
-		    G[ax+1][ay][0] = 1;
-		    G[ax+1][ay][1] = this.map.getCell(ax+1, ay).getA() ;
-		    H[ax+1][ay][0] = 1;
-		    H[ax+1][ay][1] = dist(ax+1, ay, bx, by);
-		    F[ax+1][ay][1] = G[ax+1][ay][1] + H[ax+1][ay][1];
+			G[ax+1][ay][0] = 1;
+			G[ax+1][ay][1] = this.map.getCell(ax+1, ay).getA() ;
+			H[ax+1][ay][0] = 1;
+			H[ax+1][ay][1] = dist(ax+1, ay, bx, by);
+			F[ax+1][ay][1] = G[ax+1][ay][1] + H[ax+1][ay][1];
+			if (inter.nextTo(this.map.getCell(ax+1, ay)) && F[ax+1][ay][2] == -1) F[ax+1][ay][2] = ax;
+			if (inter.nextTo(this.map.getCell(ax+1, ay)) && F[ax+1][ay][3] == -1) F[ax+1][ay][3] = ay;
 		}
 		if(ay < this.map.sizeGrid - 1) {
-		    G[ax][ay+1][0] = 1;
-		    G[ax][ay+1][1] = this.map.getCell(ax, ay+1).getA();
-		    H[ax][ay+1][0] = 1;
-		    H[ax][ay+1][1] = dist(ax, ay+1, bx, by);
-		    F[ax][ay+1][1] = G[ax][ay+1][1] + H[ax][ay+1][1];
+			G[ax][ay+1][0] = 1;
+			G[ax][ay+1][1] = this.map.getCell(ax, ay+1).getA();
+			H[ax][ay+1][0] = 1;
+			H[ax][ay+1][1] = dist(ax, ay+1, bx, by);
+			F[ax][ay+1][1] = G[ax][ay+1][1] + H[ax][ay+1][1];
+			if (inter.nextTo(this.map.getCell(ax, ay+1)) && F[ax][ay+1][2] == -1) F[ax][ay+1][2] = ax;
+			if (inter.nextTo(this.map.getCell(ax, ay+1)) && F[ax][ay+1][3] == -1) F[ax][ay+1][3] = ay;
 		}
 		if(ax > 0) {
-		    G[ax-1][ay][0] = 1;
-		    G[ax-1][ay][1] = this.map.getCell(ax-1, ay).getA();
-		    H[ax-1][ay][0] = 1;
-		    H[ax-1][ay][1] = dist(ax-1, ay, bx, by);
-		    F[ax-1][ay][1] = G[ax-1][ay][1] + H[ax-1][ay][1];
+			G[ax-1][ay][0] = 1;
+			G[ax-1][ay][1] = this.map.getCell(ax-1, ay).getA();
+			H[ax-1][ay][0] = 1;
+			H[ax-1][ay][1] = dist(ax-1, ay, bx, by);
+			F[ax-1][ay][1] = G[ax-1][ay][1] + H[ax-1][ay][1];
+			if (inter.nextTo(this.map.getCell(ax-1, ay)) && F[ax-1][ay][2] == -1) F[ax-1][ay][2] = ax;
+			if (inter.nextTo(this.map.getCell(ax-1, ay)) && F[ax-1][ay][3] == -1) F[ax-1][ay][3] = ay;
 		}
 		if(ay > 0) {
-		    G[ax][ay-1][0] = 1;
-		    G[ax][ay-1][1] = this.map.getCell(ax, ay-1).getA();
-		    H[ax][ay-1][0] = 1;
-		    H[ax][ay-1][1] = dist(ax, ay-1, bx, by);
-		    F[ax][ay-1][1] = G[ax][ay-1][1] + H[ax][ay-1][1];
+			G[ax][ay-1][0] = 1;
+			G[ax][ay-1][1] = this.map.getCell(ax, ay-1).getA();
+			H[ax][ay-1][0] = 1;
+			H[ax][ay-1][1] = dist(ax, ay-1, bx, by);
+			F[ax][ay-1][1] = G[ax][ay-1][1] + H[ax][ay-1][1];
+			if (inter.nextTo(this.map.getCell(ax, ay-1)) && F[ax][ay-1][2] == -1) F[ax][ay-1][2] = ax;
+			if (inter.nextTo(this.map.getCell(ax, ay-1)) && F[ax][ay-1][3] == -1) F[ax][ay-1][3] = ay;
 		}
 	}
 	
-//	private Queue<ICell> smallest() {
-//		int x = inter.getX(), y = inter.getY();
-//		int min_val = Integer.MAX_VALUE;
-//		
-//		Queue<ICell> min = new Queue<>();
-//		
-//		for (int i = 0; i < this.map.sizeGrid; i++) 
-//			for (int j = 0; j < this.map.sizeGrid; j++)
-//				if (F[i][j][0] == 0 ) {
-//					if(min_val > F[i][j][1] ) {
-//						min_val = F[i][j][1];
-//						min = new Queue<>();
-//						min.add(new Cell(this.model, i, j));
-//					}
-//					else if(min_val == G[i][j][1]) {
-//						min.add(new Cell(this.model, i, j));
-//					}
-//				}
-//		return min;
-//	}
+	
 	private ICell smallest() {
-		int x = inter.getX(), y = inter.getY(); 
+		int x = -1, y = -1; 
 		int min = Integer.MAX_VALUE;
 		
 		for (int i = 0; i < this.map.sizeGrid; i++) 
@@ -121,26 +110,45 @@ public class AStar {
 		return this.map.getCell(x, y);
 	}
 
-	public Queue<ICell> getPath() {
+	public Stack<ICell> getPath() {
 		show(F);
 		aStar(this.start);
+		
+//		i'm searching for f value 1
+//		if there's no 1 in f, the node / cell couldn't be found
+		
+		int x = -1 , y = -1;
+		
+		for (int i = 0; i < this.map.sizeGrid; i++) 
+			for (int j = 0; j < this.map.sizeGrid; j++) 
+				if(F[i][j][0] == 1 && F[i][j][1] == 1) {
+					x = i; y = j;
+				}
+		
+		if (x == -1) return null;
+		
+		while(x != this.start.getX() && x != this.start.getY()) {
+			System.out.println(x + " " + y);
+			path.add(this.map.getCell(x, y));
+			x = F[x][y][2];
+			y = F[x][y][3];
+		}
+					
+
 		return path;
 	}
 
 	public void aStar(ICell parent)  {
-		System.out.println(this.inter.getTerrain());
-		if (parent.samePlace(this.end)) {
-//			this.path.add(this.inter);
+		if (parent.samePlace(this.end)) 
 			return ;
-		}
 
 		calcS(parent);
-		show(F);
+//		show(F);
+//		showID(F);
 		ICell smallest_f = smallest();
 		System.out.println(smallest_f.getX());
 
 		aStar(smallest_f);
-		this.path.add(parent);
 	}
 
 
@@ -166,5 +174,42 @@ public class AStar {
 		}
 		this.map.affiche_barre();
 	}
+	
+	private void showID(int A[][][]) {
+    	this.map.showLineNums();
+    	this.map.affiche_barre();
+		for (int i = 0; i < this.map.sizeGrid; i++) {
+    		System.out.print(i);
+    		System.out.print('|');
+    		for (int j = 0; j < this.map.sizeGrid; j++) {
+    			System.out.print((A[i][j][2]) + " " + (A[i][j][3]) + " \t|");
+    		}
+    		System.out.println();
+		}
+		this.map.affiche_barre();
+	}
 
+	
+//	private Queue<ICell> smallest() {
+//	int x = inter.getX(), y = inter.getY();
+//	int min_val = Integer.MAX_VALUE;
+//	
+//	Queue<ICell> min = new Queue<>();
+//	
+//	for (int i = 0; i < this.map.sizeGrid; i++) 
+//		for (int j = 0; j < this.map.sizeGrid; j++)
+//			if (F[i][j][0] == 0 ) {
+//				if(min_val > F[i][j][1] ) {
+//					min_val = F[i][j][1];
+//					min = new Queue<>();
+//					min.add(new Cell(this.model, i, j));
+//				}
+//				else if(min_val == G[i][j][1]) {
+//					min.add(new Cell(this.model, i, j));
+//				}
+//			}
+//	return min;
+//}
+
+	
 }
