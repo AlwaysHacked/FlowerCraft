@@ -1,7 +1,6 @@
 package model.entity;
 
 import java.util.LinkedList;
-import java.util.ArrayList;
 import java.util.Queue;
 
 
@@ -18,8 +17,6 @@ public class AStar {
 	ICell inter;
 	ICell end;
 	
-	boolean succes = false;
-	
 	// two dimensional arrays containing two fields
 	// the first one is if it's visited / initialized
 	// the second one it's value
@@ -27,8 +24,7 @@ public class AStar {
 	int H[][][];
 	int F[][][];
 	
-	ArrayList<ICell> path;
-	ArrayList<ICell> p = new ArrayList<>();
+	Queue<ICell> path;
 	
 	public AStar(MainModel model, Map map, ICell start, ICell end) {
 		this.model = model;
@@ -42,8 +38,7 @@ public class AStar {
 		H = new int[this.map.sizeGrid][this.map.sizeGrid][2]; init(H);
 		F = new int[this.map.sizeGrid][this.map.sizeGrid][2]; init(F);
 		
-		path = new ArrayList<ICell>();
-//				new LinkedList<ICell>();
+		path = new LinkedList<ICell>();
 		
 //		this.aStar();
 	}
@@ -56,7 +51,7 @@ public class AStar {
 			}
 	}
 		
-	private void calcS() {
+	private void calcS(ICell inter) {
 		int ax = inter.getX(), ay = inter.getY();
 		int bx = end.getX(), by = end.getY();
 		
@@ -125,135 +120,30 @@ public class AStar {
 		F[x][y][0] = 1;
 		return this.map.getCell(x, y);
 	}
-	
-//	private void getP(int x, int y){
-//		ICell prev = this.path.get(0);
-//		for(int i = 1; i < this.path.size(); i++) {
-////			System.out.println(prev.getX() + " " + prev.getY());
-//			ICell p = this.path.get(i);
-//			if (!prev.nextTo(p)) {
-//				System.out.println(prev.getX() + " " + prev.getY() + ") && (" + p.getX() + " " + p.getY());
-//				System.out.println(this.path.get(i+1).getX() + " " + this.path.get(i+1).getY());
-//				this.path.remove(i);
-//				F[p.getX()][p.getY()][0] = 0;
-//			}
-//			else {
-////				System.out.println();
-//				prev = p;
-//			}
-//		}
-//	}
-	
-	private void getP(int ax, int ay) {
-		int up, down, right, left,
-			minx = Integer.MAX_VALUE, miny = minx;
-		int min = F[ax][ay][1];
-//		show(F);
-//		System.out.println(F[ax][ay][1]);
-		
-		if (end.getX() == ax && end.getY() == ay)
-			return;
-		
-		for(int i = -1; i <= 1; i+=2)
-			try{
-//				System.out.println(ax+i + " " + ay);
-				if (F[ax+i][ay][1] < min && F[ax+i][ay][0] == 1) {
-					min = F[ax+i][ay][1];
-					minx = ax+i; miny = ay;
-				}
-			}
-			catch(Exception e){}
-	
-		for(int i = -1; i <= 1; i+=2)
-			try{
-//				System.out.println(ax + " " + (ay+i));
-				if (F[ax][ay+i][1] < min && F[ax][ay+i][0] == 1) {
-					min = F[ax][ay+i][1];
-					minx = ax; miny = ay+i;
-				}
-			}
-			catch(Exception e){}
-		try{System.out.println(minx + " " + miny + " " + F[minx][miny][1]);}
-		catch(Exception e) {}
-//		System.out.println();
-		if(minx < Integer.MAX_VALUE) {
-			this.getP(minx, miny);
-			return;
-		}
-		
-	}
-			
-			
-//		if(ax < this.map.sizeGrid - 1) 
-//		    F[ax+1][ay][1] = G[ax+1][ay][1] + H[ax+1][ay][1];
-//		else
-//		    right = 1000;
-//	
-//		if(ay < this.map.sizeGrid - 1) 
-//		    F[ax][ay+1][1] = G[ax][ay+1][1] + H[ax][ay+1][1];
-//		else
-//		    down = 1000;
-//	
-//		if(ax > 0) 
-//		    F[ax-1][ay][1] = G[ax-1][ay][1] + H[ax-1][ay][1];
-//		else
-//		    left = 1000;
-//	
-//		if(ay > 0) 
-//		    F[ax][ay-1][1] = G[ax][ay-1][1] + H[ax][ay-1][1];
-//		else
-//		    up = 10000;
-//	}
 
-	public ArrayList<ICell> getPath() {
-		aStar();
+	public Queue<ICell> getPath() {
 		show(F);
-		this.getP(start.getX(), start.getY());
+		aStar(this.start);
 		return path;
 	}
 
-	public boolean aStar()  {
+	public void aStar(ICell parent)  {
 		System.out.println(this.inter.getTerrain());
-		if (this.inter.samePlace(this.end)) {
+		if (parent.samePlace(this.end)) {
 //			this.path.add(this.inter);
-			return true;
+			return ;
 		}
-//		map is not included ?
-		// code here
-		calcS();
-		ICell coord = smallest();
-		this.inter = coord;
-//		System.out.println("G:");
-//		show(G);
-//		System.out.println("H:");
-//		show(H);
-//		System.out.println("F:");
-//		show(F);
-		if(aStar()){
-			this.path.add(coord);
-			return true;
-		}
-		else return false;
-//		Pair p = new Pair();
-//		while(!this.inter.samePlace(this.end)) {
-//			System.out.println(Integer.toString(inter.getX()) + " " + Integer.toString(inter.getY()));
-//
-//			inter = smallest();
-//
-//
-////			try {
-////				Thread.sleep(5000);
-////			} catch (InterruptedException e) {
-////			}
-////			what is needed to be done
-////			* in case if there's not a unique minimal value in F,
-////			  a comparison is also needed with the H cases
-//		}
-//		return false;
+
+		calcS(parent);
+		show(F);
+		ICell smallest_f = smallest();
+		System.out.println(smallest_f.getX());
+
+		aStar(smallest_f);
+		this.path.add(parent);
 	}
 
-//	private bool
-	
+
 	private int abs(int a) {
 		return a > 0 ? a : -a;
 	}

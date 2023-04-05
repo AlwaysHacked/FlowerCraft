@@ -52,7 +52,7 @@ public class Entity implements IEntity {
 	}
 
 	private void videPath() {
-		this.path = new LinkedList<ICell>;
+		this.path = new LinkedList<ICell>();
 	}
 	
 	@Override

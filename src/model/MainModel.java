@@ -16,7 +16,7 @@ public class MainModel {
     public MainModel() {
         this.map = MapFactory.getInstance(this).createMap("DEFOREST");
     
-        ICell c = map.getCell(0,0);
+        ICell c = map.getCell(9,9);
         Navi n = new Navi(this, c, map, 100, 5, 10 );
         if (c.getEntity() == null)
         	c.addEntity(n);
@@ -25,7 +25,12 @@ public class MainModel {
         	c.addEntity(n);
         }
         
-        n.move(map.getCell(7,5));
+        map.affiche();
+        
+        AStar a = new AStar(this, map, c, map.getCell(6, 0));
+        for (ICell k : a.getPath())
+        	System.out.println(k.getX() + " " + k.getY());
+//        n.move(map.getCell(7,5));
         
     }
         
