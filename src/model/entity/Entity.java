@@ -10,7 +10,10 @@ import java.util.Stack;
 
 import control.EntityControl;
 
+import static model.Action.STOP;
+
 public class Entity implements IEntity {
+	private static final Action[] possibleActions = new Action[]{};
 
 	protected MainModel model;
 	protected ICell position;
@@ -35,13 +38,9 @@ public class Entity implements IEntity {
 		this.attack = a;
 		this.speed = s;
 
-		this.videPath();
+		this.stop();
 
 		this.entC = new EntityControl(this.model, this);
-	}
-
-	private void videPath() {
-		this.path = new Stack<>();
 	}
 
 	@Override
@@ -52,7 +51,8 @@ public class Entity implements IEntity {
 			case HARVEST -> this.harvest();
 			case BUILD -> this.build();
 			case MOVE -> this.move();
-			case STOP -> this.videPath(); // vide le chemin et ne fait rien
+			case STOP -> this.stop(); // vide le chemin et ne fait rien
+			case CREATE -> this.create();
 		}
 	}
 
@@ -74,24 +74,29 @@ public class Entity implements IEntity {
 	 * Le chemin est stocke dans l'attribut `path`
 	 */
 	protected void move() {
-		if (destination == position);
-		else if (canMove(this.path.peek())) {
-			this.position.deleteEntity();
-			this.position = this.path.pop();
-			this.position.addEntity(this);
-		} else generatePath();
-//*		else throw new IllegalArgumentException("Impossible d a la case (" + x + ", " + y ")");
-// *		il va pas s'arreter apres un test s'il faut y aller ou pas, il est possible que la case soit occupee par qq'un d'autre
-// * 		et peut se liberer
-// * 		il vaut mieux avoir un retour en bool
+		if (destination == position)currentAction = STOP;
+		else{
+			if (path.empty()) generatePath();
+			if (canMove(this.path.peek())) {
+				this.position.deleteEntity();
+				this.position = this.path.pop();
+				this.position.addEntity(this);
+			} else generatePath();
+		}
 	}
 
-	private void build() {
+	protected void build() {
 	}
 
-	private void harvest() {
+	protected void harvest() {
 	}
 
+	protected void stop() {
+		destination = null;
+		path = new Stack<>();
+	}
+
+	protected void create() {}
 	/** Méthode de IEntity */
 
 
@@ -128,7 +133,7 @@ public class Entity implements IEntity {
 	/** Méthodes privées */
 
 	private void moveStraight(int x, int y) {
-		this.videPath();
+		this.path = new Stack<>();
 		x += this.position.getX();
 		y += this.position.getY();
 		
@@ -170,6 +175,11 @@ public class Entity implements IEntity {
 	}
 
 	@Override
+	public Action[] possibleActions() {
+		return possibleActions;
+	}
+
+	@Override
 	public int getHealth() {
 		return this.health;
 	}
@@ -187,9 +197,6 @@ public class Entity implements IEntity {
 	@Override
 	public ICell getPosition() {
 		return this.position;
-	}
-	public Action[] possibleActions() {
-		return Action.values();
 	}
 
 	// setters

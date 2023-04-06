@@ -37,6 +37,7 @@ boolean isEnemy(IEntity ent);
 	
 //	getters
 	Action getCurrentAction() ;
+	Action[] possibleActions() ;
 	int getHealth() ;
 	int getAttack() ;
 	int getSpeed() ;

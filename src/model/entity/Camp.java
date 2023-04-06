@@ -1,15 +1,19 @@
 
 package model.entity;
 
+import model.Action;
 import model.MainModel;
 import model.Map;
 import model.terrain.Cell;
 import model.terrain.ICell;
 import model.terrain.*;
 
+import static model.Action.*;
+
 
 public class Camp extends Entity implements IEntity{
 	//	default
+	private static final Action[] possibleActions = new Action[]{ CREATE };
 	private static final int def_health = 100;
 	private static final int def_attack = 0;
 	private static final int def_speed = 0;
@@ -41,6 +45,11 @@ public class Camp extends Entity implements IEntity{
 			}
 		EntityFactory.getInstance(model).createEntity(navC, "NAVI");
 		return navC != null;
+	}
+
+	@Override
+	public Action[] possibleActions() {
+		return possibleActions;
 	}
     
 	/**

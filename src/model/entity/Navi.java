@@ -7,10 +7,11 @@ import model.terrain.Cell;
 import model.terrain.ICell;
 import model.terrain.Terrain;
 
-import static model.Action.STOP;
+import static model.Action.*;
 
 public class Navi extends Entity implements IEntity {
 	//	default
+	private static final Action[] possibleActions = new Action[]{HARVEST, ATTACK, STOP, BUILD, MOVE };
 	private static final int def_health = 100;
 	private static final int def_attack = 5;
 	private static final int def_speed = 10;
@@ -85,6 +86,10 @@ public class Navi extends Entity implements IEntity {
 //	getters
 	Action getAction() {
 		return action;
+	}
+	@Override
+	public Action[] possibleActions() {
+		return possibleActions;
 	}
 	
 //	setters
