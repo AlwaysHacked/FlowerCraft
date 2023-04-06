@@ -2,10 +2,13 @@ package model.entity;
 
 import java.util.ArrayList;
 
+import model.Action;
 import model.MainModel;
 import model.Map;
 import model.terrain.Cell;
 import model.terrain.ICell;
+
+import static model.Action.ATTACK;
 
 public class Soldier extends Entity implements IEntity {
 //	default
@@ -18,24 +21,17 @@ public class Soldier extends Entity implements IEntity {
    public Camp camp;
    public Navi navi;
 
-// constructer
-	
-	public Soldier(MainModel m, Cell c, Map map, int h, int a, int s) {
-		super(m, c, map, h, a, s);
-	}
+// constructeur
 	
 	public Soldier(MainModel m, Cell c, Map map) {
 		super(m, c, map, def_health, def_attack, def_speed);
+		currentAction = ATTACK;
 	}
 
 	@Override
 	public boolean isEnemy(IEntity ent) {
-		if(ent instanceof Navi){
-           return ent instanceof Navi;
-		} else{
-			return ent instanceof Camp;
-		}
-		}
+           return ent instanceof Navi || ent instanceof Camp;
+	}
 	
 	// before solider go to find Camp, he check if there is navi or camp next to him.
 	public void check(){
