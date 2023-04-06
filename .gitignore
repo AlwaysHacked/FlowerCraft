@@ -4,3 +4,4 @@ out/*
 **xml
 /bin/
 /.metadata/
+*.class

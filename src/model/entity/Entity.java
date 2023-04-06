@@ -11,13 +11,6 @@ import java.util.Stack;
 import control.EntityControl;
 
 public class Entity implements IEntity {
-	public static final int NAVI_HEALTH = 100;
-	public static final int NAVI_SPEED = 5;
-	public static final int NAVI_ATTACK = 10;
-
-	public static final int SOLDIER_HEALTH = 100;
-	public static final int SOLDIER_SPEED = 5;
-	public static final int SOLDIER_ATTACK = 15;
 
 	protected MainModel model;
 	protected ICell position;
@@ -48,7 +41,7 @@ public class Entity implements IEntity {
 	}
 
 	private void videPath() {
-		this.path = new Stack<ICell>();
+		this.path = new Stack<>();
 	}
 	
 	@Override
@@ -140,11 +133,10 @@ public class Entity implements IEntity {
 			return true;
 		}
 		return false;
-/**		else throw new IllegalArgumentException("Impossible d a la case (" + x + ", " + y ")");
- *		il va pas s'arreter apres un test s'il faut y aller ou pas, il est possible que la case soit occupee par qq'un d'autre
- * 		et peut se liberer
- * 		il vaut mieux avoir un retour en bool
- */
+//*		else throw new IllegalArgumentException("Impossible d a la case (" + x + ", " + y ")");
+// *		il va pas s'arreter apres un test s'il faut y aller ou pas, il est possible que la case soit occupee par qq'un d'autre
+// * 		et peut se liberer
+// * 		il vaut mieux avoir un retour en bool
 	}
 
 	// for test of moves

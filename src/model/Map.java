@@ -15,51 +15,26 @@ public class Map {
 	public final int sizeGrid;
     private final MainModel m;
     private ICell[][] grid;
-    
-//  Probabilities, have to be divided by 2  
-//		Allies' probabilities (friend animals included)
-    	private final int probNavi = 5;
-//		Ennemies' probabilities
-    	private final int probSoldier = this.probNavi + 4
-    			;
-//    	Neutral animals probabilities
+
     
     private Random rand = new Random();
-    
-    public Map(MainModel model) {
-        this.m = model;
-		this.sizeGrid = 10;
-
-        this.initGrid();
-    }
 
 	public Map(MainModel model, String[][] setup) {
 		this.m = model;
 		this.sizeGrid = setup.length;
 
-		/**
-		 * Initialisation predeterminee de la carte
-		 */
+//		Initialisation predeterminee de la carte
 		this.grid = new ICell[sizeGrid][sizeGrid];
 		CellFactory make = CellFactory.getInstance(model);
 		for (int i = 0; i < sizeGrid; i++)
 			for (int j = 0; j < sizeGrid; j++)
 				grid[i][j] = make.createCell(i,j,setup[i][j]);
 	}
-    
-	/**
-	 * Initialisation de la grille caree de taille `sizeGrid`
-	 */
-    private void initGrid(){
-    	this.grid = new Cell[sizeGrid][sizeGrid];
-    	for(int i = 0; i < sizeGrid; i++) 
-    		for(int j = 0; j < sizeGrid; j++) 
-    			this.grid[i][j] = this.createCell(i, j);
-    }
+
     
     /**
      * Calcul les voisins de la cellule c 
-     * @param ICell c
+     * @param c la case dont on demande les voisins
      * @return les voisins dans ArrayList
      */
 	public ArrayList<ICell> neighbours(ICell c) {
@@ -84,47 +59,6 @@ public class Map {
 		return n;
 	}
 
-    /**
-     * Creation de Cell avec une apparition random des entites
-     * L'algorithme d'apparition :
-	we supppose there are 3 zones
-	* the allies zone :
-		navis with their friendly animals are created
-		50 % of map
-	* the buffer zone :
-		only neutral animals are located here
-		15 % of map  
-	* the ennemy zone : 
-		ennemies appear on this 
-		35 % of map
-    */
-    private Cell createCell(int x, int y) {
-    	int az = (int) (this.sizeGrid * .5);
-    	int bz = (int) (this.sizeGrid * .15);
-    	int ez = (int) (this.sizeGrid * .35);
-    	
-    	Cell c = new Cell(this.m, x, y);
-    	int r = rand.nextInt(200);
-    	
-    	if (x < az) {
-			if (r <= this.probNavi) {
-				System.out.println(x + " " + y);
-				c.addEntity(new Navi(this.m, c, this, 
-						Entity.NAVI_HEALTH, Entity.NAVI_SPEED, Entity.NAVI_ATTACK));
-			}
-		}
-    	else if (x < bz) {
-    		
-    	}
-    	else {
-    		if (r <= this.probNavi) {
-				System.out.println(x + " " + y);
-				c.addEntity(new Soldier(this.m, c, this, 100, 5, 10));
-			}
-    	}
-    	
-    	return c;
-    }
     
     // Getters
     public ICell getCell(int x, int y) {

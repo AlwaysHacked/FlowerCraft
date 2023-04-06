@@ -9,10 +9,15 @@ import model.terrain.*;
 
 
 public class Camp extends Entity implements IEntity{
+	//	default
+	private static final int def_health = 100;
+	private static final int def_attack = 0;
+	private static final int def_speed = 0;
+
     public static int RESSOURCES = 0;
 
     public Camp(MainModel m, ICell c, Map map){
-        super(m, c, map, 0, 12, 0);
+        super(m, c, map, def_health, def_attack,def_speed);
         super.currentAction = null;
 
     }

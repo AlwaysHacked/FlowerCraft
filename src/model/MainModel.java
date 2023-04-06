@@ -23,7 +23,7 @@ public class MainModel {
         this.map = MapFactory.getInstance(this).createMap("DEFOREST");
     
         ICell c = map.getCell(0, 0);
-        Navi n = new Navi(this, c, map, 100, 5, 10 );
+        Navi n = new Navi(this, c, map);
         if (c.getEntity() == null)
         	c.addEntity(n);
         else {
