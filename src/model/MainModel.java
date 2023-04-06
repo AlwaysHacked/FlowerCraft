@@ -5,6 +5,7 @@ import model.entity.Navi;
 import model.terrain.Cell;
 import model.terrain.ICell;
 import model.terrain.Terrain;
+import model.entity.Camp;
 
 import java.util.Stack;
 import java.util.ArrayList;
@@ -12,6 +13,11 @@ import java.util.ArrayList;
 public class MainModel {
     private final Map map;
     private boolean running = true;
+
+    //  attribute for the List of Camp so solider ca attack it 
+
+    public ArrayList<Camp> campList = new ArrayList<>();
+    
 
     public MainModel() {
         this.map = MapFactory.getInstance(this).createMap("DEFOREST");

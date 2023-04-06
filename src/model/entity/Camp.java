@@ -70,17 +70,17 @@ public class Camp extends Entity implements IEntity{
 	 * Enleve des points de vie a l'ennemi
 	 * Et verifie si le camp est detruit
 	 */
-    @Override
-    public void sufferAttack(int impact) {
-    	super.sufferAttack(impact);
-    	deleteCamp();
-    }
+   // @Override
+    //public void sufferAttack(int impact) {
+    //	super.sufferAttack(impact);
+    //	deleteCamp();
+    //}
     
     /**
 	 * Si le camp n'a plus de vie, l'enleve de map
 	 */
-	public void deleteCamp(){
-	    if(super.getHealth() <= 0)
-	        campcell.deleteEntity();
-	}
+	//public void deleteCamp(){
+	//    if(super.getHealth() <= 0)
+	 //       campcell.deleteEntity();
+	//}
 }
