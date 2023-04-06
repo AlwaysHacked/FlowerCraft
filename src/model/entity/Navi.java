@@ -7,12 +7,19 @@ import model.terrain.Cell;
 import model.terrain.ICell;
 import model.terrain.Terrain;
 
+import static model.Action.STOP;
+
 public class Navi extends Entity implements IEntity {
-	private Action action = Action.STOP;
+	//	default
+	private static final int def_health = 100;
+	private static final int def_attack = 5;
+	private static final int def_speed = 10;
+
+	private Action action = STOP;
 	
-	public Navi(MainModel m, ICell c, Map map, int h, int a, int s) {
-		super(m, c, map, h, a, s);
-		super.currentAction = null;
+	public Navi(MainModel m, ICell c, Map map) {
+		super(m, c, map, def_health, def_attack,def_speed);
+		super.currentAction = STOP;
 	}
 	
 	@Override
@@ -50,7 +57,7 @@ public class Navi extends Entity implements IEntity {
 
 	/**
 	 * Verifie si la construction de Camp est possible
-	 * @param ICell c, l'endroit de construction 
+	 * @param c, l'endroit de construction
 	 * @return vraie s'il n'y a personne sur `c` et est a cote de Navi
 	 */
 	public boolean canBuildCamp(ICell c){
@@ -59,15 +66,14 @@ public class Navi extends Entity implements IEntity {
 
 	/**
 	 * Construit un Camp sur le cell demande
-	 * @param ICell cell 
+	 * @param cell la case de construction
 	 */
 	public void buildCamp(ICell cell){
 		int x = cell.getX();
 		int y = cell.getY();
 		
 		if(this.canBuildCamp (cell)){
-			Camp c = new Camp(super.model,cell,this.map,12,0,0);
-			this.map.getCell(x, y).addEntity(c);
+			EntityFactory.getInstance(model).createEntity(cell, "CAMP");
 		}
 		else throw new IllegalArgumentException("Impossible de construire a la case (" + x + ", " + y + ")");
 	}

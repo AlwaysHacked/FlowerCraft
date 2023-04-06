@@ -10,60 +10,26 @@ import model.terrain.*;
 
 public class Camp extends Entity implements IEntity{
     public static int RESSOURCES = 0;
-	private final Cell campcell;
 
-    public Camp(MainModel m, ICell c, Map map,int h,int a,int s){
-        super(m, c, map, h, a, s);
-        this.campcell = null;
+    public Camp(MainModel m, ICell c, Map map){
+        super(m, c, map, 0, 12, 0);
         super.currentAction = null;
-        super.setSpeed(0);
-        super.setHealth(12);
-        super.setAttack(0);
 
-    }
-    
-    /**
-     * Indique la possibilite de creation d'un navi sur `c`
-     * @param ICell c
-     * @return vraie si c est accessible et est a cote
-     */
-    public boolean canCreateNavi(ICell c){
-        return c.isAccessible() && this.position.nextTo(c);
-    }
-    
-    /**
-     * Apres avoir verifie cree un navi si possible
-     * @param ICell c
-     * @return navi cree ou null si la creation est impossible
-     */
-    public IEntity createNaviAt(ICell c){
-        return this.canCreateNavi(c) ? this.addNavi(c) : null;
     }
     
     /**
 	 * Cree un navi sur l'une des cases voisines
-	 * @return navi ou null si aucun voisin accessible
+	 * @return false si le navi n'a pas pu être créé
 	 */
-	public IEntity createNavi(){
+	public boolean createNavi(){
 		ICell navC = null;
-		for(ICell c : this.map.neighbours(this.campcell))
+		for(ICell c : this.map.neighbours(this.position))
 			if(c.isAccessible()) {
 				navC = c;
 				break;
 			}
-		
-		return navC == null ? null : this.addNavi(navC);
-	}
-	
-	/**
-	 * Cree un navi et le place sur le cell demande
-	 * @param ICell c
-	 * @return navi cree
-	 */
-	private IEntity addNavi(ICell c) {
-		IEntity navi = new Navi(super.model, c, super.getMap(), NAVI_HEALTH, NAVI_ATTACK, NAVI_SPEED);
-	    c.addEntity(navi);
-	    return navi;
+		EntityFactory.getInstance(model).createEntity(navC, "NAVI");
+		return navC != null;
 	}
     
 	/**

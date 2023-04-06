@@ -30,14 +30,11 @@ public class EntityFactory {
             return;
         IEntity entity;
         switch (channel) {
-            case "NAVI" -> {
-                entity = new Navi(model, cell, model.getMap(), 0, 0, 0);
-            }
-            case "SOLDIERS" -> {
-                entity = new Soldier(model, (Cell) cell, model.getMap(), 0, 0, 0);
-            }
+            case "NAVI" -> entity = new Navi(model, cell, model.getMap());
+            case "SOLDIERS" -> entity = new Soldier(model, (Cell) cell, model.getMap());
             case "CAMP" -> {
-                entity = new Camp(model, cell, model.getMap(), 0, 0, 0);
+                entity = new Camp(model, cell, model.getMap());
+                model.campList.add((Camp) entity);
             }
             default -> throw new IllegalArgumentException("Unknown channel " + channel);
         }
