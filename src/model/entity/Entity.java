@@ -56,7 +56,7 @@ public class Entity implements IEntity {
 		}
 	}
 
-	/** Liste des méthodes associées à chaque action */
+	/* Liste des méthodes associées à chaque action */
 
 	/**
 	 * Attaque l'ennemi (s'il y en a un) a cote de lui
@@ -124,6 +124,7 @@ public class Entity implements IEntity {
 		this.health -= impact;
 		if (this.health <= 0) {
 			this.position.deleteEntity();
+			this.position = null;
 		}
 	}
 	@Override

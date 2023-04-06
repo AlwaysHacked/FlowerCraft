@@ -17,12 +17,13 @@ public class Camp extends Entity implements IEntity{
 	private static final int def_health = 100;
 	private static final int def_attack = 0;
 	private static final int def_speed = 0;
+	private static final int COUT_NAVI = 40;
 
     public static int RESSOURCES = 0;
 
     public Camp(MainModel m, ICell c, Map map){
-        super(m, c, map, def_health, def_attack,def_speed);
-        super.currentAction = null;
+        super(m, c, map, def_health, def_attack, def_speed);
+        super.currentAction = STOP;
 
     }
 
@@ -31,7 +32,13 @@ public class Camp extends Entity implements IEntity{
 	public String toString() {
 		return "c";
 	}
-    
+
+	@Override
+	protected void create() {
+		if (model.food >= COUT_NAVI)
+			if (createNavi()) model.food -= COUT_NAVI;
+	}
+
     /**
 	 * Cree un navi sur l'une des cases voisines
 	 * @return false si le navi n'a pas pu être créé
@@ -56,17 +63,10 @@ public class Camp extends Entity implements IEntity{
 	 * Enleve des points de vie a l'ennemi
 	 * Et verifie si le camp est detruit
 	 */
-   // @Override
-    //public void sufferAttack(int impact) {
-    //	super.sufferAttack(impact);
-    //	deleteCamp();
-    //}
-    
-    /**
-	 * Si le camp n'a plus de vie, l'enleve de map
-	 */
-	//public void deleteCamp(){
-	//    if(super.getHealth() <= 0)
-	 //       campcell.deleteEntity();
-	//}
+    @Override
+    public void sufferAttack(int impact) {
+    	super.sufferAttack(impact);
+    	if (health <= 0)
+			model.campList.remove(this);
+    }
 }
