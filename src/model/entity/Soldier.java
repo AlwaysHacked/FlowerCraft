@@ -75,7 +75,7 @@ public class Soldier extends Entity implements IEntity {
 
 			ICell campP = camp.position;// get each Camp Position
 		// utiliser AStar pour calculer la plus proche camp avec soldier,
-            this.position;//position of soldier.
+//            this.position;//position of soldier.
 		// stock le temps-distance with a temps number(il va changer avec le for)
 		    int n = 0;
 

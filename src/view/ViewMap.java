@@ -21,6 +21,7 @@ public class ViewMap extends JPanel {
     private ArrayList<JLabel> cases;
     public final static int SIZE = 10;
     public final static int STEP = 70;
+    private int counter = 1;
 
     public ViewMap(MainModel model) {
         this.m = model;
@@ -49,6 +50,9 @@ public class ViewMap extends JPanel {
 
     public void update() {
         // maybe replace with a thread later once there is one in Cell ?
+        counter++;
+//        System.out.println( (counter % 13) + 1);
+        counter = (counter == Integer.MAX_VALUE) ? 0 : counter;
         repaint();
 
     }
@@ -68,14 +72,14 @@ public class ViewMap extends JPanel {
 
     public void type(ICell c, Graphics g, int x, int y) {
         if (c instanceof Field)
-            frame(g, "Ressources/Normal_1.png", x * STEP, y * STEP, STEP, STEP);
+            frame(g, "Ressources/Normal_"+  (counter % 13) + 1 +".png", x * STEP, y * STEP, STEP, STEP);
         else if (c instanceof Forest)
             frame(g, "Ressources/FOREST.png", x * STEP, y * STEP, STEP, STEP);
         else if (c instanceof Berries) {
-            frame(g, "Ressources/Normal_1.png", x * STEP, y * STEP, STEP, STEP);
+            frame(g, "Ressources/Normal_"+  (counter % 13) + 1 + "png", x * STEP, y * STEP, STEP, STEP);
             frame(g, "Ressources/BERRIES.png", x * STEP + 10, y * STEP - 4, STEP - 20, STEP - 10);
         } else
-            frame(g, "Ressources/Submerge_1.png", x * STEP, y * STEP, STEP, STEP);
+            frame(g, "Ressources/Submerge_"+  (counter % 13) + 1 + ".png", x * STEP, y * STEP, STEP, STEP);
     }
 
     public void frame(Graphics g, String s, int x, int y, int width, int height) {
