@@ -31,7 +31,7 @@ public class EntityFactory {
         IEntity entity;
         switch (channel) {
             case "NAVI" -> entity = new Navi(model, cell, model.getMap());
-            case "SOLDIERS" -> entity = new Soldier(model, (Cell) cell, model.getMap());
+            case "SOLDIER" -> entity = new Soldier(model, (Cell) cell, model.getMap());
             case "CAMP" -> {
                 entity = new Camp(model, cell, model.getMap());
                 model.campList.add((Camp) entity);

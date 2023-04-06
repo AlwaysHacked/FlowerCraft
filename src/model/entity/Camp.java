@@ -21,6 +21,12 @@ public class Camp extends Entity implements IEntity{
         super.currentAction = null;
 
     }
+
+
+	@Override
+	public String toString() {
+		return "c";
+	}
     
     /**
 	 * Cree un navi sur l'une des cases voisines

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import model.entity.Entity;
+import model.entity.EntityFactory;
 import model.entity.Navi;
 import model.entity.Soldier;
 import model.terrain.Cell;
@@ -13,14 +14,14 @@ import model.terrain.ICell;
 public class Map {
 //	Grid's size
 	public final int sizeGrid;
-    private final MainModel m;
+    private final MainModel model;
     private ICell[][] grid;
 
     
     private Random rand = new Random();
 
 	public Map(MainModel model, String[][] setup) {
-		this.m = model;
+		this.model = model;
 		this.sizeGrid = setup.length;
 
 //		Initialisation predeterminee de la carte
@@ -29,6 +30,15 @@ public class Map {
 		for (int i = 0; i < sizeGrid; i++)
 			for (int j = 0; j < sizeGrid; j++)
 				grid[i][j] = make.createCell(i,j,setup[i][j]);
+
+//		Création des entité
+		EntityFactory factory = EntityFactory.getInstance(model);
+		factory.createEntity(grid[6][4], "CAMP");
+		factory.createEntity(grid[6][5], "NAVI");
+		factory.createEntity(grid[6][3], "NAVI");
+		factory.createEntity(grid[0][5], "SOLDIER");
+		factory.createEntity(grid[0][3], "SOLDIER");
+
 	}
 
     
