@@ -32,11 +32,6 @@ public class MainModel {
         	c.addEntity(n);
         }
         
-//        map.affiche();
-        
-//        AStar a = new AStar(this, map, c, map.getCell(6, 0));
-//        n.testMove(this.map.getCell(9, 1));
-        
     }
         
     public Map getMap() {
@@ -46,6 +41,19 @@ public class MainModel {
     public boolean isRunning() {
         return running;
     }
+
+
+    public boolean isGameOver() {return campList.isEmpty();}
+
+    /* Méthode d'action du controleur sur le modèle */
+
+    /** Recois la cellule cliquée et fais lance l'action */
+    public void clic(ICell cell) {
+
+    }
+
+    /** Recois l'action cliquée et fais lance l'action ou attends un clic */
+    public void selectAction(Action action) {}
 
 // calcule all camp in the map
    
