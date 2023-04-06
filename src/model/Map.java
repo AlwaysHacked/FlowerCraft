@@ -74,6 +74,10 @@ public class Map {
     public ICell getCell(int x, int y) {
     	return this.grid[x][y];
     }
+
+	public ICell[][] getGrid(){
+		return this.grid;
+	}
     
     
 /**

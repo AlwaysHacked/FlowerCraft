@@ -17,6 +17,7 @@ public class MainModel {
     //  attribute for the List of Camp so solider ca attack it 
 
     public ArrayList<Camp> campList = new ArrayList<>();
+    public Camp camp;
     
 
     public MainModel() {
@@ -45,4 +46,34 @@ public class MainModel {
     public boolean isRunning() {
         return running;
     }
+
+// calcule all camp in the map
+   
+   public void addCamps(){
+
+         for(ICell[] cl : map.getGrid()){
+            for(ICell cc : cl){
+
+                if(cc.getEntity()==camp){
+                   campList.add((Camp)cc.getEntity());
+                }
+            }
+         }
+
+   }
+
+   public ArrayList<Camp> getCampList() {
+    ArrayList<Camp> temp = new ArrayList<>();
+    for(ICell[] cl : map.getGrid()){
+        for(ICell cc : cl){
+
+            if(cc.getEntity()==camp){
+               temp.add((Camp)cc.getEntity());
+            }
+        }
+     }
+
+     return temp;
+   }
+    
 }

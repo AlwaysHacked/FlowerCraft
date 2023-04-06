@@ -65,11 +65,29 @@ public class Soldier extends Entity implements IEntity {
 
 	// search for the camp
 
+	public ICell search(){
 
+		ArrayList<Camp> camps = super.model.getCampList();
 
-	//public void search(){
-	//	super.model.campList
-	//}
+		int distance = 700;
+        
+		for(Camp camp:camps){
+
+			ICell campP = camp.position;// get each Camp Position
+		// utiliser AStar pour calculer la plus proche camp avec soldier,
+            this.position;//position of soldier.
+		// stock le temps-distance with a temps number(il va changer avec le for)
+		    int n = 0;
+
+			if(n<distance) distance = n;//distance gets the best closed between the solider and camp
+		}
+
+		//how we know which camp has the best distance with int distance?
+		ICell campPosition = null;
+
+		return campPosition;
+        
+	}
 
 	public void SoilderAction(){
      //het the list of positions next to the soilder   
@@ -83,9 +101,11 @@ public class Soldier extends Entity implements IEntity {
 			}
 		}
 
-	//go to search the camp
+	//go to search the camp and get the camp position
     
-	// this.search()
+	// ICell p = this.search();
+
+	//move to the campS
 
 	}
 
