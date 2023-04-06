@@ -43,39 +43,57 @@ public class Entity implements IEntity {
 	private void videPath() {
 		this.path = new Stack<>();
 	}
-	
+
 	@Override
 	public void update() {
-//		attaque si possible
-		if (this.attack())
-			return;
 
 		switch (this.currentAction) {
 			case ATTACK -> this.attack();
 			case HARVEST -> this.harvest();
 			case BUILD -> this.build();
-			case MOVE -> this.moveToNext();
-			/*
-			 * case UP -> this.moveStraight(0, -1);
-			 * case DOWN -> this.moveStraight(0, 1);
-			 * case LEFT -> this.moveStraight(-1, 0);
-			 * case RIGHT -> this.moveStraight(1,0);
-			 */
+			case MOVE -> this.move();
 			case STOP -> this.videPath(); // vide le chemin et ne fait rien
 		}
 	}
 
-	private void moveStraight(int x, int y) {
-		this.videPath();
-		x += this.position.getX();
-		y += this.position.getY();
-		
-		if(x < this.map.sizeGrid - 1 && y < this.map.sizeGrid - 1 && x > 0 && y > 0) {
-	        this.path.add(this.map.getCell(x+1, y));
-	        this.moveToNext();
-		}
-		else throw new IllegalArgumentException("Impossible d'aller a la case (" + x + ", " + y + ")");
+	/** Liste des méthodes associées à chaque action */
+
+	/**
+	 * Attaque l'ennemi (s'il y en a un) a cote de lui
+	 * En absence d'ennemi, bouge vers sa destination
+	 */
+	protected void attack() {
+		IEntity ent = this.canAttack();
+		if (ent != null)
+			ent.sufferAttack(this.attack);
+		else move();
 	}
+
+	/**
+	 * La fonction bouge le pion sur la cellule suivante
+	 * Le chemin est stocke dans l'attribut `path`
+	 */
+	protected void move() {
+		if (destination == position);
+		else if (canMove(this.path.peek())) {
+			this.position.deleteEntity();
+			this.position = this.path.pop();
+			this.position.addEntity(this);
+		} else generatePath();
+//*		else throw new IllegalArgumentException("Impossible d a la case (" + x + ", " + y ")");
+// *		il va pas s'arreter apres un test s'il faut y aller ou pas, il est possible que la case soit occupee par qq'un d'autre
+// * 		et peut se liberer
+// * 		il vaut mieux avoir un retour en bool
+	}
+
+	private void build() {
+	}
+
+	private void harvest() {
+	}
+
+	/** Méthode de IEntity */
+
 
 	@Override
 	public boolean isEnemy(IEntity ent) {
@@ -86,7 +104,6 @@ public class Entity implements IEntity {
 		else
 			return false;
 	}
-
 	@Override
 	public IEntity canAttack() {
 		ArrayList<ICell> c = this.map.neighbours(this.position);
@@ -97,17 +114,6 @@ public class Entity implements IEntity {
 		}
 		return null;
 	}
-
-	@Override
-	public boolean attack() {
-		IEntity ent = this.canAttack();
-		if (ent != null) {
-			ent.sufferAttack(this.attack);
-			return true;
-		}
-		return false;
-	}
-
 	@Override
 	public void sufferAttack(int impact) {
 		this.health -= impact;
@@ -115,29 +121,33 @@ public class Entity implements IEntity {
 			this.position.deleteEntity();
 		}
 	}
-
 	@Override
 	public boolean canMove(ICell c) {
 		return c.isAccessible() && this.position.nextTo(c);
 	}
+	/** Méthodes privées */
 
-	/**
-	 * La fonction bouge le pion sur la cellule suivante
-	 * Le chemin est stocke dans l'attribut `path`
-	 */
-	public boolean moveToNext() {
-		if (canMove(this.path.peek())) {
-			this.position.deleteEntity();
-			this.position = this.path.pop();
-			this.position.addEntity(this);
-			return true;
+	private void moveStraight(int x, int y) {
+		this.videPath();
+		x += this.position.getX();
+		y += this.position.getY();
+		
+		if(x < this.map.sizeGrid - 1 && y < this.map.sizeGrid - 1 && x > 0 && y > 0) {
+	        this.path.add(this.map.getCell(x+1, y));
+	        this.move();
 		}
-		return false;
-//*		else throw new IllegalArgumentException("Impossible d a la case (" + x + ", " + y ")");
-// *		il va pas s'arreter apres un test s'il faut y aller ou pas, il est possible que la case soit occupee par qq'un d'autre
-// * 		et peut se liberer
-// * 		il vaut mieux avoir un retour en bool
+		else throw new IllegalArgumentException("Impossible d'aller a la case (" + x + ", " + y + ")");
 	}
+
+	// After checking if the move is possible will
+	// put the path gotten from AStar into path variable.
+	// If the move isn't possible will throw exception
+	private void generatePath() {
+		AStar a = new AStar(this.model, this.map, this.position, this.destination);
+		this.path = a.getPath();
+		System.out.println(this.path.size());
+	}
+
 
 	// for test of moves
 	public void testMove(ICell c) {
@@ -147,22 +157,11 @@ public class Entity implements IEntity {
 		this.map.affiche();
 
 		while (!this.path.isEmpty()) {
-			System.out.println(this.moveToNext());
 			this.map.affiche();
 		}
 	}
 
-	// After checking if the move is possible will
-	// put the path gotten from AStar into path variable.
-	// If the move isn't possible will throw exception
-	/**
-	 * 
-	 */
-	private void generatePath() {
-		AStar a = new AStar(this.model, this.map, this.position, this.destination);
-		this.path = a.getPath();
-		System.out.println(this.path.size());
-	}
+
 
 	// getters
 	@Override
@@ -189,9 +188,8 @@ public class Entity implements IEntity {
 	public ICell getPosition() {
 		return this.position;
 	}
-
-	public Map getMap() {
-		return this.map;
+	public Action[] possibleActions() {
+		return Action.values();
 	}
 
 	// setters
@@ -220,14 +218,4 @@ public class Entity implements IEntity {
 		this.position = position;
 	}
 
-	// other
-	public Action[] possibleActions() {
-		return Action.values();
-	}
-
-	private void build() {
-	}
-
-	private void harvest() {
-	}
 }

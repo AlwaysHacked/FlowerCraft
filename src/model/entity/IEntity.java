@@ -17,8 +17,8 @@ public interface IEntity {
 /** prend une entite en argument
  * renvoie vraie si c'est un ennemi
  * faux sinon
- */ 
-	public boolean isEnemy(IEntity ent);
+ */
+boolean isEnemy(IEntity ent);
 	
 /**
  * Examine le voisinage de l'entite
@@ -26,14 +26,7 @@ public interface IEntity {
  * faux sinon
  */
 	IEntity canAttack() ;
-	
- /**
-  * Attaque l'ennemi (s'il y en a un) a cote de lui
-  * En cas d'absence d'ennemi ne fait rien
-  *
-  * @return
-  */
-	boolean attack();
+
 	
 /** Baisse les points de vie */ 
 	void sufferAttack(int impact) ;
