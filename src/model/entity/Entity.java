@@ -151,7 +151,7 @@ public class Entity implements IEntity {
 	// After checking if the move is possible will
 	// put the path gotten from AStar into path variable.
 	// If the move isn't possible will throw exception
-	private void generatePath() {
+	protected void generatePath() {
 		AStar a = new AStar(this.model, this.map, this.position, this.destination);
 		this.path = a.getPath();
 		System.out.println(this.path.size());
