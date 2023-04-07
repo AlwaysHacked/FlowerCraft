@@ -9,6 +9,7 @@ import model.terrain.ICell;
 import model.terrain.Terrain;
 import model.entity.Camp;
 
+import java.util.Arrays;
 import java.util.Stack;
 import java.util.ArrayList;
 
@@ -83,7 +84,13 @@ public class MainModel {
     }
 
     /** Recois l'action cliquée et fais lance l'action ou attends un clic */
-    public void selectAction(Action action) {}
+    public void selectAction(Action action) {
+        if (entity != null && Arrays.stream(entity.possibleActions()).toList().contains(action))
+            switch (action) {
+                case HARVEST, BUILD, MOVE, ATTACK -> this.action = action;
+                case STOP, CREATE -> entity.setCurrentAction(action);
+            }
+    }
 
     public ArrayList<Camp> getCampList() {
        return campList;
