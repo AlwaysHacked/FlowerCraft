@@ -1,5 +1,6 @@
 package model.entity;
 
+import control.EntityControl;
 import model.MainModel;
 import model.terrain.*;
 
@@ -29,6 +30,7 @@ public class EntityFactory {
         if (channel == null || channel.isEmpty())
             return;
         IEntity entity;
+        EntityControl thread;
         switch (channel) {
             case "NAVI" -> entity = new Navi(model, cell, model.getMap());
             case "SOLDIER" -> entity = new Soldier(model, (Cell) cell, model.getMap());
@@ -39,5 +41,7 @@ public class EntityFactory {
             default -> throw new IllegalArgumentException("Unknown channel " + channel);
         }
         cell.addEntity(entity);
+        thread = new EntityControl(this.model, entity);
+        thread.run();
     }
 }

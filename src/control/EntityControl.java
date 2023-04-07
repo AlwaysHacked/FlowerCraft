@@ -2,12 +2,13 @@ package control;
 
 import model.MainModel;
 import model.entity.Entity;
+import model.entity.IEntity;
 
 public class EntityControl extends Thread{
 	private MainModel model;
-	private Entity ent;
+	private IEntity ent;
 	
-	public EntityControl(MainModel m, Entity ent) {
+	public EntityControl(MainModel m, IEntity ent) {
 		this.model = m;
 		this.ent = ent;
 	}
@@ -15,7 +16,7 @@ public class EntityControl extends Thread{
     public void run() {
         while (model.isRunning()) {
             try {
-                if (ent.dead())
+                if (ent.isDead())
                     this.interrupt();
 
                 ent.update();
