@@ -99,7 +99,10 @@ public class Entity implements IEntity {
 	protected void create() {}
 	/** Méthode de IEntity */
 
-
+	@Override
+	public boolean isDead(){
+		return this.health <= 0;
+	}
 	@Override
 	public boolean isEnemy(IEntity ent) {
 		if (this instanceof Navi)

@@ -18,6 +18,8 @@ public class MainModel {
 
     public ArrayList<Camp> campList = new ArrayList<>();
     public int food = 0;
+
+
     
 
     public MainModel() {
@@ -49,7 +51,6 @@ public class MainModel {
 
     /** Recois la cellule cliquée et fais lance l'action */
     public void clic(ICell cell) {
-
     }
 
     /** Recois l'action cliquée et fais lance l'action ou attends un clic */
