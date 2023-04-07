@@ -210,6 +210,11 @@ public class Entity implements IEntity {
 	}
 
 	@Override
+	public void setDestination(ICell destination) {
+		this.destination = destination;
+	}
+
+	@Override
 	public void setHealth(int health) {
 		this.health = health;
 	}

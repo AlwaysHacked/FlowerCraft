@@ -66,15 +66,18 @@ public class MainModel {
             switch (action) {
                 case MOVE, ATTACK -> {
                     entity.setCurrentAction(action);
+                    entity.setDestination(cell);
                 }
                 case BUILD -> {
                     if (cell.isAccessible() && food >= COUT_CAMP) {
                         entity.setCurrentAction(action);
+                        entity.setDestination(cell);
                     }
                 }
                 case HARVEST -> {
                     if (cell.isAccessible() && cell instanceof Berries){
                         entity.setCurrentAction(action);
+                        entity.setDestination(cell);
                     }
                 }
                 case CREATE, STOP -> entity = cell.getEntity();
