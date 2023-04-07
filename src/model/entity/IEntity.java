@@ -36,6 +36,7 @@ boolean isEnemy(IEntity ent);
 	boolean canMove(ICell c);
 	
 //	getters
+	boolean isDead();
 	Action getCurrentAction() ;
 	Action[] possibleActions() ;
 	int getHealth() ;
