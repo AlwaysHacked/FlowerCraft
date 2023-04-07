@@ -14,8 +14,11 @@ public class EntityControl extends Thread{
     @Override
     public void run() {
         while (model.isRunning()) {
-            ent.update();
             try {
+                if (ent.dead())
+                    this.interrupt();
+
+                ent.update();
                 sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
