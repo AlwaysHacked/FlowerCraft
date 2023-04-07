@@ -1,7 +1,9 @@
 package model;
 
 import model.entity.AStar;
+import model.entity.IEntity;
 import model.entity.Navi;
+import model.terrain.Berries;
 import model.terrain.Cell;
 import model.terrain.ICell;
 import model.terrain.Terrain;
@@ -11,6 +13,8 @@ import java.util.Stack;
 import java.util.ArrayList;
 
 public class MainModel {
+    private static final int COUT_CAMP = 80;
+
     private final Map map;
     private boolean running = true;
 
@@ -19,7 +23,9 @@ public class MainModel {
     public ArrayList<Camp> campList = new ArrayList<>();
     public int food = 0;
 
-
+//    Attributs pour gérer les ordres des joueurs
+    private IEntity entity = null;
+    private Action action = null;
     
 
     public MainModel() {
@@ -51,6 +57,29 @@ public class MainModel {
 
     /** Recois la cellule cliquée et fais lance l'action */
     public void clic(ICell cell) {
+        if (entity == null)
+            entity = cell.getEntity();
+        else if (action == null)
+            entity = cell.getEntity();
+        else {
+            switch (action) {
+                case MOVE, ATTACK -> {
+                    entity.setCurrentAction(action);
+                }
+                case BUILD -> {
+                    if (cell.isAccessible() && food >= COUT_CAMP) {
+                        entity.setCurrentAction(action);
+                    }
+                }
+                case HARVEST -> {
+                    if (cell.isAccessible() && cell instanceof Berries){
+                        entity.setCurrentAction(action);
+                    }
+                }
+                case CREATE, STOP -> entity = cell.getEntity();
+            }
+            action = null;
+        }
     }
 
     /** Recois l'action cliquée et fais lance l'action ou attends un clic */
