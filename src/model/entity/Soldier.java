@@ -49,15 +49,15 @@ public class Soldier extends Entity implements IEntity {
 			if (path.empty()) {
 				generatePath();
 			} else {
-				System.out.println(position.getCoord());
-				for(var i : path)System.out.println(i.getCoord());
+				System.out.println("DEtination"+destination.getCoord());
+				//for(var i : path)System.out.println(i.getCoord());
 				if (canMove(this.path.peek())) {
 					this.path.peek().addEntity(this);
 					this.position.deleteEntity();
 					this.position = this.path.peek();
 					this.path.pop();///////
 
-				}
+				} else generatePath();
 			}
 		}
 	}

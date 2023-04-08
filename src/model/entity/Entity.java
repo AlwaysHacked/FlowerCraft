@@ -76,7 +76,7 @@ public class Entity implements IEntity {
 		if (ent != null)
 			ent.sufferAttack(this.attack);
 		else{
-			System.out.println("run");
+			System.out.println("running");
 			move();
 		}
 	}
@@ -99,7 +99,7 @@ public class Entity implements IEntity {
 					this.position = this.path.peek();
 					this.path.pop();///////
 
-				} // else generatePath();
+				} else generatePath();
 			}
 		}
 	}
@@ -130,7 +130,7 @@ public class Entity implements IEntity {
 		if (this instanceof Navi)
 			return ent instanceof Soldier;
 		else if (this instanceof Soldier)
-			return ent instanceof Navi;
+			return ent instanceof Navi || ent instanceof Camp;
 		else
 			return false;
 	}
