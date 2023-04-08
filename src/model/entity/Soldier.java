@@ -86,7 +86,7 @@ public class Soldier extends Entity implements IEntity {
 		}
 	//and then if 4 cells around soilder is null or he already attacked all
 	// he goes to aleatoire camp.
-        this.move(); //nb == 0 so all the cells are null /vide
+        this.move(); //all the cells are null /vide
 
 	}
 	
