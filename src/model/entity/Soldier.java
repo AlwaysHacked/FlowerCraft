@@ -3,6 +3,7 @@ package model.entity;
 import java.util.ArrayList;
 import java.util.Random;
 
+import model.Action;
 import model.MainModel;
 import model.Map;
 import model.terrain.Cell;
@@ -62,7 +63,6 @@ public class Soldier extends Entity implements IEntity {
 				} // else generatePath();
 			}
 		}
-	}
 
 
 
@@ -82,8 +82,8 @@ public class Soldier extends Entity implements IEntity {
 			if(n.get(i).getEntity() != null){
                this.canAttack();
 			   n.get(i).getEntity().sufferAttack(this.attack);
-			   break;//because soilder only can attack once after soilder"s attack , 
-			   //it"s navi's turn
+			   this.currentAction = Action.STOP;//because soilder only can attack once after soilder"s attack , 
+			   //it"s navi's turn 
 			   nb = nb + 1;
 			}
 		}
