@@ -121,7 +121,6 @@ public class Entity implements IEntity {
 	}
 	@Override
 	public IEntity canAttack() {
-		System.out.println(this.map != null);
 		ArrayList<ICell> c = model.getMap().neighbours(this.position);
 		for (ICell cc : c) {
 			IEntity ent = cc.getEntity();
