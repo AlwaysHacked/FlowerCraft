@@ -72,7 +72,7 @@ public class Soldier extends Entity implements IEntity {
 	}
 
 	public void SoilderAction(){
-		int nb = 0;
+
 	// before solider go to find Camp, he check if there is navi or camp next to him.
      //have the list of positions next to the soilder   
 		ArrayList<ICell>n = super.map.neighbours(super.position);
@@ -82,13 +82,11 @@ public class Soldier extends Entity implements IEntity {
 			if(n.get(i).getEntity() != null){
                this.canAttack();
 			   n.get(i).getEntity().sufferAttack(this.attack);
-			   this.currentAction = Action.STOP;//because soilder only can attack once after soilder"s attack , 
-			   //it"s navi's turn 
-			   nb = nb + 1;
 			}
 		}
-	//and then if 4 cells around soilder is null he goes to aleatoire camp.
-        if(nb == 0)this.move(); //nb == 0 so all the cells are null /vide
+	//and then if 4 cells around soilder is null or he already attacked all
+	// he goes to aleatoire camp.
+        this.move(); //nb == 0 so all the cells are null /vide
 
 	}
 	
