@@ -3,14 +3,12 @@ package model.entity;
 import java.util.ArrayList;
 import java.util.Random;
 
-import model.Action;
 import model.MainModel;
 import model.Map;
 import model.terrain.Cell;
 import model.terrain.ICell;
 
 import static model.Action.ATTACK;
-import static model.Action.STOP;
 
 public class Soldier extends Entity implements IEntity {
 //	default
@@ -34,7 +32,7 @@ public class Soldier extends Entity implements IEntity {
 	
 	public void move() {
 		if (destination == position) {
-			destination = (ICell) model.campList.get(rand.nextInt(model.campList.size()));
+			destination = (ICell) model.camps.get(rand.nextInt(model.camps.size()));
 		} else{
 			
 			// if (path.empty()) generatePath();
@@ -81,7 +79,7 @@ public class Soldier extends Entity implements IEntity {
 
 	public ICell search(){
 
-		ArrayList<Camp> camps = super.model.getCampList();
+		ArrayList<Camp> camps = super.model.getCamps();
 
 		int distance = 700;
         

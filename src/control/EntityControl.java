@@ -17,7 +17,22 @@ public class EntityControl extends Thread {
         this.model = m;
         this.view = v;
 
-        checkEntity();
+//        checkEntity();
+    }
+
+    @Override
+    public void run() {
+        while (model.isRunning()) {
+//            ent.forEach((this::update));
+//            checkEntity();
+            model.entities.forEach(IEntity::update);
+            try {
+
+                sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void checkEntity() {
@@ -66,19 +81,4 @@ public class EntityControl extends Thread {
             }
         }
     }
-
-    @Override
-    public void run() {
-        while (model.isRunning()) {
-            ent.forEach((this::update));
-            checkEntity();
-            try {
-               
-                sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
 }

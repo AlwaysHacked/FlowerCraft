@@ -4,9 +4,7 @@ package model.entity;
 import model.Action;
 import model.MainModel;
 import model.Map;
-import model.terrain.Cell;
 import model.terrain.ICell;
-import model.terrain.*;
 
 import static model.Action.*;
 
@@ -67,6 +65,6 @@ public class Camp extends Entity implements IEntity{
     public void sufferAttack(int impact) {
     	super.sufferAttack(impact);
     	if (health <= 0)
-			model.campList.remove(this);
+			model.camps.remove(this);
     }
 }

@@ -36,11 +36,12 @@ public class EntityFactory {
             case "SOLDIER" -> entity = new Soldier(model, (Cell) cell, model.getMap());
             case "CAMP" -> {
                 entity = new Camp(model, cell, model.getMap());
-                model.campList.add((Camp) entity);
+                model.camps.add((Camp) entity);
             }
             default -> throw new IllegalArgumentException("Unknown channel " + channel);
         }
         cell.addEntity(entity);
+        model.entities.add(entity);
         //thread = new EntityControl(this.model, entity);
         //thread.run();
     }

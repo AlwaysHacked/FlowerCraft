@@ -38,11 +38,6 @@ public class BerriesControl extends Thread {
         }
     }
 
-    // Pour ajouter les cases à l'initialisation
-    public void addBerries(Berries b) {
-        berries.add(b);
-    }
-
     // Actualise un Berries et le supprime de la liste si il est passé en dessous de
     // 0
     private void update(Berries b) {

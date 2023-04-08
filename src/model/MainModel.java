@@ -1,16 +1,12 @@
 package model;
 
-import model.entity.AStar;
 import model.entity.IEntity;
 import model.entity.Navi;
 import model.terrain.Berries;
-import model.terrain.Cell;
 import model.terrain.ICell;
-import model.terrain.Terrain;
 import model.entity.Camp;
 
 import java.util.Arrays;
-import java.util.Stack;
 import java.util.ArrayList;
 
 public class MainModel {
@@ -23,7 +19,8 @@ public class MainModel {
 
     //  attribute for the List of Camp so solider ca attack it 
 
-    public ArrayList<Camp> campList = new ArrayList<>();
+    public ArrayList<Camp> camps = new ArrayList<>();
+    public ArrayList<IEntity> entities = new ArrayList<>();
     public int food = 0;
 
 //    Attributs pour gérer les ordres des joueurs
@@ -54,7 +51,7 @@ public class MainModel {
     }
 
 
-    public boolean isGameOver() {return campList.isEmpty();}
+    public boolean isGameOver() {return camps.isEmpty();}
 
     /* Méthode d'action du controleur sur le modèle */
 
@@ -97,8 +94,8 @@ public class MainModel {
             }
     }
 
-    public ArrayList<Camp> getCampList() {
-       return campList;
+    public ArrayList<Camp> getCamps() {
+       return camps;
     }
     
     /**
