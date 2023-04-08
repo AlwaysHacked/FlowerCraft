@@ -4,9 +4,7 @@ package model.entity;
 import model.Action;
 import model.MainModel;
 import model.Map;
-import model.terrain.Cell;
 import model.terrain.ICell;
-import model.terrain.*;
 
 import static model.Action.*;
 
@@ -21,8 +19,8 @@ public class Camp extends Entity implements IEntity{
 
     public static int RESSOURCES = 0;
 
-    public Camp(MainModel m, ICell c, Map map){
-        super(m, c, map, def_health, def_attack, def_speed);
+    public Camp(MainModel m, ICell c){
+        super(m, c, def_health, def_attack, def_speed);
         super.currentAction = STOP;
 
     }
@@ -67,6 +65,6 @@ public class Camp extends Entity implements IEntity{
     public void sufferAttack(int impact) {
     	super.sufferAttack(impact);
     	if (health <= 0)
-			model.campList.remove(this);
+			model.camps.remove(this);
     }
 }

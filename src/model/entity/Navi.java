@@ -18,8 +18,8 @@ public class Navi extends Entity implements IEntity {
 
 	private Action action = STOP;
 	
-	public Navi(MainModel m, ICell c, Map map) {
-		super(m, c, map, def_health, def_attack,def_speed);
+	public Navi(MainModel m, ICell c) {
+		super(m, c, def_health, def_attack,def_speed);
 		super.currentAction = STOP;
 	}
 	

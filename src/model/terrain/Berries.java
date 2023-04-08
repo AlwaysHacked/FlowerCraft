@@ -8,7 +8,7 @@ import static java.lang.Thread.sleep;
 
 public class Berries extends Cell{
 	private static final int HARVEST = 10;
-	private static final int REGEN = 5;
+	private static final int REGEN = 1;
     public static final int MAX_FOOD = 100;
     private int food = MAX_FOOD;
 
