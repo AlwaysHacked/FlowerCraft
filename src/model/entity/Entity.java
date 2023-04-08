@@ -25,7 +25,7 @@ public class Entity implements IEntity {
 
 	protected MainModel model;
 	protected ICell position;
-	protected Map map;
+	public Map map;
 
 	protected int health;
 	protected int attack;
@@ -121,7 +121,7 @@ public class Entity implements IEntity {
 	}
 	@Override
 	public IEntity canAttack() {
-		System.out.println(this.map != null);
+		
 		ArrayList<ICell> c = this.map.neighbours(this.position);
 		for (ICell cc : c) {
 			IEntity ent = cc.getEntity();

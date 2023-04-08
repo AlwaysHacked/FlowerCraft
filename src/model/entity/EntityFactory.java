@@ -31,6 +31,7 @@ public class EntityFactory {
             return;
         IEntity entity;
         EntityControl thread;
+        System.out.println(model.getMap() != null);
         switch (channel) {
             case "NAVI" -> entity = new Navi(model, cell, model.getMap());
             case "SOLDIER" -> entity = new Soldier(model, (Cell) cell, model.getMap());
