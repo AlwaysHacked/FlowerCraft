@@ -32,7 +32,7 @@ public class MainModel {
         this.map = MapFactory.getInstance(this).createMap("DEFOREST");
     
         ICell c = map.getCell(0, 0);
-        Navi n = new Navi(this, c, map);
+        Navi n = new Navi(this, c);
         if (c.getEntity() == null)
         	c.addEntity(n);
         else {
@@ -126,4 +126,7 @@ public class MainModel {
         this.endCell = endCell;
     }
 
+    public IEntity getEntity() {
+        return entity;
+    }
 }

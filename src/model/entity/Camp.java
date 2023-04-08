@@ -19,8 +19,8 @@ public class Camp extends Entity implements IEntity{
 
     public static int RESSOURCES = 0;
 
-    public Camp(MainModel m, ICell c, Map map){
-        super(m, c, map, def_health, def_attack, def_speed);
+    public Camp(MainModel m, ICell c){
+        super(m, c, def_health, def_attack, def_speed);
         super.currentAction = STOP;
 
     }

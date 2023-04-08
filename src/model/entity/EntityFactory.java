@@ -32,10 +32,10 @@ public class EntityFactory {
         IEntity entity;
         EntityControl thread;
         switch (channel) {
-            case "NAVI" -> entity = new Navi(model, cell, model.getMap());
-            case "SOLDIER" -> entity = new Soldier(model, (Cell) cell, model.getMap());
+            case "NAVI" -> entity = new Navi(model, cell);
+            case "SOLDIER" -> entity = new Soldier(model, cell);
             case "CAMP" -> {
-                entity = new Camp(model, cell, model.getMap());
+                entity = new Camp(model, cell);
                 model.camps.add((Camp) entity);
             }
             default -> throw new IllegalArgumentException("Unknown channel " + channel);

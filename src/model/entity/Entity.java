@@ -35,10 +35,10 @@ public class Entity implements IEntity {
 	protected ICell destination;
 	protected Action currentAction;
 
-	public Entity(MainModel m, ICell c, Map map, int h, int a, int s) {
+	public Entity(MainModel m, ICell c, int h, int a, int s) {
 		this.model = m;
 		this.position = c;
-		this.map = map;
+		this.map = model.getMap();
 
 		this.health = h;
 		this.attack = a;

@@ -24,8 +24,8 @@ public class Soldier extends Entity implements IEntity {
 
 // constructeur
 	
-	public Soldier(MainModel m, Cell c, Map map) {
-		super(m, c, map, def_health, def_attack, def_speed);
+	public Soldier(MainModel m, ICell c) {
+		super(m, c, def_health, def_attack, def_speed);
 		currentAction = ATTACK;
 	}
 
