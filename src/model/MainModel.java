@@ -24,8 +24,8 @@ public class MainModel {
     public int food = 0;
 
 //    Attributs pour gérer les ordres des joueurs
-    private IEntity entity = null;
-    private Action action = null;
+    private IEntity selectedEntity = null;
+    private Action selectedAction = null;
     
 
     public MainModel() {
@@ -57,40 +57,40 @@ public class MainModel {
 
     /** Recois la cellule cliquée et fais lance l'action */
     public void clic(ICell cell) {
-        if (entity == null)
-            entity = cell.getEntity();
-        else if (action == null)
-            entity = cell.getEntity();
+        if (selectedEntity == null)
+            selectedEntity = cell.getEntity();
+        else if (selectedAction == null)
+            selectedEntity = cell.getEntity();
         else {
-            switch (action) {
+            switch (selectedAction) {
                 case MOVE, ATTACK -> {
-                    entity.setCurrentAction(action);
-                    entity.setDestination(cell);
+                    selectedEntity.setCurrentAction(selectedAction);
+                    selectedEntity.setDestination(cell);
                 }
                 case BUILD -> {
                     if (cell.isAccessible() && food >= COUT_CAMP) {
-                        entity.setCurrentAction(action);
-                        entity.setDestination(cell);
+                        selectedEntity.setCurrentAction(selectedAction);
+                        selectedEntity.setDestination(cell);
                     }
                 }
                 case HARVEST -> {
                     if (cell.isAccessible() && cell instanceof Berries){
-                        entity.setCurrentAction(action);
-                        entity.setDestination(cell);
+                        selectedEntity.setCurrentAction(selectedAction);
+                        selectedEntity.setDestination(cell);
                     }
                 }
-                case CREATE, STOP -> entity = cell.getEntity();
+                case CREATE, STOP -> selectedEntity = cell.getEntity();
             }
-            action = null;
+            selectedAction = null;
         }
     }
 
     /** Recois l'action cliquée et fais lance l'action ou attends un clic */
     public void selectAction(Action action) {
-        if (entity != null && Arrays.stream(entity.possibleActions()).toList().contains(action))
+        if (selectedEntity != null && Arrays.stream(selectedEntity.possibleActions()).toList().contains(action))
             switch (action) {
-                case HARVEST, BUILD, MOVE, ATTACK -> this.action = action;
-                case STOP, CREATE -> entity.setCurrentAction(action);
+                case HARVEST, BUILD, MOVE, ATTACK -> this.selectedAction = action;
+                case STOP, CREATE -> selectedEntity.setCurrentAction(action);
             }
     }
 
@@ -126,7 +126,7 @@ public class MainModel {
         this.endCell = endCell;
     }
 
-    public IEntity getEntity() {
-        return entity;
+    public IEntity getSelectedEntity() {
+        return selectedEntity;
     }
 }

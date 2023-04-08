@@ -1,14 +1,11 @@
 package view;
 
-import model.*;
-
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import control.mouseControl.actionController;
@@ -22,13 +19,13 @@ import model.terrain.Forest;
 import model.terrain.ICell;
 
 public class ViewMap extends JPanel {
-    private MainModel m;
+    private MainModel model;
     private ArrayList<JButton> cases;
     public final static int SIZE = 10;
     public final static int STEP = 70;
 
     public ViewMap(MainModel model) {
-        this.m = model;
+        this.model = model;
         this.cases = new ArrayList<>();
         this.setLayout(null);
         Dimension dim = new Dimension(SIZE * 70, SIZE * 70); ///// change later on
@@ -46,7 +43,7 @@ public class ViewMap extends JPanel {
                 object.setOpaque(false);
                 object.setContentAreaFilled(false);
                 object.setBorderPainted(false);
-                actionController ctrl = new actionController(m, object, this.m.getMap().getCell(j, i));
+                actionController ctrl = new actionController(this.model, object, this.model.getMap().getCell(j, i));
                 object.addMouseListener(ctrl);
                 object.setIcon(new ImageIcon());
 
@@ -72,8 +69,8 @@ public class ViewMap extends JPanel {
         // Pour chaque cellule...
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
-                if (m.getMap().getCell(j, i) != null) {
-                    type(m.getMap().getCell(j, i), g, j, i);
+                if (model.getMap().getCell(j, i) != null) {
+                    type(model.getMap().getCell(j, i), g, j, i);
                 }
             }
         }
@@ -106,12 +103,12 @@ public class ViewMap extends JPanel {
             frame(g, "Ressources/Soldier.png", x * STEP + 10, y * STEP - 4, STEP - 20, STEP - 10);
         }
 
-        if (m.getStartCell() != null && c == m.getStartCell()){
+        if (model.getSelectedEntity() != null && c == model.getSelectedEntity().getPosition()){
             frame(g, "Ressources/move_1.png", x * STEP, y * STEP, STEP, STEP);
         }
-        if (m.getEndCell() != null && c == m.getEndCell()){
-            frame(g, "Ressources/move_1.png", x * STEP, y * STEP, STEP, STEP);
-        }
+//        if (m.getEndCell() != null && c == m.getEndCell()){
+//            frame(g, "Ressources/move_1.png", x * STEP, y * STEP, STEP, STEP);
+//        }
     }
 
     public void frame(Graphics g, String s, int x, int y, int width, int height) {

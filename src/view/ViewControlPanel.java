@@ -80,30 +80,30 @@ public class ViewControlPanel extends JPanel {
         g.setColor(Color.WHITE);
         g.drawString("Ressources : " + Camp.RESSOURCES, 40, height/2-20);
 
-        if(m.getStartCell() != null && m.getEndCell() != null){
-            if(m.getEndCell() instanceof Berries){
-                ImageIcon temp2 = new ImageIcon(this.getClass().getResource("Ressources/berry2.png"));
-                g.drawImage(temp2.getImage(), 0, height/2+100, 40, 40, this);
-                g.setFont(new Font ("Courier New", 1, 14));
-                g.setColor(Color.YELLOW);
-                g.drawString("Berries : "+((Berries)m.getEndCell()).getFood(), 40, height/2+120);
-            }
-            if(m.getEndCell().getEntity() instanceof Soldier){
+        if(m.getSelectedEntity() != null){
+//            if(m.getEndCell() instanceof Berries){
+//                ImageIcon temp2 = new ImageIcon(this.getClass().getResource("Ressources/berry2.png"));
+//                g.drawImage(temp2.getImage(), 0, height/2+100, 40, 40, this);
+//                g.setFont(new Font ("Courier New", 1, 14));
+//                g.setColor(Color.YELLOW);
+//                g.drawString("Berries : "+((Berries)m.getEndCell()).getFood(), 40, height/2+120);
+//            }
+            if(m.getSelectedEntity() instanceof Soldier){
                 ImageIcon temp2 = new ImageIcon(this.getClass().getResource("Ressources/Icon_Soldier.png"));
                 g.drawImage(temp2.getImage(), 0, 50, width, height/3, this);
                 g.setFont(new Font ("Courier New", 1, 24));
                 g.setColor(Color.YELLOW);
-                g.drawString(m.getEndCell().getEntity().getHealth()+" "+Entity.SOLDIER_HEALTH, width/2-30, height/2+40);
+                g.drawString(m.getSelectedEntity().getHealth()+" "+Entity.SOLDIER_HEALTH, width/2-30, height/2+40);
                 g.setFont(new Font ("Courier New", 1, 12));
                 g.setColor(Color.YELLOW);
                 g.drawString("Soldier", width-60, 40);
             }else{
-                if(m.getStartCell().getEntity() instanceof Navi){
+                if(m.getSelectedEntity() instanceof Navi){
                     ImageIcon temp2 = new ImageIcon(this.getClass().getResource("Ressources/Icon_Navi.png"));
                     g.drawImage(temp2.getImage(), 0, 50, width, height/3, this);
                     g.setFont(new Font ("Courier New", 1, 24));
                     g.setColor(Color.YELLOW);
-                    g.drawString(m.getStartCell().getEntity().getHealth()+" "+Entity.NAVI_HEALTH, width/2-30, height/2+40);
+                    g.drawString(m.getSelectedEntity().getHealth()+" "+Entity.NAVI_HEALTH, width/2-30, height/2+40);
                     g.setFont(new Font ("Courier New", 1, 12));
                     g.setColor(Color.YELLOW);
                     g.drawString("Avatar", width-60, 40);
