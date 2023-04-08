@@ -15,6 +15,14 @@ import static model.Action.STOP;
 public class Entity implements IEntity {
 	private static final Action[] possibleActions = new Action[]{};
 
+	public static final int NAVI_HEALTH = 100;
+	public static final int NAVI_SPEED = 5;
+	public static final int NAVI_ATTACK = 10;
+
+	public static final int SOLDIER_HEALTH = 100;
+	public static final int SOLDIER_SPEED = 5;
+	public static final int SOLDIER_ATTACK = 15;
+
 	protected MainModel model;
 	protected ICell position;
 	protected Map map;
@@ -27,8 +35,6 @@ public class Entity implements IEntity {
 	protected ICell destination;
 	protected Action currentAction;
 
-	protected EntityControl entC;
-
 	public Entity(MainModel m, ICell c, Map map, int h, int a, int s) {
 		this.model = m;
 		this.position = c;
@@ -38,9 +44,8 @@ public class Entity implements IEntity {
 		this.attack = a;
 		this.speed = s;
 
-		this.stop();
+		//this.stop();
 
-		this.entC = new EntityControl(this.model, this);
 	}
 
 	@Override
@@ -62,25 +67,27 @@ public class Entity implements IEntity {
 	 * Attaque l'ennemi (s'il y en a un) a cote de lui
 	 * En absence d'ennemi, bouge vers sa destination
 	 */
-	protected void attack() {
+	public void attack() {
 		IEntity ent = this.canAttack();
 		if (ent != null)
 			ent.sufferAttack(this.attack);
-		else move();
+		// else move();
 	}
 
 	/**
 	 * La fonction bouge le pion sur la cellule suivante
 	 * Le chemin est stocke dans l'attribut `path`
 	 */
-	protected void move() {
+	public void move() {
 		if (destination == position)currentAction = STOP;
 		else{
 			if (path.empty()) generatePath();
 			if (canMove(this.path.peek())) {
+				this.path.peek().addEntity(this);
+				this.position = this.path.peek();
 				this.position.deleteEntity();
 				this.position = this.path.pop();
-				this.position.addEntity(this);
+				
 			} else generatePath();
 		}
 	}
@@ -114,6 +121,7 @@ public class Entity implements IEntity {
 	}
 	@Override
 	public IEntity canAttack() {
+		System.out.println(this.map != null);
 		ArrayList<ICell> c = this.map.neighbours(this.position);
 		for (ICell cc : c) {
 			IEntity ent = cc.getEntity();
@@ -151,7 +159,7 @@ public class Entity implements IEntity {
 	// After checking if the move is possible will
 	// put the path gotten from AStar into path variable.
 	// If the move isn't possible will throw exception
-	private void generatePath() {
+	public void generatePath() {
 		AStar a = new AStar(this.model, this.map, this.position, this.destination);
 		this.path = a.getPath();
 		System.out.println(this.path.size());
@@ -228,5 +236,23 @@ public class Entity implements IEntity {
 	public void setPosition(ICell position) {
 		this.position = position;
 	}
+
+
+	public Stack<ICell> getPath() {
+		return this.path;
+	}
+
+	public void setPath(Stack<ICell> path) {
+		this.path = path;
+	}
+
+	public ICell getDestination() {
+		return this.destination;
+	}
+
+	public void setDestination(ICell destination) {
+		this.destination = destination;
+	}
+
 
 }

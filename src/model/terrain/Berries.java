@@ -35,7 +35,10 @@ public class Berries extends Cell{
      * cueillables definie dans HARVEST
      */
     public int isBeingHarvested() {
-    	this.food -= HARVEST;
+        System.out.println("amount of food" + this.food);
+    	if(this.food > 0){
+            this.food -= HARVEST;
+        }
     	return HARVEST;
     }
     
@@ -54,4 +57,19 @@ public class Berries extends Cell{
             return false;
         }
     }
+
+    /**
+     * @return int return the food
+     */
+    public int getFood() {
+        return food;
+    }
+
+    /**
+     * @param food the food to set
+     */
+    public void setFood(int food) {
+        this.food = food;
+    }
+
 }

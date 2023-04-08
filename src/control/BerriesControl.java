@@ -2,33 +2,51 @@ package control;
 
 import model.MainModel;
 import model.terrain.Berries;
+import model.terrain.ICell;
+import view.MainView;
+import view.ViewControlPanel;
 
 import java.util.ArrayList;
 
-public class BerriesControl extends Thread{
+public class BerriesControl extends Thread {
     private MainModel model;
-//    Liste de toutes les cases Berries
+    private MainView view;
+    // Liste de toutes les cases Berries
     private ArrayList<Berries> berries = new ArrayList<>();
+
+    public BerriesControl (MainModel m, MainView v){
+        this.model = m;
+        this.view = v;
+        for(ICell[] ct : m.getMap().getGrid()){
+            for(ICell c : ct){
+                if(c instanceof Berries){
+                    berries.add((Berries) c);
+                }
+            }
+        }
+    }
 
     @Override
     public void run() {
         while (model.isRunning()) {
             berries.forEach((this::update));
             try {
-                sleep(1000);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
     }
 
-//    Pour ajouter les cases à l'initialisation
-    public void addBerries(Berries b){
+    // Pour ajouter les cases à l'initialisation
+    public void addBerries(Berries b) {
         berries.add(b);
     }
 
-//    Actualise un Berries et le supprime de la liste si il est passé en dessous de 0
+    // Actualise un Berries et le supprime de la liste si il est passé en dessous de
+    // 0
     private void update(Berries b) {
+        view.update();
         if (!b.update())
             berries.remove(b);
     }

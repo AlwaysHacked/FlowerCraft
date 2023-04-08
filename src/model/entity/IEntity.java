@@ -50,4 +50,5 @@ boolean isEnemy(IEntity ent);
 	void setAttack(int attack);
 	void setSpeed(int speed);
 	void setPosition(ICell position);
+
 }
