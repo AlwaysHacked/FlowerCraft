@@ -35,50 +35,50 @@ public class EntityControl extends Thread {
         }
     }
 
-    public void checkEntity() {
-        this.ent = new ArrayList<ICell>();
-        for (ICell[] ct : model.getMap().getGrid()) {
-            for (ICell c : ct) {
-                if (c.getEntity() != null) {
-                    ent.add(c);
-                }
-            }
-        }
-    }
+    // public void checkEntity() {
+    //     this.ent = new ArrayList<ICell>();
+    //     for (ICell[] ct : model.getMap().getGrid()) {
+    //         for (ICell c : ct) {
+    //             if (c.getEntity() != null) {
+    //                 ent.add(c);
+    //             }
+    //         }
+    //     }
+    // }
 
-    public void update(ICell e) {
-        if (e.getEntity() instanceof Navi) {
-            var temp = e.getEntity();
-            if (((Navi) temp).getPath() != null && temp.getCurrentAction() == Action.MOVE) {
-                temp.setPosition(((Navi) temp).getPath().get(0));
-                ((Navi) temp).getPath().get(0).addEntity(temp);
-                e.deleteEntity();
-                var pathway = ((Navi) temp).getPath();
-                pathway.remove(0);
-                ((Navi) temp).setPath(pathway);
-                if (((Navi) temp).getPath().size() == 0) {
-                    ((Navi) temp).setPath(null);
-                }
-            } else {
-                if (temp.getCurrentAction() == Action.HARVEST) {
-                    ((Navi) temp).harvest();
-                    temp.setCurrentAction(Action.STOP);
-                    model.setStartCell(null);
-                    model.setEndCell(null);
-                } else if (temp.getCurrentAction() == Action.MOVE) {
-                    temp.setCurrentAction(Action.STOP);
-                    model.setStartCell(null);
-                    model.setEndCell(null);
-                } else if (temp.getCurrentAction() == Action.BUILD) {
-                    ((Navi) temp).buildCamp(model.getEndCell());
-                    temp.setCurrentAction(Action.STOP);
-                    model.setStartCell(null);
-                    model.setEndCell(null);
-                }else if (temp.getCurrentAction() == Action.ATTACK) {
-                    ((Navi) temp).attack();
+    // public void update(ICell e) {
+    //     if (e.getEntity() instanceof Navi) {
+    //         var temp = e.getEntity();
+    //         if (((Navi) temp).getPath() != null && temp.getCurrentAction() == Action.MOVE) {
+    //             temp.setPosition(((Navi) temp).getPath().get(0));
+    //             ((Navi) temp).getPath().get(0).addEntity(temp);
+    //             e.deleteEntity();
+    //             var pathway = ((Navi) temp).getPath();
+    //             pathway.remove(0);
+    //             ((Navi) temp).setPath(pathway);
+    //             if (((Navi) temp).getPath().size() == 0) {
+    //                 ((Navi) temp).setPath(null);
+    //             }
+    //         } else {
+    //             if (temp.getCurrentAction() == Action.HARVEST) {
+    //                 ((Navi) temp).harvest();
+    //                 temp.setCurrentAction(Action.STOP);
+    //                 model.setStartCell(null);
+    //                 model.setEndCell(null);
+    //             } else if (temp.getCurrentAction() == Action.MOVE) {
+    //                 temp.setCurrentAction(Action.STOP);
+    //                 model.setStartCell(null);
+    //                 model.setEndCell(null);
+    //             } else if (temp.getCurrentAction() == Action.BUILD) {
+    //                 ((Navi) temp).buildCamp(model.getEndCell());
+    //                 temp.setCurrentAction(Action.STOP);
+    //                 model.setStartCell(null);
+    //                 model.setEndCell(null);
+    //             }else if (temp.getCurrentAction() == Action.ATTACK) {
+    //                 ((Navi) temp).attack();
                     
-                }
-            }
-        }
-    }
+    //             }
+    //         }
+    //     }
+    // }
 }

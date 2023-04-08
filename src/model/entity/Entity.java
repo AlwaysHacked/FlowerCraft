@@ -46,6 +46,8 @@ public class Entity implements IEntity {
 		this.attack = a;
 		this.speed = s;
 
+		this.path = new Stack<>();
+
 		// this.stop();
 
 	}
@@ -73,8 +75,10 @@ public class Entity implements IEntity {
 		IEntity ent = this.canAttack();
 		if (ent != null)
 			ent.sufferAttack(this.attack);
-		else
+		else{
+			System.out.println("run");
 			move();
+		}
 	}
 
 	/**
