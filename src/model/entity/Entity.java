@@ -6,6 +6,8 @@ import model.Map;
 import model.terrain.ICell;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Stack;
 
 import control.EntityControl;
@@ -13,7 +15,7 @@ import control.EntityControl;
 import static model.Action.STOP;
 
 public class Entity implements IEntity {
-	private static final Action[] possibleActions = new Action[]{};
+	private static final Action[] possibleActions = new Action[] {};
 
 	public static final int NAVI_HEALTH = 100;
 	public static final int NAVI_SPEED = 5;
@@ -44,7 +46,7 @@ public class Entity implements IEntity {
 		this.attack = a;
 		this.speed = s;
 
-		//this.stop();
+		// this.stop();
 
 	}
 
@@ -71,7 +73,8 @@ public class Entity implements IEntity {
 		IEntity ent = this.canAttack();
 		if (ent != null)
 			ent.sufferAttack(this.attack);
-		else move();
+		else
+			move();
 	}
 
 	/**
@@ -79,16 +82,21 @@ public class Entity implements IEntity {
 	 * Le chemin est stocke dans l'attribut `path`
 	 */
 	public void move() {
-		if (destination == position) ;
-		else{
-			if (path.empty()) generatePath();
-			if (canMove(this.path.peek())) {
-				this.path.peek().addEntity(this);
-				this.position = this.path.peek();
-				this.position.deleteEntity();
-				this.position = this.path.pop();
-				
-			} else generatePath();
+		if (destination == position)
+			this.currentAction = Action.STOP;
+		else {
+			if (path.empty()) {
+				generatePath();
+			} else {
+				for(var i : path)System.out.println(i.getCoord());
+				if (canMove(this.path.peek())) {
+					this.path.peek().addEntity(this);
+					this.position.deleteEntity();
+					this.position = this.path.peek();
+					this.path.pop();///////
+
+				} // else generatePath();
+			}
 		}
 	}
 
@@ -103,13 +111,16 @@ public class Entity implements IEntity {
 		path = new Stack<>();
 	}
 
-	protected void create() {}
+	protected void create() {
+	}
+
 	/** Méthode de IEntity */
 
 	@Override
-	public boolean isDead(){
+	public boolean isDead() {
 		return this.health <= 0;
 	}
+
 	@Override
 	public boolean isEnemy(IEntity ent) {
 		if (this instanceof Navi)
@@ -119,6 +130,7 @@ public class Entity implements IEntity {
 		else
 			return false;
 	}
+
 	@Override
 	public IEntity canAttack() {
 		ArrayList<ICell> c = model.getMap().neighbours(this.position);
@@ -129,6 +141,7 @@ public class Entity implements IEntity {
 		}
 		return null;
 	}
+
 	@Override
 	public void sufferAttack(int impact) {
 		this.health -= impact;
@@ -137,22 +150,24 @@ public class Entity implements IEntity {
 			this.position = null;
 		}
 	}
+
 	@Override
 	public boolean canMove(ICell c) {
 		return c.isAccessible() && this.position.nextTo(c);
 	}
+
 	/** Méthodes privées */
 
 	private void moveStraight(int x, int y) {
 		this.path = new Stack<>();
 		x += this.position.getX();
 		y += this.position.getY();
-		
-		if(x < this.map.sizeGrid - 1 && y < this.map.sizeGrid - 1 && x > 0 && y > 0) {
-	        this.path.add(this.map.getCell(x+1, y));
-	        this.move();
-		}
-		else throw new IllegalArgumentException("Impossible d'aller a la case (" + x + ", " + y + ")");
+
+		if (x < this.map.sizeGrid - 1 && y < this.map.sizeGrid - 1 && x > 0 && y > 0) {
+			this.path.add(this.map.getCell(x + 1, y));
+			this.move();
+		} else
+			throw new IllegalArgumentException("Impossible d'aller a la case (" + x + ", " + y + ")");
 	}
 
 	// After checking if the move is possible will
@@ -160,10 +175,14 @@ public class Entity implements IEntity {
 	// If the move isn't possible will throw exception
 	public void generatePath() {
 		AStar a = new AStar(this.model, model.getMap(), this.position, this.destination);
-		this.path = a.getPath();
-		System.out.println(this.path.size());
+		Stack<ICell> tab = a.getPath();
+		this.path = tab;
+		// ArrayList<ICell> temp = new ArrayList<ICell>(tab);
+		// Collections.reverse(temp);
+		// Stack<ICell> newtab = new Stack<>();
+		// newtab.addAll(temp);
+		// this.path = newtab;
 	}
-
 
 	// for test of moves
 	public void testMove(ICell c) {
@@ -176,8 +195,6 @@ public class Entity implements IEntity {
 			this.map.affiche();
 		}
 	}
-
-
 
 	// getters
 	@Override
@@ -216,8 +233,6 @@ public class Entity implements IEntity {
 		this.currentAction = currentAction;
 	}
 
-	
-
 	@Override
 	public void setHealth(int health) {
 		this.health = health;
@@ -238,7 +253,6 @@ public class Entity implements IEntity {
 		this.position = position;
 	}
 
-
 	public Stack<ICell> getPath() {
 		return this.path;
 	}
@@ -254,6 +268,5 @@ public class Entity implements IEntity {
 	public void setDestination(ICell destination) {
 		this.destination = destination;
 	}
-
 
 }

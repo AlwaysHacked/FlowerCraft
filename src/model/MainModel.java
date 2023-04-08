@@ -31,14 +31,14 @@ public class MainModel {
     public MainModel() {
         this.map = MapFactory.getInstance(this).createMap("DEFOREST");
     
-        ICell c = map.getCell(0, 0);
-        Navi n = new Navi(this, c);
-        if (c.getEntity() == null)
-        	c.addEntity(n);
-        else {
-        	c.deleteEntity();
-        	c.addEntity(n);
-        }
+        // ICell c = map.getCell(0, 0);
+        // Navi n = new Navi(this, c);
+        // if (c.getEntity() == null)
+        // 	c.addEntity(n);
+        // else {
+        // 	c.deleteEntity();
+        // 	c.addEntity(n);
+        // }
         
     }
         
@@ -87,7 +87,9 @@ public class MainModel {
 
     /** Recois l'action cliquée et fais lance l'action ou attends un clic */
     public void selectAction(Action action) {
+        
         if (selectedEntity != null && Arrays.stream(selectedEntity.possibleActions()).toList().contains(action))
+            
             switch (action) {
                 case HARVEST, BUILD, MOVE, ATTACK -> this.selectedAction = action;
                 case STOP, CREATE -> selectedEntity.setCurrentAction(action);
