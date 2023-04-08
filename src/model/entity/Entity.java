@@ -71,7 +71,7 @@ public class Entity implements IEntity {
 		IEntity ent = this.canAttack();
 		if (ent != null)
 			ent.sufferAttack(this.attack);
-		// else move();
+		else move();
 	}
 
 	/**
@@ -79,7 +79,7 @@ public class Entity implements IEntity {
 	 * Le chemin est stocke dans l'attribut `path`
 	 */
 	public void move() {
-		if (destination == position)currentAction = STOP;
+		if (destination == position) ;
 		else{
 			if (path.empty()) generatePath();
 			if (canMove(this.path.peek())) {
@@ -122,7 +122,7 @@ public class Entity implements IEntity {
 	@Override
 	public IEntity canAttack() {
 		System.out.println(this.map != null);
-		ArrayList<ICell> c = this.map.neighbours(this.position);
+		ArrayList<ICell> c = model.getMap().neighbours(this.position);
 		for (ICell cc : c) {
 			IEntity ent = cc.getEntity();
 			if (this.isEnemy(ent))
@@ -160,7 +160,7 @@ public class Entity implements IEntity {
 	// put the path gotten from AStar into path variable.
 	// If the move isn't possible will throw exception
 	public void generatePath() {
-		AStar a = new AStar(this.model, this.map, this.position, this.destination);
+		AStar a = new AStar(this.model, model.getMap(), this.position, this.destination);
 		this.path = a.getPath();
 		System.out.println(this.path.size());
 	}
