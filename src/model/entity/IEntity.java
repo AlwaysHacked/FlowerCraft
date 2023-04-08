@@ -46,6 +46,7 @@ boolean isEnemy(IEntity ent);
 	
 //	setters
 	void setCurrentAction(Action currentAction);
+	void setDestination(ICell destination);
 	void setHealth(int health);
 	void setAttack(int attack);
 	void setSpeed(int speed);

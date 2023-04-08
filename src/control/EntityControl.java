@@ -73,6 +73,7 @@ public class EntityControl extends Thread {
             ent.forEach((this::update));
             checkEntity();
             try {
+               
                 sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();

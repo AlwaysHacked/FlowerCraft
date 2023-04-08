@@ -1,6 +1,7 @@
 package model.entity;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import model.Action;
 import model.MainModel;
@@ -9,12 +10,14 @@ import model.terrain.Cell;
 import model.terrain.ICell;
 
 import static model.Action.ATTACK;
+import static model.Action.STOP;
 
 public class Soldier extends Entity implements IEntity {
 //	default
 	private static final int def_health = 100;
 	private static final int def_attack = 5;
 	private static final int def_speed = 10;
+	private static final Random rand = new Random();
 
 //others
    
@@ -26,6 +29,21 @@ public class Soldier extends Entity implements IEntity {
 	public Soldier(MainModel m, Cell c, Map map) {
 		super(m, c, map, def_health, def_attack, def_speed);
 		currentAction = ATTACK;
+	}
+
+	
+	public void move() {
+		if (destination == position) {
+			destination = (ICell) model.campList.get(rand.nextInt(model.campList.size()));
+		} else{
+			
+			// if (path.empty()) generatePath();
+			// if (canMove(this.path.peek())) {
+			// 	this.position.deleteEntity();
+			// 	this.position = this.path.pop();
+			// 	this.position.addEntity(this);
+			// } else generatePath();
+		}
 	}
 
 	@Override
@@ -55,9 +73,9 @@ public class Soldier extends Entity implements IEntity {
 
 	//check the camp or navi is in those positions or no
         
-	    if(cellR.getEntity() == navi || cellR.getEntity() == camp||cellD.getEntity() == navi ||cellD.getEntity() == camp)this.attack();
-		if(cellL.getEntity() == navi || cellL.getEntity() == camp || cellU.getEntity() == navi||cellU.getEntity() == camp)this.attack();
-	}
+	//     if(cellR.getEntity() == navi || cellR.getEntity() == camp||cellD.getEntity() == navi ||cellD.getEntity() == camp)this.attack();
+	// 	if(cellL.getEntity() == navi || cellL.getEntity() == camp || cellU.getEntity() == navi||cellU.getEntity() == camp)this.attack();
+	 }
 
 	// search for the camp
 

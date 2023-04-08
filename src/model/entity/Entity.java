@@ -217,6 +217,8 @@ public class Entity implements IEntity {
 		this.currentAction = currentAction;
 	}
 
+	
+
 	@Override
 	public void setHealth(int health) {
 		this.health = health;
