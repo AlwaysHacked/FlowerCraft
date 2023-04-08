@@ -3,6 +3,7 @@ package model.entity;
 import java.util.ArrayList;
 import java.util.Random;
 
+import model.Action;
 import model.MainModel;
 import model.Map;
 import model.terrain.Cell;
@@ -60,6 +61,8 @@ public class Soldier extends Entity implements IEntity {
 			}
 		}
 	}
+
+
 
 	@Override
 	public boolean isEnemy(IEntity ent) {
@@ -141,7 +144,8 @@ public class Soldier extends Entity implements IEntity {
 		// move to the campS
 
 	}
-
+	
+	
 	@Override
 	public String toString() {
 		return "s";
