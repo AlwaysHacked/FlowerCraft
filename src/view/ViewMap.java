@@ -2,6 +2,7 @@ package view;
 
 import model.*;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import javax.swing.JPanel;
 
 import control.mouseControl.actionController;
 import model.MainModel;
-import model.entity.Camp;
+import model.entity.*;
 import model.entity.Navi;
 import model.entity.Soldier;
 import model.terrain.Berries;
@@ -96,6 +97,9 @@ public class ViewMap extends JPanel {
             frame(g, "Ressources/Submerge_1.png", x * STEP, y * STEP, STEP, STEP);
         if (c.getEntity() instanceof Navi) {
             frame(g, "Ressources/Navi.png", x * STEP + 10, y * STEP - 4, STEP - 20, STEP - 10);
+            g.setColor(Color.RED);
+            g.fillRect(x * STEP+10, y * STEP+2, ((STEP-10)*c.getEntity().getHealth())/Entity.SOLDIER_HEALTH, 6);
+            frame(g, "Ressources/healthbar.png", x * STEP, y * STEP, STEP, 10);
         }
 
         if (c.getEntity() instanceof Camp){
@@ -104,6 +108,9 @@ public class ViewMap extends JPanel {
 
         if (c.getEntity() instanceof Soldier){
             frame(g, "Ressources/Soldier.png", x * STEP + 10, y * STEP - 4, STEP - 20, STEP - 10);
+            g.setColor(Color.RED);
+            g.fillRect(x * STEP+10, y * STEP+2, ((STEP-10)*c.getEntity().getHealth())/Entity.SOLDIER_HEALTH, 6);
+            frame(g, "Ressources/healthbar.png", x * STEP, y * STEP, STEP, 10);
         }
 
         if (m.getStartCell() != null && c == m.getStartCell()){
