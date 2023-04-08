@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import control.mouseControl.actionController;
@@ -61,6 +62,9 @@ public class ViewMap extends JPanel {
 
     public void update() {
         // maybe replace with a thread later once there is one in Cell ?
+        if(this.model.isGameOver()){
+            this.youLooseScreen();
+        }
         repaint();
 
     }
@@ -122,6 +126,12 @@ public class ViewMap extends JPanel {
 
         ImageIcon temp2 = new ImageIcon(this.getClass().getResource(s));
         g.drawImage(temp2.getImage(), x, y, width, height, this);
+    }
+
+    public void youLooseScreen() {
+        ImageIcon temp = new ImageIcon(this.getClass().getResource("Ressources/youLoose.jpg"));
+        JOptionPane.showMessageDialog(this, null, "Game Over", JOptionPane.PLAIN_MESSAGE, temp);
+        System.exit(0);
     }
 
 }
