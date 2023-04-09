@@ -10,6 +10,7 @@ public class MainControl {
 	private MainView view;
 	private BerriesControl berries;
 	private EntityControl entities;
+	private ViewControl viewControl;
 	
 	public MainControl(MainModel m, MainView v) {
 		this.model = m;
@@ -18,12 +19,7 @@ public class MainControl {
 		this.berries.start();
 		this.entities = new EntityControl(m, v);
 		this.entities.start();
-		
-
-//		this.map = new Map(this.model);
-//		this.jar = new Jardinier(this.model, this.map, this.map.getCell(0, 0));
-//		this.map.getCell(5, 4).addEntity(jar);
-
-//		this.map.affiche();
+		this.viewControl = new ViewControl(m, v);
+		this.viewControl.start();
 	}
 }

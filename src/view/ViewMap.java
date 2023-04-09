@@ -64,8 +64,7 @@ public class ViewMap extends JPanel {
         // maybe replace with a thread later once there is one in Cell ?
         if(this.model.isGameOver()){
             this.youLooseScreen();
-        }
-        repaint();
+        } else repaint();
 
     }
 
