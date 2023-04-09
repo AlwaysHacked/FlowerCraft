@@ -12,6 +12,7 @@ public class Berries extends Cell{
     public static final int MAX_FOOD = 100;
     private int food = MAX_FOOD;
     private String frame = "BERRIES";
+    private int iconFrame = 1;
 
     public Berries(MainModel model, Point p) {
         super(model, p);
@@ -99,5 +100,6 @@ public class Berries extends Cell{
     public void setFrame(String frame) {
         this.frame = frame;
     }
+    
 
 }

@@ -9,14 +9,14 @@ public class MapFactory {
 
     private final static String[][] deforest =
             {       {"FIELD",   "BERRIES",  "BERRIES",  "FIELD",   "BERRIES",   "BERRIES",  "FIELD",   "BERRIES",  "BERRIES",   "FIELD"},
-                    {"FIELD",   "BERRIES",  "BERRIES",  "FIELD",   "BERRIES",   "BERRIES",  "FIELD",   "BERRIES",  "BERRIES",   "FIELD"},
-                    {"FIELD",   "BERRIES",  "BERRIES",  "FIELD",   "BERRIES",   "BERRIES",  "FIELD",   "BERRIES",  "BERRIES",   "FIELD"},
-                    {"FIELD",   "FIELD",    "FIELD",    "FIELD",   "FIELD",     "FIELD",    "FIELD",   "FIELD",    "FIELD",     "FIELD"},
+                    {"FIELD",   "BERRIES",  "BERRIES",  "WATER",   "BERRIES",   "BERRIES",  "FIELD",   "BERRIES",  "BERRIES",   "FIELD"},
+                    {"FIELD",   "BERRIES",  "BERRIES",  "WATER",   "WATER",   "WATER",  "FIELD",   "BERRIES",  "BERRIES",   "FIELD"},
+                    {"FIELD",   "FIELD",    "FIELD",    "WATER",   "FIELD",     "FIELD",    "FIELD",   "FIELD",    "FIELD",     "FIELD"},
                     {"FIELD",   "FOREST",   "FIELD",    "FIELD",   "FOREST",    "FIELD",    "FIELD",   "FIELD",    "FIELD",     "FOREST"},
                     {"FOREST",  "FOREST",   "FOREST",   "FOREST",  "FOREST",    "FOREST",   "FOREST",  "FOREST",   "FOREST",    "FOREST"},
-                    {"FOREST",  "WATER",    "WATER",    "FOREST",  "FOREST",    "FOREST",   "FOREST",  "FOREST",   "BERRIES",   "FOREST"},
-                    {"WATER",   "WATER",    "WATER",    "FOREST",  "BERRIES",   "FOREST",   "FOREST",  "FOREST",   "FOREST",    "FOREST"},
-                    {"WATER",   "WATER",    "BERRIES",  "FOREST",  "FOREST",    "FOREST",   "FOREST",  "FOREST",   "BERRIES",   "FOREST"},
+                    {"FOREST",  "WATER",    "WATER",    "FOREST",  "FOREST",    "FOREST",   "WATER",  "FOREST",   "BERRIES",   "FOREST"},
+                    {"WATER",   "WATER",    "WATER",    "FOREST",  "BERRIES",   "WATER",   "FOREST",  "FOREST",   "FOREST",    "FOREST"},
+                    {"WATER",   "WATER",    "BERRIES",  "FOREST",  "FOREST",    "FOREST",   "WATER",  "FOREST",   "BERRIES",   "FOREST"},
                     {"FOREST",  "FOREST",   "FOREST",   "FOREST",  "FOREST",    "FOREST",   "FOREST",  "FOREST",   "FOREST",    "FOREST"}
             };
 

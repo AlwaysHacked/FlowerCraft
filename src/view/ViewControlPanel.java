@@ -73,7 +73,7 @@ public class ViewControlPanel extends JPanel {
         ImageIcon temp = new ImageIcon(this.getClass().getResource("Ressources/ControlPanel.png"));
         g.drawImage(temp.getImage(), 0, 0, width, height, this);
 
-        ImageIcon temp3 = new ImageIcon(this.getClass().getResource("Ressources/berry2.png"));
+        ImageIcon temp3 = new ImageIcon(this.getClass().getResource("Ressources/berry3.png"));
         g.drawImage(temp3.getImage(), 10, height/2-50, 20, 20, this);
         g.setFont(new Font ("Courier New", 1, 14));
         g.setColor(Color.WHITE);
@@ -154,5 +154,6 @@ public class ViewControlPanel extends JPanel {
         Image newimg = image.getScaledInstance(width, height,  java.awt.Image.SCALE_SMOOTH);
         box.setIcon(new ImageIcon(newimg));
     }
+    
 
 }

@@ -14,7 +14,7 @@ import static model.Action.ATTACK;
 public class Soldier extends Entity implements IEntity {
 	// default
 	private static final int def_health = 100;
-	private static final int def_attack = 5;
+	private static final int def_attack = 3;
 	private static final int def_speed = 10;
 	private static final Random rand = new Random();
 
