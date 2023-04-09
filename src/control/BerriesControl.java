@@ -43,7 +43,6 @@ public class BerriesControl extends Thread {
     private void update(Berries b) {
         if (model.isRunning()) {
             b.newFrame();
-            view.update();
             if (!b.update())
                 berries.remove(b);
         } else {

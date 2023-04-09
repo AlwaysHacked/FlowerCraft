@@ -73,7 +73,7 @@ public class Entity implements IEntity {
 	 * Attaque l'ennemi (s'il y en a un) a cote de lui
 	 * En absence d'ennemi, bouge vers sa destination
 	 */
-	public void attack() {
+	protected void attack() {
 		IEntity ent = this.canAttack();
 		if (ent != null)
 			ent.sufferAttack(this.attack);
@@ -87,7 +87,7 @@ public class Entity implements IEntity {
 	 * La fonction bouge le pion sur la cellule suivante
 	 * Le chemin est stocke dans l'attribut `path`
 	 */
-	public void move() {
+	protected void move() {
 		if (destination == position)
 			this.currentAction = Action.STOP;
 		else {
@@ -187,8 +187,7 @@ public class Entity implements IEntity {
 	// If the move isn't possible will throw exception
 	public void generatePath() {
 		AStar a = new AStar(this.model, model.getMap(), this.position, this.destination);
-		Stack<ICell> tab = a.getPath();
-		this.path = tab;
+		this.path = a.getPath();
 		// ArrayList<ICell> temp = new ArrayList<ICell>(tab);
 		// Collections.reverse(temp);
 		// Stack<ICell> newtab = new Stack<>();

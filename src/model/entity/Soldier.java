@@ -27,19 +27,11 @@ public class Soldier extends Entity implements IEntity {
 		currentAction = ATTACK;
 	}
 
-	public void move() {
+	@Override
+	protected void move() {
 		if (destination == null) {
 			//look at free cells around camp
-			Camp camp =  model.camps.get(rand.nextInt(model.camps.size()));
-			ArrayList<ICell> tab = new ArrayList<>();
-			for(var i : this.model.getMap().getGrid()){
-				for(var j : i){
-					if(j.nextTo(camp.getPosition()) && j.getEntity() == null){
-						tab.add(j);
-					}
-				}
-			}
-			destination = tab.get(0);
+			destination = model.camps.get(rand.nextInt(model.camps.size())).position;
 			
 		} else if(position==destination) {
 //			System.out.println("renew destination");
