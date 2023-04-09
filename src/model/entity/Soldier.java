@@ -72,17 +72,24 @@ public class Soldier extends Entity implements IEntity {
 		return ent instanceof Navi || ent instanceof Camp;
 	}
 
+
 	public void SoilderAction() {
-		// het the list of positions next to the soilder
+		// have the list of positions next to the soilder
 		ArrayList<ICell> n = super.map.neighbours(super.position);
 		// check the neighbours is enemy or not
 		for (int i = 0; i < n.size(); i++) {
-
+            
 			if (n.get(i).getEntity() != null) {
 				this.canAttack();
 				n.get(i).getEntity().sufferAttack(this.attack);
-			}
+			} 
 		}
+
+	}
+
+	public void buildSoilder(){
+        ICell cell = this.model.getMap().getCell(rand.nextInt(10), rand.nextInt(10));
+		EntityFactory.getInstance(model).createEntity(cell, "SOLDIER");
 
 	}
 	

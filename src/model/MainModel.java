@@ -9,7 +9,12 @@ import model.entity.Camp;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.concurrent.CopyOnWriteArrayList;
+
+import javax.sound.midi.Soundbank;
+
 import java.util.ArrayList;
+
+import Sound.Sound;
 
 public class MainModel {
     private static final int COUT_CAMP = 80;
@@ -18,6 +23,7 @@ public class MainModel {
     private boolean running = true;
     private ICell startCell = null;
     private ICell endCell = null;
+    private Sound sound = new Sound(this);
 
     //  attribute for the List of Camp so solider ca attack it 
 
@@ -59,6 +65,7 @@ public class MainModel {
 
     /** Recois la cellule cliquée et fais lance l'action */
     public void clic(ICell cell) {
+        sound.plsySE(1);
         if (selectedEntity == null)
             selectedEntity = cell.getEntity();
         else if (selectedAction == null)

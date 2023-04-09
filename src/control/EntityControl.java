@@ -8,15 +8,18 @@ import model.MainModel;
 import model.entity.*;
 import model.terrain.ICell;
 import view.MainView;
+import model.entity.Soldier;
 
 public class EntityControl extends Thread {
     private MainModel model;
     private MainView view;
     private ArrayList<ICell> ent;
+    private int counter;
+    private Soldier soldier;
 
     public EntityControl(MainModel m, MainView v) {
         this.model = m;
-        this.view = v;
+        this.view = v;      
 
 //        checkEntity();
     }
@@ -28,12 +31,22 @@ public class EntityControl extends Thread {
             checkEntity(); //// important to remove charater that has died
             model.entities.forEach(IEntity::update);
             view.update();
+
+            counter ++; 
+            this.createSoilder();
+
             try {
                 sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void createSoilder(){
+
+        if(this.counter % 5 == 0) soldier.buildSoilder();//We can change %10 to control the speed
+
     }
 
     public void checkEntity() {
