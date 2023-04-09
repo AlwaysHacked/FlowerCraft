@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import Sound.Sound;
 
 public class MainModel {
-    private static final int COUT_CAMP = 80;
 
     private final Map map;
     private boolean running = true;
@@ -80,7 +79,7 @@ public class MainModel {
                     selectedEntity.setDestination(cell);
                 }
                 case BUILD -> {
-                    if (cell.isAccessible()) {
+                    if (cell.isAccessible() && food >= Camp.COUT_CAMP) {
                         selectedEntity.setCurrentAction(selectedAction);
                         selectedEntity.setDestination(cell);
                     }else this.sound.plsySE(3);

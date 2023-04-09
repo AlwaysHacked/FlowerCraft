@@ -61,7 +61,7 @@ public class Navi extends Entity implements IEntity {
 	 * @return vraie s'il n'y a personne sur `c` et est a cote de Navi
 	 */
 	public boolean canBuildCamp(ICell c){
-		return c.isAccessible() && c.nextTo(this.position) && this.position.nextTo(c) && Camp.RESSOURCES >= Camp.COUT_CAMP;
+		return c.isAccessible() && c.nextTo(this.position) && Camp.RESSOURCES >= Camp.COUT_CAMP;
 	}
 
 	/**
