@@ -4,28 +4,33 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
+import model.MainModel;
+
 import java.net.URL;
 
 public class Sound {
 
+    MainModel model;
     Clip clip;
     URL soundURL[] = new URL[30];
 
-    public Sound(){
+    public Sound(MainModel m){
+        model =m;
+        soundURL[0] = getClass().getResource("bgm.wav");
+        // soundURL[1] = getClass().getResource(null);
+        // soundURL[2] = getClass().getResource(null);
+        // soundURL[3] = getClass().getResource(null);
+        // soundURL[4] = getClass().getResource(null);
+        this.playMusic(0);
 
-        soundURL[0] = getClass().getResource("Sound/bgm.wave");
-        soundURL[1] = getClass().getResource(null);
-        soundURL[2] = getClass().getResource(null);
-        soundURL[3] = getClass().getResource(null);
-        soundURL[4] = getClass().getResource(null);
     }
 
     public void setFile(int i){
 
         try{
-            //AudioInputStream ais = AudioSystem.getAudioInputStream(null);
+            AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[i]);
             clip = AudioSystem.getClip();
-            //clip.open(ais);
+            clip.open(ais);
         } catch(Exception e){
         }
 
