@@ -75,9 +75,9 @@ public class ViewControlPanel extends JPanel {
 
         ImageIcon temp3 = new ImageIcon(this.getClass().getResource("Ressources/berry3.png"));
         g.drawImage(temp3.getImage(), 10, height/2-50, 20, 20, this);
-        g.setFont(new Font ("Courier New", 1, 14));
+        g.setFont(new Font ("Courier New", Font.BOLD, 14));
         g.setColor(Color.WHITE);
-        g.drawString("Ressources : " + Camp.RESSOURCES, 40, height/2-40);
+        g.drawString("Ressources : " + m.food, 40, height/2-40);
 
         g.setColor(Color.CYAN);
         g.drawString("Navi cost : " + Camp.COUT_NAVI, 40, height/2-25);
@@ -96,22 +96,22 @@ public class ViewControlPanel extends JPanel {
             if(m.getSelectedEntity() instanceof Soldier){
                 ImageIcon temp2 = new ImageIcon(this.getClass().getResource("Ressources/Icon_Soldier.png"));
                 g.drawImage(temp2.getImage(), 0, 50, width, height/3, this);
-                g.setFont(new Font ("Courier New", 1, 24));
+                g.setFont(new Font ("Courier New", Font.BOLD, 24));
                 g.setColor(Color.YELLOW);
                 g.drawString(m.getSelectedEntity().getHealth()+"", width/2-30, height/2+40);
                 g.drawString(Entity.SOLDIER_HEALTH+"", width/2+30, height/2+40);
-                g.setFont(new Font ("Courier New", 1, 12));
+                g.setFont(new Font ("Courier New", Font.BOLD, 12));
                 g.setColor(Color.YELLOW);
                 g.drawString("Soldier", width-60, 40);
             }else{
                 if(m.getSelectedEntity() instanceof Navi){
                     ImageIcon temp2 = new ImageIcon(this.getClass().getResource("Ressources/Icon_Navi.png"));
                     g.drawImage(temp2.getImage(), 0, 50, width, height/3, this);
-                    g.setFont(new Font ("Courier New", 1, 24));
+                    g.setFont(new Font ("Courier New", Font.BOLD, 24));
                     g.setColor(Color.YELLOW);
                     g.drawString(m.getSelectedEntity().getHealth()+"", width/2-30, height/2+40);
                     g.drawString(Entity.NAVI_HEALTH+"", width/2+30, height/2+40);
-                    g.setFont(new Font ("Courier New", 1, 12));
+                    g.setFont(new Font ("Courier New", Font.BOLD, 12));
                     g.setColor(Color.YELLOW);
                     g.drawString("Avatar", width-60, 40);
                 }
@@ -120,10 +120,10 @@ public class ViewControlPanel extends JPanel {
             if(m.getStartCell().getEntity() instanceof Navi){
                 ImageIcon temp2 = new ImageIcon(this.getClass().getResource("Ressources/Icon_Navi.png"));
                 g.drawImage(temp2.getImage(), 0, 50, width, height/3, this);
-                g.setFont(new Font ("Courier New", 1, 24));
+                g.setFont(new Font ("Courier New", Font.BOLD, 24));
                 g.setColor(Color.YELLOW);
                 g.drawString(m.getStartCell().getEntity().getHealth()+" "+Entity.NAVI_HEALTH, width/2-30, height/2+40);
-                g.setFont(new Font ("Courier New", 1, 12));
+                g.setFont(new Font ("Courier New", Font.BOLD, 12));
                 g.setColor(Color.YELLOW);
                 g.drawString("Avatar", width-60, 40);
             }
