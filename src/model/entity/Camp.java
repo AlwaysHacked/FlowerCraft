@@ -40,7 +40,10 @@ public class Camp extends Entity implements IEntity{
 				Camp.RESSOURCES -= COUT_NAVI;
 				this.currentAction = STOP;
 			}else this.model.sound.plsySE(3);
-		}else this.model.sound.plsySE(3);
+		}else {
+			this.currentAction = Action.STOP;
+			this.model.sound.plsySE(3);
+		}
 	}
 
 	@Override

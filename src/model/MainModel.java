@@ -62,6 +62,8 @@ public class MainModel {
 
     public boolean isGameOver() {return camps.isEmpty();}
 
+    public boolean isWin() {return this.numberSoldier() == 0;}
+
     /* Méthode d'action du controleur sur le modèle */
 
     /** Recois la cellule cliquée et fais lance l'action */
