@@ -30,12 +30,9 @@ public class EntityControl extends Thread {
     public void run() {
         while (model.isRunning()) {
 //            ent.forEach((this::update));
-            checkEntity(); //// important to remove charater that has died
+//            checkEntity(); //// important to remove charater that has died // tkt c'est géré dans suffer attack
             model.entities.forEach(IEntity::update);
             this.createSoldier();
-            view.update();
-            
-
             try {
                 sleep(1000);
             } catch (InterruptedException e) {
