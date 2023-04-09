@@ -2,9 +2,7 @@ package model.entity;
 
 import model.Action;
 import model.MainModel;
-import model.Map;
 import model.terrain.Berries;
-import model.terrain.Cell;
 import model.terrain.ICell;
 import model.terrain.Terrain;
 
