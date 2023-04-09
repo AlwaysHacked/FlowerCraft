@@ -40,13 +40,13 @@ public class ViewControlPanel extends JPanel {
         // /** Enregistrement du contrôleur comme auditeur du bouton.**
         // object.addMouseListener(ctrl);
 
-        String[] names = { "ATTACK", "HARVEST", "STOP", "MOVE", "BUILD" };
+        String[] names = { "ATTACK", "HARVEST", "STOP", "MOVE", "BUILD", "CREATE" };
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 6; i++) {
             ImageIcon temp2 = new ImageIcon();
             JButton object2 = new JButton();
             object2.setLayout(null);
-            object2.setBounds(i * 45, height / 4 * 3, 30, 30);
+            object2.setBounds(i * 36, height / 4 * 3, 30, 30);
             object2.setIcon(temp2);
             object2.setName(names[i]);
             object2.setOpaque(false);
@@ -121,8 +121,8 @@ public class ViewControlPanel extends JPanel {
             }
         }
         
-        String[] message = { "Attack selected Soldier", "Harvest selected Berries", "Stop selected Navi", "Move to destination", "Build a Camp" };
-        for (int i = 0; i < 5; i++) {
+        String[] message = { "Attack selected Soldier", "Harvest selected Berries", "Stop selected Navi", "Move to destination", "Build a Camp", "Add a new Navi" };
+        for (int i = 0; i < 6; i++) {
             JButton box = elements.get(i);
             frame(g, message[i], box, box.getName(), box.getX(), box.getY(), box.getHeight(), box.getWidth());
             

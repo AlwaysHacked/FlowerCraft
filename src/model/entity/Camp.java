@@ -33,7 +33,7 @@ public class Camp extends Entity implements IEntity{
 
 	@Override
 	protected void create() {
-		if (model.food >= COUT_NAVI)
+		if (Camp.RESSOURCES >= COUT_NAVI)
 			if (createNavi()) model.food -= COUT_NAVI;
 	}
 
@@ -43,12 +43,15 @@ public class Camp extends Entity implements IEntity{
 	 */
 	public boolean createNavi(){
 		ICell navC = null;
-		for(ICell c : this.map.neighbours(this.position))
+		for(ICell c : this.model.getMap().neighbours(this.position))
 			if(c.isAccessible()) {
 				navC = c;
 				break;
 			}
-		EntityFactory.getInstance(model).createEntity(navC, "NAVI");
+		if(navC != null) {
+			EntityFactory.getInstance(model).createEntity(navC, "NAVI");
+		}
+		this.currentAction = Action.STOP;
 		return navC != null;
 	}
 

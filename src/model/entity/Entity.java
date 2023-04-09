@@ -153,8 +153,11 @@ public class Entity implements IEntity {
 	public void sufferAttack(int impact) {
 		this.health -= impact;
 		if (this.health <= 0) {
+			
 			this.position.deleteEntity();
+			this.currentAction = Action.STOP;
 			this.position = null;
+			
 		}
 	}
 
