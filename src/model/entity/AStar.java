@@ -174,7 +174,9 @@ public class AStar {
 				}
 			}
 			catch(Exception e){}
-		try{System.out.println(minx + " " + miny + " " + F[minx][miny][1]);}
+		try{
+//			System.out.println(minx + " " + miny + " " + F[minx][miny][1]);
+		}
 		catch(Exception e) {}
 //		System.out.println();
 		if(minx < Integer.MAX_VALUE) {
@@ -208,7 +210,7 @@ public class AStar {
 
 	public Stack<ICell> getPath() {
 		aStar();
-		show(F);
+//		show(F);
 		this.getP(start.getX(), start.getY());
 		Stack<ICell> temp = new Stack<ICell>();
 		temp.addAll(path);
@@ -216,7 +218,7 @@ public class AStar {
 	}
 
 	public boolean aStar()  {
-		System.out.println(this.inter.getTerrain());
+//		System.out.println(this.inter.getTerrain());
 		if (this.inter.samePlace(this.end)) {
 //			this.path.add(this.inter);
 			return true;

@@ -28,7 +28,7 @@ public class CellFactory {
     /** Partie factory :
      * créé des Cell aux coordonnées x y
      * et du type donné dans channel
-     * mais avec le type apparent channel */
+     * mais avec le type apparent ICell */
     public ICell createCell(int x, int y, String channel) {
         if (channel == null || channel.isEmpty())
             return null;

@@ -8,7 +8,7 @@ import static java.lang.Thread.sleep;
 
 public class Berries extends Cell{
 	private static final int HARVEST = 10;
-	private static final int REGEN = 1;
+	private static final int REGEN = 2;
     public static final int MAX_FOOD = 100;
     private int food = MAX_FOOD;
     private String frame = "BERRIES";
@@ -37,7 +37,7 @@ public class Berries extends Cell{
      * cueillables definie dans HARVEST
      */
     public int isBeingHarvested() {
-        System.out.println("amount of food" + this.food);
+//        System.out.println("amount of food" + this.food);
     	if(this.food > 9){
             this.food -= HARVEST;
             return HARVEST;
@@ -52,11 +52,11 @@ public class Berries extends Cell{
      * Sinon il se regenere
      */
     public boolean update() {
-        if (food >= 0) {
+        if (food > 0) {
             food = Integer.min(MAX_FOOD, food + REGEN);
             return true;
         } else {
-            //super.terrain = Terrain.FIELD;
+            super.terrain = Terrain.FIELD;
             return false;
         }
     }

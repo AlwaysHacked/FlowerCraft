@@ -70,7 +70,7 @@ public class EntityControl extends Thread {
             }
         }
         this.model.entities = temp;
-        System.out.println(model.entities.size());
+//        System.out.println(model.entities.size());
     }
 
     // public void update(ICell e) {

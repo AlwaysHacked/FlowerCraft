@@ -38,9 +38,13 @@ public class Camp extends Entity implements IEntity{
 			if (createNavi()) {
 				this.model.sound.plsySE(2);
 				Camp.RESSOURCES -= COUT_NAVI;
+				this.currentAction = STOP;
 			}else this.model.sound.plsySE(3);
 		}else this.model.sound.plsySE(3);
 	}
+
+	@Override
+	protected void stop() {}
 
     /**
 	 * Cree un navi sur l'une des cases voisines

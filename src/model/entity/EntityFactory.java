@@ -23,14 +23,13 @@ public class EntityFactory {
     }
 
     /** Partie factory :
-     * créé des Cell aux coordonnées x y
+     * créé une entité dans la case cell
      * et du type donné dans channel
-     * mais avec le type apparent channel */
+     * mais avec le type apparent IEntity */
     public void createEntity(ICell cell, String channel) {
         if (channel == null || channel.isEmpty())
             return;
         IEntity entity;
-        EntityControl thread;
         
         switch (channel) {
             case "NAVI" -> entity = new Navi(model, cell);
@@ -43,7 +42,5 @@ public class EntityFactory {
         }
         cell.addEntity(entity);
         model.entities.add(entity);
-        //thread = new EntityControl(this.model, entity);
-        //thread.run();
     }
 }

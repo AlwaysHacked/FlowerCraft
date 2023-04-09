@@ -3,10 +3,7 @@ package model.entity;
 import java.util.ArrayList;
 import java.util.Random;
 
-import model.Action;
 import model.MainModel;
-import model.Map;
-import model.terrain.Cell;
 import model.terrain.ICell;
 
 import static model.Action.ATTACK;
@@ -45,7 +42,7 @@ public class Soldier extends Entity implements IEntity {
 			destination = tab.get(0);
 			
 		} else if(position==destination) {
-			System.out.println("renew destination");
+//			System.out.println("renew destination");
 			destination = null;
 		} else{
 			

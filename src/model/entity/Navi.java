@@ -14,7 +14,7 @@ public class Navi extends Entity implements IEntity {
 	//	default
 	private static final Action[] possibleActions = new Action[]{HARVEST, ATTACK, STOP, BUILD, MOVE };
 	private static final int def_health = 100;
-	private static final int def_attack = 5;
+	private static final int def_attack = 10;
 	private static final int def_speed = 10;
 
 	private Action action = STOP;
@@ -66,7 +66,6 @@ public class Navi extends Entity implements IEntity {
 
 	/**
 	 * Construit un Camp sur le cell demande
-	 * @param cell la case de construction
 	 */
 	public void build(){
 		

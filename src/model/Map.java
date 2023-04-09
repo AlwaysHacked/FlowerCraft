@@ -37,7 +37,7 @@ public class Map {
 		factory.createEntity(grid[6][5], "NAVI");
 		factory.createEntity(grid[6][3], "NAVI");
 		factory.createEntity(grid[0][5], "SOLDIER");
-		factory.createEntity(grid[0][3], "SOLDIER");
+//		factory.createEntity(grid[0][3], "SOLDIER");
 
 	}
 

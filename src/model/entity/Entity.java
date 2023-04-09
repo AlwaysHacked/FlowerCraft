@@ -88,13 +88,13 @@ public class Entity implements IEntity {
 	 * Le chemin est stocke dans l'attribut `path`
 	 */
 	public void move() {
-		if (destination == position){}
-			//this.currentAction = Action.STOP;
+		if (destination == position)
+			this.currentAction = Action.STOP;
 		else {
 			if (path.empty()) {
 				generatePath();
 			} else {
-				for(var i : path)System.out.println(i.getCoord());
+//				for(var i : path)System.out.println(i.getCoord());
 				if (canMove(this.path.peek())) {
 					this.path.peek().addEntity(this);
 					this.position.deleteEntity();
@@ -113,8 +113,9 @@ public class Entity implements IEntity {
 	}
 
 	protected void stop() {
-		destination = null;
-		path = new Stack<>();
+		IEntity ent = this.canAttack();
+		if (ent != null)
+			ent.sufferAttack(this.attack);
 	}
 
 	protected void create() {
@@ -157,6 +158,7 @@ public class Entity implements IEntity {
 			this.position.deleteEntity();
 			this.currentAction = Action.STOP;
 			this.position = null;
+			model.entities.remove(this);
 			
 		}
 	}
