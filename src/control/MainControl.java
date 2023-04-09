@@ -20,7 +20,7 @@ public class MainControl {
 		this.entities = new EntityControl(m, v);
 		this.entities.start();
 		this.sound = new Sound();
-		this.sound.setFile(0);
+		this.sound.playMusic(0);
 
 //		this.map = new Map(this.model);
 //		this.jar = new Jardinier(this.model, this.map, this.map.getCell(0, 0));
