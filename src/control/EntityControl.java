@@ -28,7 +28,6 @@ public class EntityControl extends Thread {
             model.entities.forEach(IEntity::update);
             view.update();
             try {
-
                 sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();

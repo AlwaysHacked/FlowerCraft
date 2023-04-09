@@ -89,7 +89,6 @@ public class ViewMap extends JPanel {
             frame(g, "Ressources/FOREST.png", x * STEP, y * STEP, STEP, STEP);
         else if (c instanceof Berries) {
             frame(g, "Ressources/Normal_1.png", x * STEP, y * STEP, STEP, STEP);
-            System.out.println(((Berries)c).getFrame());
             frame(g, "Ressources/"+ ((Berries)c).getFrame() +".png", x * STEP + 10, y * STEP - 4, STEP - 20, STEP - 10);
         } else
             frame(g, "Ressources/Submerge_1.png", x * STEP, y * STEP, STEP, STEP);
