@@ -44,12 +44,15 @@ public class Soldier extends Entity implements IEntity {
 			}
 			destination = tab.get(0);
 			
+		} else if(position==destination) {
+			System.out.println("renew destination");
+			destination = null;
 		} else{
 			
 			if (path.empty()) {
 				generatePath();
 			} else {
-				System.out.println("DEtination"+destination.getCoord());
+				
 				//for(var i : path)System.out.println(i.getCoord());
 				if (canMove(this.path.peek())) {
 					this.path.peek().addEntity(this);

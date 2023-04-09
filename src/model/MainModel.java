@@ -89,7 +89,6 @@ public class MainModel {
     public void selectAction(Action action) {
         
         if (selectedEntity != null && Arrays.stream(selectedEntity.possibleActions()).toList().contains(action))
-            
             switch (action) {
                 case HARVEST, BUILD, MOVE, ATTACK -> this.selectedAction = action;
                 case STOP, CREATE -> selectedEntity.setCurrentAction(action);

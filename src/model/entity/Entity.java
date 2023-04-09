@@ -25,6 +25,8 @@ public class Entity implements IEntity {
 	public static final int SOLDIER_SPEED = 5;
 	public static final int SOLDIER_ATTACK = 15;
 
+	public static final int CAMP_HEALTH = 100;
+
 	protected MainModel model;
 	protected ICell position;
 	public Map map;
@@ -76,7 +78,7 @@ public class Entity implements IEntity {
 		if (ent != null)
 			ent.sufferAttack(this.attack);
 		else{
-			System.out.println("running");
+
 			move();
 		}
 	}
@@ -99,7 +101,7 @@ public class Entity implements IEntity {
 					this.position = this.path.peek();
 					this.path.pop();///////
 
-				} else generatePath();
+				}
 			}
 		}
 	}
@@ -137,6 +139,7 @@ public class Entity implements IEntity {
 
 	@Override
 	public IEntity canAttack() {
+		if(this.position == null) return null;
 		ArrayList<ICell> c = model.getMap().neighbours(this.position);
 		for (ICell cc : c) {
 			IEntity ent = cc.getEntity();

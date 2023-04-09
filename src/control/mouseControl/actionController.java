@@ -17,6 +17,7 @@ import model.entity.Navi;
 import model.entity.Soldier;
 import model.terrain.Berries;
 import model.terrain.ICell;
+import model.terrain.Terrain;
 import model.terrain.Water;
 import view.ViewControlPanel;
 import view.ViewMap;
@@ -55,7 +56,7 @@ public class actionController implements MouseListener {
                 case "ATTACK" -> model.selectAction(ATTACK);
                 case "STOP" -> model.selectAction(STOP);
                 case "HARVEST" -> model.selectAction(HARVEST);
-                case "BUILD" -> model.selectAction(BUILD);
+                case "BUILD" -> model.selectAction(BUILD); 
                 case "CREATE" -> model.selectAction(CREATE);
             }
         }
@@ -124,7 +125,7 @@ public class actionController implements MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
+        if(cell != null && cell.getTerrain() == Terrain.BERRIES) icon.setToolTipText("Berries : "+((Berries)cell).getFood());
     }
 
     @Override

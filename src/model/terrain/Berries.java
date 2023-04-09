@@ -36,10 +36,11 @@ public class Berries extends Cell{
      */
     public int isBeingHarvested() {
         System.out.println("amount of food" + this.food);
-    	if(this.food > 0){
+    	if(this.food > 9){
             this.food -= HARVEST;
+            return HARVEST;
         }
-    	return HARVEST;
+    	return 0;
     }
     
     /**
@@ -49,11 +50,11 @@ public class Berries extends Cell{
      * Sinon il se regenere
      */
     public boolean update() {
-        if (food > 0) {
-            food = Integer.max(MAX_FOOD, food + REGEN);
+        if (food >= 0) {
+            food = Integer.min(MAX_FOOD, food + REGEN);
             return true;
         } else {
-            super.terrain = Terrain.FIELD;
+            //super.terrain = Terrain.FIELD;
             return false;
         }
     }

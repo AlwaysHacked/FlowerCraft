@@ -105,6 +105,9 @@ public class ViewMap extends JPanel {
 
         if (c.getEntity() instanceof Camp){
             frame(g, "Ressources/Camp.png", x * STEP + 10, y * STEP - 4, STEP - 20, STEP - 25);
+            g.setColor(Color.RED);
+            g.fillRect(x * STEP+10, y * STEP+2, ((STEP-10)*c.getEntity().getHealth())/Entity.CAMP_HEALTH, 6);
+            frame(g, "Ressources/healthbar.png", x * STEP, y * STEP, STEP, 10);
         }
 
         if (c.getEntity() instanceof Soldier){

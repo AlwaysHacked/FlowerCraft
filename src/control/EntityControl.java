@@ -24,7 +24,7 @@ public class EntityControl extends Thread {
     public void run() {
         while (model.isRunning()) {
 //            ent.forEach((this::update));
-//            checkEntity();
+            checkEntity(); //// important to remove charater that has died
             model.entities.forEach(IEntity::update);
             try {
 
@@ -35,16 +35,18 @@ public class EntityControl extends Thread {
         }
     }
 
-    // public void checkEntity() {
-    //     this.ent = new ArrayList<ICell>();
-    //     for (ICell[] ct : model.getMap().getGrid()) {
-    //         for (ICell c : ct) {
-    //             if (c.getEntity() != null) {
-    //                 ent.add(c);
-    //             }
-    //         }
-    //     }
-    // }
+    public void checkEntity() {
+        var temp = new ArrayList<IEntity>();
+        for (ICell[] ct : model.getMap().getGrid()) {
+            for (ICell c : ct) {
+                if (c.getEntity() != null) {
+                    temp.add(c.getEntity());
+                }
+            }
+        }
+        this.model.entities = temp;
+        System.out.println(model.entities.size());
+    }
 
     // public void update(ICell e) {
     //     if (e.getEntity() instanceof Navi) {

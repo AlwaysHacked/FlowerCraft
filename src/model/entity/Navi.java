@@ -3,6 +3,7 @@ package model.entity;
 import model.Action;
 import model.MainModel;
 import model.Map;
+import model.terrain.Berries;
 import model.terrain.Cell;
 import model.terrain.ICell;
 import model.terrain.Terrain;
@@ -37,7 +38,7 @@ public class Navi extends Entity implements IEntity {
 	 * Renvoie true si le pion se trouve sur un terrain Berries
 	 */
 	public boolean canHarvest(){
-		return super.position.getTerrain() == Terrain.BERRIES;
+		return super.position.getTerrain() == Terrain.BERRIES && ((Berries)super.position).getFood() > 9;
 	}
 	
 	/**
@@ -52,8 +53,8 @@ public class Navi extends Entity implements IEntity {
 		int y = super.position.getX();
 		
 		if(this.canHarvest())
-			Camp.RESSOURCES += this.map.getCell(x, y).isBeingHarvested();
-		else throw new IllegalArgumentException("Impossible de recolter a la case (" + x + ", " + y + ")");
+			Camp.RESSOURCES += this.model.getMap().getCell(x, y).isBeingHarvested();
+		else move();
 	}
 
 	/**
@@ -62,21 +63,19 @@ public class Navi extends Entity implements IEntity {
 	 * @return vraie s'il n'y a personne sur `c` et est a cote de Navi
 	 */
 	public boolean canBuildCamp(ICell c){
-		return c.isAccessible() && this.position.nextTo(c);
+		return c.isAccessible() && c.nextTo(this.position) && this.position.nextTo(c) && Camp.RESSOURCES/this.model.getCamps().size() >= 1;
 	}
 
 	/**
 	 * Construit un Camp sur le cell demande
 	 * @param cell la case de construction
 	 */
-	public void buildCamp(ICell cell){
-		int x = cell.getX();
-		int y = cell.getY();
+	public void build(){
 		
-		if(this.canBuildCamp (cell)){
-			EntityFactory.getInstance(model).createEntity(cell, "CAMP");
+		if(destination != null && this.canBuildCamp (destination)){
+			EntityFactory.getInstance(model).createEntity(destination, "CAMP");
 		}
-		else throw new IllegalArgumentException("Impossible de construire a la case (" + x + ", " + y + ")");
+		else System.out.println("Building forbidden, move closer / More berries needed");
 	}
 
 //	public void builingCamp(){
