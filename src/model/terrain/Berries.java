@@ -11,6 +11,7 @@ public class Berries extends Cell{
 	private static final int REGEN = 1;
     public static final int MAX_FOOD = 100;
     private int food = MAX_FOOD;
+    private String frame = "BERRIES";
 
     public Berries(MainModel model, Point p) {
         super(model, p);
@@ -66,11 +67,37 @@ public class Berries extends Cell{
         return food;
     }
 
+    public void newFrame(){
+            if(food == 100) this.frame = "BERRIES";
+            else if (food == 0) this.frame = "tile039";
+            else if (food > 70) this.frame = "tile015";
+            else if (food > 40) this.frame = "tile005";
+            else if (food > 10) this.frame = "tile004";
+            else if (food > 0) this.frame = "tile003";
+    }
+
+    
+
     /**
      * @param food the food to set
      */
     public void setFood(int food) {
         this.food = food;
+    }
+
+
+    /**
+     * @return String return the frame
+     */
+    public String getFrame() {
+        return frame;
+    }
+
+    /**
+     * @param frame the frame to set
+     */
+    public void setFrame(String frame) {
+        this.frame = frame;
     }
 
 }

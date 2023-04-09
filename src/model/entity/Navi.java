@@ -38,7 +38,7 @@ public class Navi extends Entity implements IEntity {
 	 * Renvoie true si le pion se trouve sur un terrain Berries
 	 */
 	public boolean canHarvest(){
-		return super.position.getTerrain() == Terrain.BERRIES && ((Berries)super.position).getFood() > 9;
+		return super.position.getTerrain() == Terrain.BERRIES && ((Berries)super.position).getFood() > 9 && position == destination;
 	}
 	
 	/**
@@ -49,11 +49,10 @@ public class Navi extends Entity implements IEntity {
 	 * les ressources augmentent
 	 */
 	public void harvest() {
-		int x = super.position.getX();
-		int y = super.position.getX();
-		
-		if(this.canHarvest())
-			Camp.RESSOURCES += this.model.getMap().getCell(x, y).isBeingHarvested();
+		if(this.canHarvest()){
+			System.out.println(this.position.isBeingHarvested());
+			Camp.RESSOURCES += this.position.isBeingHarvested();
+		}
 		else move();
 	}
 

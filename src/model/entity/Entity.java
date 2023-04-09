@@ -88,8 +88,8 @@ public class Entity implements IEntity {
 	 * Le chemin est stocke dans l'attribut `path`
 	 */
 	public void move() {
-		if (destination == position)
-			this.currentAction = Action.STOP;
+		if (destination == position){}
+			//this.currentAction = Action.STOP;
 		else {
 			if (path.empty()) {
 				generatePath();

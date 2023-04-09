@@ -26,6 +26,7 @@ public class EntityControl extends Thread {
 //            ent.forEach((this::update));
             checkEntity(); //// important to remove charater that has died
             model.entities.forEach(IEntity::update);
+            view.update();
             try {
 
                 sleep(1000);

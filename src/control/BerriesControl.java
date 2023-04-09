@@ -41,6 +41,7 @@ public class BerriesControl extends Thread {
     // Actualise un Berries et le supprime de la liste si il est passé en dessous de
     // 0
     private void update(Berries b) {
+        b.newFrame();
         view.update();
         if (!b.update())
             berries.remove(b);
