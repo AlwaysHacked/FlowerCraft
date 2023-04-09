@@ -39,7 +39,6 @@ public class ViewControlPanel extends JPanel {
         // GrilleController ctrl = new GrilleController(grille);
         // /** Enregistrement du contrôleur comme auditeur du bouton.**
         // object.addMouseListener(ctrl);
-        
 
         String[] names = { "ATTACK", "HARVEST", "STOP", "MOVE", "BUILD" };
 

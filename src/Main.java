@@ -2,6 +2,7 @@ import control.MainControl;
 import model.MainModel;
 import view.MainView;
 
+
 public class Main {
 	public static void main(String[] args) {
 		MainModel m = new MainModel();
