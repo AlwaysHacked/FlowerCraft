@@ -62,6 +62,9 @@ public class ViewMap extends JPanel {
 
     public void update() {
         // maybe replace with a thread later once there is one in Cell ?
+        if(this.model.isWin()){
+            this.youWinScreen();
+        }
         if(this.model.isGameOver()){
             this.youLooseScreen();
         }
@@ -130,6 +133,12 @@ public class ViewMap extends JPanel {
     public void youLooseScreen() {
         ImageIcon temp = new ImageIcon(this.getClass().getResource("Ressources/youLoose.jpg"));
         JOptionPane.showMessageDialog(this, null, "Game Over", JOptionPane.PLAIN_MESSAGE, temp);
+        System.exit(0);
+    }
+
+    public void youWinScreen() {
+        ImageIcon temp = new ImageIcon(this.getClass().getResource("Ressources/youWin.jpg"));
+        JOptionPane.showMessageDialog(this, null, "You Win !", JOptionPane.PLAIN_MESSAGE, temp);
         System.exit(0);
     }
 
