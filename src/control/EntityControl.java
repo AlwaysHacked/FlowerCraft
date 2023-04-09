@@ -1,6 +1,7 @@
 package control;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import model.Action;
@@ -14,8 +15,9 @@ public class EntityControl extends Thread {
     private MainModel model;
     private MainView view;
     private ArrayList<ICell> ent;
-    private int counter;
+    private int counter = 0;
     private Soldier soldier;
+    private static final Random rand = new Random();
 
     public EntityControl(MainModel m, MainView v) {
         this.model = m;
@@ -30,10 +32,9 @@ public class EntityControl extends Thread {
 //            ent.forEach((this::update));
             checkEntity(); //// important to remove charater that has died
             model.entities.forEach(IEntity::update);
+            this.createSoldier();
             view.update();
-
-            counter ++; 
-            this.createSoilder();
+            
 
             try {
                 sleep(1000);
@@ -43,9 +44,16 @@ public class EntityControl extends Thread {
         }
     }
 
-    public void createSoilder(){
-
-        if(this.counter % 5 == 0) soldier.buildSoilder();//We can change %10 to control the speed
+    public void createSoldier(){
+        counter ++; 
+        if(this.counter % 20 == 0) {
+            ICell cell = this.model.getMap().getCell(rand.nextInt(10), rand.nextInt(10));
+            //We can change %10 to control the speed
+            while(!cell.isAccessible()){
+                cell = this.model.getMap().getCell(rand.nextInt(10), rand.nextInt(10));
+            }
+            if(model.numberSoldier() < model.numberNavi()*2)EntityFactory.getInstance(model).createEntity(cell, "SOLDIER");
+        }
 
     }
 

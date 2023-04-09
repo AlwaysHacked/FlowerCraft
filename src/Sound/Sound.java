@@ -17,11 +17,11 @@ public class Sound {
     public Sound(MainModel m){
         model =m;
         soundURL[0] = getClass().getResource("bgm.wav");
-        // soundURL[1] = getClass().getResource(null);
+        soundURL[1] = getClass().getResource("move.wav");
         // soundURL[2] = getClass().getResource(null);
         // soundURL[3] = getClass().getResource(null);
         // soundURL[4] = getClass().getResource(null);
-        this.playMusic(0);
+        
 
     }
 

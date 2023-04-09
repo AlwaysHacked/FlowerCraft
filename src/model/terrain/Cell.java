@@ -56,7 +56,7 @@ public class Cell implements ICell{
 	
 
 	@Override
-	public boolean isAccessible() { return this.entity != null; }
+	public boolean isAccessible() { return this.entity == null; }
 
 	public boolean samePlace(ICell c) {
 		return c.getX() == this.getX() && 

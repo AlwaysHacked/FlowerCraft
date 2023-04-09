@@ -2,6 +2,7 @@ package model;
 
 import model.entity.IEntity;
 import model.entity.Navi;
+import model.entity.Soldier;
 import model.terrain.Berries;
 import model.terrain.ICell;
 import model.entity.Camp;
@@ -107,6 +108,22 @@ public class MainModel {
 
     public CopyOnWriteArrayList<Camp> getCamps() {
        return camps;
+    }
+
+    public int numberSoldier(){
+        int res = 0;
+        for(var e : this.entities){
+            if(e instanceof Soldier) res++;
+        }
+        return res;
+    }
+
+    public int numberNavi(){
+        int res = 0;
+        for(var e : this.entities){
+            if(e instanceof Navi) res++;
+        }
+        return res;
     }
     
     /**
