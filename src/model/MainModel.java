@@ -68,7 +68,8 @@ public class MainModel {
                     selectedEntity.setDestination(cell);
                 }
                 case BUILD -> {
-                    if (cell.isAccessible() && food >= COUT_CAMP) {
+                    if (cell.isAccessible()) {
+                        System.out.println("running rn");
                         selectedEntity.setCurrentAction(selectedAction);
                         selectedEntity.setDestination(cell);
                     }
@@ -130,4 +131,33 @@ public class MainModel {
     public IEntity getSelectedEntity() {
         return selectedEntity;
     }
+
+    /**
+     * @param running the running to set
+     */
+    public void setRunning(boolean running) {
+        this.running = running;
+    }
+
+    /**
+     * @param selectedEntity the selectedEntity to set
+     */
+    public void setSelectedEntity(IEntity selectedEntity) {
+        this.selectedEntity = selectedEntity;
+    }
+
+    /**
+     * @return Action return the selectedAction
+     */
+    public Action getSelectedAction() {
+        return selectedAction;
+    }
+
+    /**
+     * @param selectedAction the selectedAction to set
+     */
+    public void setSelectedAction(Action selectedAction) {
+        this.selectedAction = selectedAction;
+    }
+
 }

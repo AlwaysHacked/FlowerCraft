@@ -50,7 +50,6 @@ public class Navi extends Entity implements IEntity {
 	 */
 	public void harvest() {
 		if(this.canHarvest()){
-			System.out.println(this.position.isBeingHarvested());
 			Camp.RESSOURCES += this.position.isBeingHarvested();
 		}
 		else move();
@@ -74,7 +73,10 @@ public class Navi extends Entity implements IEntity {
 		if(destination != null && this.canBuildCamp (destination)){
 			EntityFactory.getInstance(model).createEntity(destination, "CAMP");
 		}
-		else System.out.println("Building forbidden, move closer / More berries needed");
+		else {
+			System.out.println("Building forbidden, move closer / More berries needed");
+			this.currentAction = Action.STOP;
+		}
 	}
 
 //	public void builingCamp(){
