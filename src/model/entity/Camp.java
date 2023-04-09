@@ -34,8 +34,12 @@ public class Camp extends Entity implements IEntity{
 
 	@Override
 	protected void create() {
-		if (Camp.RESSOURCES >= COUT_NAVI)
-			if (createNavi()) Camp.RESSOURCES -= COUT_NAVI;
+		if (Camp.RESSOURCES >= COUT_NAVI){
+			if (createNavi()) {
+				this.model.sound.plsySE(2);
+				Camp.RESSOURCES -= COUT_NAVI;
+			}else this.model.sound.plsySE(3);
+		}else this.model.sound.plsySE(3);
 	}
 
     /**

@@ -52,7 +52,10 @@ public class EntityControl extends Thread {
             while(!cell.isAccessible()){
                 cell = this.model.getMap().getCell(rand.nextInt(10), rand.nextInt(10));
             }
-            if(model.numberSoldier() < model.numberNavi()*2)EntityFactory.getInstance(model).createEntity(cell, "SOLDIER");
+            if(model.numberSoldier() < model.numberNavi()*2){
+                this.model.sound.plsySE(2);
+                EntityFactory.getInstance(model).createEntity(cell, "SOLDIER");
+            }
         }
 
     }

@@ -24,7 +24,7 @@ public class MainModel {
     private boolean running = true;
     private ICell startCell = null;
     private ICell endCell = null;
-    private Sound sound = new Sound(this);
+    public Sound sound = new Sound(this);
 
     //  attribute for the List of Camp so solider ca attack it 
 
@@ -66,7 +66,7 @@ public class MainModel {
 
     /** Recois la cellule cliquée et fais lance l'action */
     public void clic(ICell cell) {
-        sound.plsySE(1);
+        if(cell.getEntity() instanceof Navi || cell.getEntity() instanceof Camp) sound.plsySE(1);
         if (selectedEntity == null)
             selectedEntity = cell.getEntity();
         else if (selectedAction == null)
@@ -79,16 +79,15 @@ public class MainModel {
                 }
                 case BUILD -> {
                     if (cell.isAccessible()) {
-                        System.out.println("running rn");
                         selectedEntity.setCurrentAction(selectedAction);
                         selectedEntity.setDestination(cell);
-                    }
+                    }else this.sound.plsySE(3);
                 }
                 case HARVEST -> {
                     if (cell.isAccessible() && cell instanceof Berries){
                         selectedEntity.setCurrentAction(selectedAction);
                         selectedEntity.setDestination(cell);
-                    }
+                    }else this.sound.plsySE(3);
                 }
                 case CREATE, STOP -> selectedEntity = cell.getEntity();
             }

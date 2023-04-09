@@ -18,8 +18,8 @@ public class Sound {
         model =m;
         soundURL[0] = getClass().getResource("bgm.wav");
         soundURL[1] = getClass().getResource("move.wav");
-        // soundURL[2] = getClass().getResource(null);
-        // soundURL[3] = getClass().getResource(null);
+        soundURL[2] = getClass().getResource("appear.wav");
+        soundURL[3] = getClass().getResource("forbidden.wav");
         // soundURL[4] = getClass().getResource(null);
         
 

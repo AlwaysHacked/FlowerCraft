@@ -75,6 +75,7 @@ public class Navi extends Entity implements IEntity {
 			Camp.RESSOURCES -= Camp.COUT_CAMP;
 		}
 		else {
+			this.model.sound.plsySE(3);
 			System.out.println("Building forbidden, move closer / More berries needed");
 			this.currentAction = Action.STOP;
 		}
