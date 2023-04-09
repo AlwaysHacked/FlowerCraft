@@ -61,7 +61,7 @@ public class Navi extends Entity implements IEntity {
 	 * @return vraie s'il n'y a personne sur `c` et est a cote de Navi
 	 */
 	public boolean canBuildCamp(ICell c){
-		return c.isAccessible() && c.nextTo(this.position) && this.position.nextTo(c) && Camp.RESSOURCES/this.model.getCamps().size() >= 1;
+		return c.isAccessible() && c.nextTo(this.position) && this.position.nextTo(c) && Camp.RESSOURCES >= Camp.COUT_CAMP;
 	}
 
 	/**
@@ -72,6 +72,7 @@ public class Navi extends Entity implements IEntity {
 		
 		if(destination != null && this.canBuildCamp (destination)){
 			EntityFactory.getInstance(model).createEntity(destination, "CAMP");
+			Camp.RESSOURCES -= Camp.COUT_CAMP;
 		}
 		else {
 			System.out.println("Building forbidden, move closer / More berries needed");

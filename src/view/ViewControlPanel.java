@@ -74,10 +74,16 @@ public class ViewControlPanel extends JPanel {
         g.drawImage(temp.getImage(), 0, 0, width, height, this);
 
         ImageIcon temp3 = new ImageIcon(this.getClass().getResource("Ressources/berry2.png"));
-        g.drawImage(temp3.getImage(), 10, height/2-30, 20, 20, this);
+        g.drawImage(temp3.getImage(), 10, height/2-50, 20, 20, this);
         g.setFont(new Font ("Courier New", 1, 14));
         g.setColor(Color.WHITE);
-        g.drawString("Ressources : " + Camp.RESSOURCES, 40, height/2-20);
+        g.drawString("Ressources : " + Camp.RESSOURCES, 40, height/2-40);
+
+        g.setColor(Color.CYAN);
+        g.drawString("Navi cost : " + Camp.COUT_NAVI, 40, height/2-25);
+        g.setColor(Color.CYAN);
+        g.drawString("Camp cost : " + Camp.COUT_CAMP, 40, height/2-10);
+
 
         if(m.getSelectedEntity() != null){
 //            if(m.getEndCell() instanceof Berries){
@@ -92,7 +98,8 @@ public class ViewControlPanel extends JPanel {
                 g.drawImage(temp2.getImage(), 0, 50, width, height/3, this);
                 g.setFont(new Font ("Courier New", 1, 24));
                 g.setColor(Color.YELLOW);
-                g.drawString(m.getSelectedEntity().getHealth()+" "+Entity.SOLDIER_HEALTH, width/2-30, height/2+40);
+                g.drawString(m.getSelectedEntity().getHealth()+"", width/2-30, height/2+40);
+                g.drawString(Entity.SOLDIER_HEALTH+"", width/2+30, height/2+40);
                 g.setFont(new Font ("Courier New", 1, 12));
                 g.setColor(Color.YELLOW);
                 g.drawString("Soldier", width-60, 40);
@@ -102,7 +109,8 @@ public class ViewControlPanel extends JPanel {
                     g.drawImage(temp2.getImage(), 0, 50, width, height/3, this);
                     g.setFont(new Font ("Courier New", 1, 24));
                     g.setColor(Color.YELLOW);
-                    g.drawString(m.getSelectedEntity().getHealth()+" "+Entity.NAVI_HEALTH, width/2-30, height/2+40);
+                    g.drawString(m.getSelectedEntity().getHealth()+"", width/2-30, height/2+40);
+                    g.drawString(Entity.NAVI_HEALTH+"", width/2+30, height/2+40);
                     g.setFont(new Font ("Courier New", 1, 12));
                     g.setColor(Color.YELLOW);
                     g.drawString("Avatar", width-60, 40);

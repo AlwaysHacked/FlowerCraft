@@ -15,7 +15,8 @@ public class Camp extends Entity implements IEntity{
 	private static final int def_health = 100;
 	private static final int def_attack = 0;
 	private static final int def_speed = 0;
-	private static final int COUT_NAVI = 40;
+	public static final int COUT_NAVI = 40;
+	public static final int COUT_CAMP = 70;
 
     public static int RESSOURCES = 0;
 
@@ -34,7 +35,7 @@ public class Camp extends Entity implements IEntity{
 	@Override
 	protected void create() {
 		if (Camp.RESSOURCES >= COUT_NAVI)
-			if (createNavi()) model.food -= COUT_NAVI;
+			if (createNavi()) Camp.RESSOURCES -= COUT_NAVI;
 	}
 
     /**
