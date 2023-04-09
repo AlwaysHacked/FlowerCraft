@@ -18,8 +18,6 @@ public class Camp extends Entity implements IEntity{
 	public static final int COUT_NAVI = 40;
 	public static final int COUT_CAMP = 70;
 
-    public static int RESSOURCES = 0;
-
     public Camp(MainModel m, ICell c){
         super(m, c, def_health, def_attack, def_speed);
         super.currentAction = STOP;
@@ -34,10 +32,10 @@ public class Camp extends Entity implements IEntity{
 
 	@Override
 	protected void create() {
-		if (Camp.RESSOURCES >= COUT_NAVI){
+		if (model.food >= COUT_NAVI){
 			if (createNavi()) {
 				this.model.sound.plsySE(2);
-				Camp.RESSOURCES -= COUT_NAVI;
+				model.food -= COUT_NAVI;
 				this.currentAction = STOP;
 			}else this.model.sound.plsySE(3);
 		}else {

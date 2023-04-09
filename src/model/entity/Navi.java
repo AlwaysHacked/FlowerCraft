@@ -50,7 +50,7 @@ public class Navi extends Entity implements IEntity {
 	 */
 	public void harvest() {
 		if(this.canHarvest()){
-			Camp.RESSOURCES += this.position.isBeingHarvested();
+			model.food += this.position.isBeingHarvested();
 		}
 		else move();
 	}
@@ -61,7 +61,7 @@ public class Navi extends Entity implements IEntity {
 	 * @return vraie s'il n'y a personne sur `c` et est a cote de Navi
 	 */
 	public boolean canBuildCamp(ICell c){
-		return c.isAccessible() && c.nextTo(this.position) && Camp.RESSOURCES >= Camp.COUT_CAMP;
+		return c.isAccessible() && c.nextTo(this.position) && model.food >= Camp.COUT_CAMP;
 	}
 
 	/**
@@ -71,7 +71,7 @@ public class Navi extends Entity implements IEntity {
 		
 		if(destination != null && this.canBuildCamp (destination)){
 			EntityFactory.getInstance(model).createEntity(destination, "CAMP");
-			Camp.RESSOURCES -= Camp.COUT_CAMP;
+			model.food -= Camp.COUT_CAMP;
 		}
 		else {
 			this.model.sound.plsySE(3);
