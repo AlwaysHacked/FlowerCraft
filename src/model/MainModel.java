@@ -7,6 +7,8 @@ import model.terrain.ICell;
 import model.entity.Camp;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.ArrayList;
 
 public class MainModel {
@@ -19,8 +21,8 @@ public class MainModel {
 
     //  attribute for the List of Camp so solider ca attack it 
 
-    public ArrayList<Camp> camps = new ArrayList<>();
-    public ArrayList<IEntity> entities = new ArrayList<>();
+    public CopyOnWriteArrayList<Camp> camps = new CopyOnWriteArrayList<>();
+    public CopyOnWriteArrayList<IEntity> entities = new CopyOnWriteArrayList<IEntity>();
     public int food = 0;
 
 //    Attributs pour gérer les ordres des joueurs
@@ -96,7 +98,7 @@ public class MainModel {
             }
     }
 
-    public ArrayList<Camp> getCamps() {
+    public CopyOnWriteArrayList<Camp> getCamps() {
        return camps;
     }
     

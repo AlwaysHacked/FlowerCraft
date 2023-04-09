@@ -31,6 +31,7 @@ public class EntityFactory {
             return;
         IEntity entity;
         EntityControl thread;
+        
         switch (channel) {
             case "NAVI" -> entity = new Navi(model, cell);
             case "SOLDIER" -> entity = new Soldier(model, cell);

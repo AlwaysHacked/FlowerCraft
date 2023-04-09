@@ -1,6 +1,7 @@
 package control;
 
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import model.Action;
 import model.MainModel;
@@ -36,7 +37,7 @@ public class EntityControl extends Thread {
     }
 
     public void checkEntity() {
-        var temp = new ArrayList<IEntity>();
+        var temp = new CopyOnWriteArrayList<IEntity>();
         for (ICell[] ct : model.getMap().getGrid()) {
             for (ICell c : ct) {
                 if (c.getEntity() != null) {
